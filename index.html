@@ -1,0 +1,1463 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Node.js - 最新Web技术栈</title>
+
+		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+		<meta name="author" content="Hakim El Hattab">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/black.css" id="theme">
+
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+					<h1>Nodejs最新技术栈</h1>
+					<p>Nodejs是比较简单的，只有你有前端js基础，那就按照我的办法来吧！一周足矣</p>
+					<p>
+						<small>Created by <a href="https://cnodejs.org/user/i5ting">i5ting</a> / <a href="http://github.com/i5ting">@i5ting</a></small>
+					</p>
+				</section>
+
+				<section>
+					
+					<section data-background="#dddddd">
+						<h2>Abount Me</h2>
+						<p>
+							i5ting 一个开源爱好者
+						</p>
+						<a href="#" class="navigate-down">
+							<img width="600" height="338" data-src="images/me.png" alt="Down arrow">
+						</a>
+					</section>
+          
+					<section data-background="#dddddd">
+  					<h2>Node全栈公众号</h2>
+  					<p>
+  						<p>什么是全栈？一直站在前面讲么？</p>
+  						<br>
+              <img src='images/nodeonly-wechat.png'/>
+  					</p>
+            
+  					<aside class="notes">
+  						Oh hey, these are some notes. They'll be hidden in your presentation, but you can see them if you open the speaker notes window (hit 's' on your keyboard).
+  					</aside>
+					</section>
+          
+				</section>
+        
+        
+        <section>
+          <section data-markdown>
+            ## 主要内容
+            
+            1. 了解http协议，尤其是express如何req
+            1. 了解db相关操作，以mongoose为主
+            1. 了解Promise/A+规范，合理规避回调陷阱
+            1. 使用tdd/bdd测试，最小化问题
+            1. 你无论如何都要会的：调试
+            
+          </section>
+          
+          <section data-markdown>
+              ## 推荐技术栈
+            
+              - express 4.x （express最新版本，初学者先别去碰koa）
+              - mongoose（mongodb）
+              - bluebird（Promise/A+实现）
+              - jade（视图层模板）
+              - mocha（测试）
+              - node-inspector(调试)
+
+              https://github.com/i5ting/express-starter
+          </section>
+				</section>
+        
+				<section data-transition="slide" data-background="#4d7e65" data-background-transition="zoom">
+          <section data-transition="slide" data-background="#4d7e65" data-background-transition="zoom">
+					<h2>Part 1：http基础</h2>
+					<p>
+						了解http协议，尤其是express如何req
+					</p>
+					<pre><code>curl -d "a=1&b=2" http://127.0.0.1:3001/users/post</code></pre>
+          </section>
+          
+          <section data-markdown>
+              ## http是无状态的协议
+              
+              tcp呢？
+          </section>
+          
+          <section data-markdown>
+              - 绝对地址和相对地址
+  
+              ```
+              相对地址的举例：
+              &lt;a href="/visit"&gt;访谈&lt;/a&gt;
+              
+              绝对地址的举例：
+              &lt;a href="http://www.xxxxx.cn/net/"&gt;广告网络平台&lt;/a&gt;
+           
+              ```
+          </section>
+          
+          <section data-markdown>
+              - querystring
+              
+              ```
+              https://www.baidu.com/s?wd=querystring
+              ```
+              
+              in expressjs
+              
+              ```
+              req.query.wd
+              ```
+              
+            
+          </section>
+          
+          <section data-markdown>
+              ## url 和 uri
+              
+              
+              URI抽象结构     
+              ```
+              [scheme:]scheme-specific-part[#fragment]
+
+              [scheme:][//authority][path][?query][#fragment]
+
+              authority为[user-info@]host[:port]
+              ```
+          </section>
+          
+          <section data-markdown>
+              ## http verbs -1
+              
+              verbs = 动词
+
+              http://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html
+              
+              ```
+              app.get('/user:id', function (req, res) {
+                res.send('Hello World!');
+              });
+
+              app.post('/user/create', function (req, res) {
+                res.send('Got a POST request');
+              });
+
+              app.put('/user/:id', function (req, res) {
+                res.send('Got a PUT request at /user');
+              });
+
+              app.delete('/user/:id', function (req, res) {
+                res.send('Got a DELETE request at /user');
+              });
+              ```
+              
+          </section>
+          
+          <section data-markdown>
+              ## http verbs -2
+              
+              链式写法？
+              
+              ```
+              router.route('/')
+                .get($.list)
+                .post($.create);
+              ```
+              
+              all代表什么？
+              
+              ```
+              router.all('/new', $.new);  
+              ```
+              
+              更多node里的verbs（26个），见 https://github.com/jshttp/methods/blob/master/index.js
+          </section>
+          
+          
+          
+          <section data-markdown>
+              ## http status code
+              
+              - http://www.restapitutorial.com/httpstatuscodes.html
+              - https://github.com/nodejs/io.js/blob/master/lib/_http_server.js
+
+              ```
+              500 : 'Internal Server Error',
+              403 : 'Forbidden',
+              404 : 'Not Found',
+              304 : 'Not Modified',
+              200 : 'OK',
+              
+              app.get('/user/:id', function(req, res){
+                res.status(200).json({
+                  a : 1,
+                  b : 2
+                });
+              });
+              ```
+          </section>
+          
+          <section data-markdown>
+              ## req取参数的3种方法
+              
+              expressjs里的请求参数，4.x里只有3种
+              
+              - req.params
+              - req.body
+              - req.query
+              - 已经废弃的api：req.param
+          </section>
+          
+          <section data-markdown>
+              - req.params
+
+              ```
+              app.get('/user/:id', function(req, res){
+                res.send('user ' + req.params.id);
+              });
+              ```
+              
+              俗点：取带冒号的参数
+          </section>
+          
+          <section data-markdown>
+              - req.body
+
+              ```
+              var app = require('express')();
+              var bodyParser = require('body-parser');
+
+              app.use(bodyParser.json()); // for parsing application/json
+              app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
+
+              app.post('/', function (req, res) {
+                console.log(req.body);
+                res.json(req.body);
+              })
+              ```
+              
+              可以肯定的一点是req.body一定是post请求，express里依赖的中间件必须有bodyParser，不然req.body是没有的。
+          </section>
+          
+          <section data-markdown>
+              - req.query
+
+              ```
+              // GET /search?q=tobi+ferret
+              req.query.q
+              // => "tobi ferret"
+
+              // GET /shoes?order=desc&shoe[color]=blue&shoe[type]=converse
+              req.query.order
+              // => "desc"
+
+              req.query.shoe.color
+              // => "blue"
+
+              req.query.shoe.type
+              // => "converse"
+              ```
+              
+              query是querystring
+
+          </section>
+          
+          <section data-markdown>
+              - req.query不一定是get
+
+              ```
+              // POST /search?q=tobi+ferret
+              {a:1,b:2}
+              req.query.q
+              // => "tobi ferret"
+              ```
+             
+              post里的数据看不到得，需要用req.body取
+          </section>
+          
+          
+          <section data-markdown>
+              - 3种不同类型的post
+          </section>
+          
+          <section data-markdown>
+              - Post with x-www-form-urlencoded
+              
+              see post.html
+              
+              ```
+              $.ajaxSetup({
+                contentType: "application/x-www-form-urlencoded; charset=utf-8"
+              });
+
+              $.post("/users/post", { name: "i5a6", time: "2pm" },
+                 function(data){
+                   console.log(data);
+                 }, "json");
+              ```
+              
+              in routes/users.js
+
+              ```
+              router.post('/post', function(req, res) {
+                // res.send('respond with a resource');
+                  res.json(req.body);
+              });
+              ```
+          </section>
+          
+          <section data-markdown>
+              #### Post with form-data 主要目的是为了上传
+              
+              
+              ```
+              var express = require('express')
+              var multer  = require('multer')
+
+              var app = express()
+              app.use(multer({ dest: './uploads/'}))
+              ```
+              
+              You can access the fields and files in the request object
+
+              ```
+              router.post('/post-form-data', function(req, res) {
+                console.log(req.body)
+                console.log(req.files)
+              });
+              
+              ```
+              
+              Multer will not process any form which is not multipart/form-data
+              
+          </section>
+          
+          <section data-markdown>
+              - Post with raw
+              
+              To get the raw body content of a request with Content-Type: "text/plain" into req.rawBody you can do:
+              
+              ```
+              var express = require('./')
+              var app = express();
+              app.use(function(req, res, next){
+                if (req.is('text/*')) {
+                  req.text = '';
+                  req.setEncoding('utf8');
+                  req.on('data', function(chunk){ req.text += chunk });
+                  req.on('end', next);
+                } else {
+                  next();
+                }
+              });
+              app.post('/', function(req, res){
+                res.send('got "' + req.text + '"');
+              });
+              app.listen(3000)
+              ```
+          </section>
+          
+          
+          
+          <section data-markdown>
+              ## 命令行玩法
+              
+              ```
+              #! /bin/bash
+
+              echo -n "post common"
+              curl -d "a=1&b=2" http://127.0.0.1:3001/users/post
+
+              echo -n 'post formdata'
+              curl -F 'pic=@"img/post-common.png"' -F 'a=1' -F 'b=2'  http://127.0.0.1:3001/users/post/formdata
+
+              echo -n 'post raw json'
+
+              curl -d "{"a":"1","b":"2","c":{"a":"1","b":"2"}}" http://127.0.0.1:3001/users/post
+              ```
+              
+              如不清楚，请 `man curl`.
+          </section>
+          
+          <section data-markdown>
+              ## supertest用法
+              
+              https://github.com/expressjs/restful-router/blob/master/test/restful-router.test.js
+              
+              ```
+              var request = require('supertest');
+              var app = require('../example/app');
+              
+              describe('restful-router.test.js', function () {
+                it('should get /users/new => user.new', function (done) {
+                   request(app)
+                   .get('/users/new')
+                   .expect('GET /users/new => new, query: {}')
+                   .expect(200, done);
+                 });
+               });
+              ```
+          </section>
+          
+          <section data-markdown>
+              ## what is rest?
+              
+              参考阮一峰的文章http://www.ruanyifeng.com/blog/2011/09/restful.html
+              
+              ```
+              /**
+               * Auto generate RESTful url routes.
+               *
+               * URL routes:
+               *
+               *  GET    /topics[/]        => topic.list()
+               *  GET    /topics/new       => topic.new()
+               *  GET    /topics/:id       => topic.show()
+               *  GET    /topics/:id/edit  => topic.edit()
+               *  POST   /topics[/]        => topic.create()
+               *  PATCH  /topics/:id       => topic.update()
+               *  DELETE /topics/:id       => topic.destroy()
+               *
+               */
+               ```
+          </section>
+          
+          <section data-markdown>
+              ## restful api or res.api？
+              
+              res.api is an express middleware for render json api , it convention over api format like this :
+
+              ```
+              {
+                data: {
+
+                },
+                status: {
+                  code : x,
+                  msg  : 'some message'
+                }
+              }
+              ```
+              
+              - 客户端 API 开发总结 https://cnodejs.org/topic/552b3b9382388cec50cf6d95
+              - res.api用法说明 https://cnodejs.org/topic/55818a0c395a0c1812f18273
+              
+          </section>
+          
+     
+  				<section>
+
+						<h2>如果还不懂http协议?</h2>
+            花点时间会用个软件就能学会，有兴趣吗？
+            
+						<p class="fragment">
+              推荐Postman
+              <img width="1000" height="538" data-src="images/postman.png" alt="Down arrow">
+            </p>
+
+				</section>
+        
+        
+  		  <section>
+          <h2>如果还还不懂http协议?</h2>
+          看书吧
+					<p class="fragment">推荐1
+            <a href='http://ccbikai.gitbooks.io/http-book/content/index.html'>《HTTP下午茶》
+            </a> 
+          </p>
+				 
+				  <p class="fragment">推荐2
+           <a href='http://product.china-pub.com/3769819'>《图解HTTP》
+           </a> 
+         </p>
+			  </section>
+      </section>
+        
+        
+        
+				<section data-transition="slide" data-background="#b5533c" data-background-transition="zoom">
+        
+  				<section data-transition="slide" data-background="#b5533c" data-background-transition="zoom">
+  					<h2>Part 2：db相关</h2>
+  					<p>
+              MEAN
+  					</p>
+            <li>M = mongodb
+          </section>
+          
+          <section data-markdown>
+            - 了解mvc里m的作用
+            
+            ![](images/mvc.png)
+          </section>
+          <section data-markdown>
+            - 代码结构
+            
+            ![](images/models.png)
+          </section>
+          <section data-markdown>
+
+- mongoose用法
+    
+```
+var mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost/test');
+
+var Cat = mongoose.model('Cat', { name: String });
+
+var kitty = new Cat({ name: 'Zildjian' });
+kitty.save(function (err) {
+  if (err) // ...
+  console.log('meow');
+});
+```
+          </section>
+          <section data-markdown>
+            ## crud（增删改查）
+            
+            - save
+            - find | findOne
+            - update
+            - remove
+            
+            ```
+            Kitten.find({ name: /^Fluff/ }, callback)
+            Comment.remove({ title: 'baby born from alien father' }, callback);
+            MyModel.update({ age: { $gt: 18 } }, { oldEnough: true }, fn);
+            ```
+          </section>
+          
+          <section data-markdown>
+            - 了解分页
+            
+            常见写法
+            ```
+            db.users.find().skip(pagesize*(n-1)).limit(pagesize)
+            ```
+            
+            更好的写法
+            ```
+            db.usermodels.find({'_id' :{
+               "$gt" :ObjectId("55940ae59c39572851075bfd")} 
+             }).limit(20).sort({_id:-1})
+            ```
+          </section>
+          
+          <section data-markdown>
+            - 了解关系（1对1，1对多）在mongoose里如何实现
+            
+            ```
+            UserSchema = new Schema({
+                ...
+                contacts:[]
+            });
+            ```
+          </section>
+          
+          <section data-markdown>
+            - 了解关系（1对1，1对多，多对多）在mongoose里如何实现
+            
+            ```
+            ContactSchema = new Schema({
+                ...
+                owner: {
+                  type: Schema.ObjectId,
+                  required: true,
+                  index: true
+                }
+            });
+            ```
+          </section>
+          
+          
+          <section data-markdown>
+            - 了解populate
+            
+            ```
+            ContactSchema = new Schema({
+                ...
+                owner: {
+                  type: Schema.ObjectId,
+                  ref: ‘user’ 
+                }
+            });
+            
+            ContactSchema.find({}).populate(‘owner’).exec(callback);
+            
+            ```
+          </section>
+          
+          
+          <section data-markdown>
+            - 扩展mongoose模型：statics类方法
+            
+            ```
+            UserSchema.statics.find_by_openid = function(openid, cb) {
+              return this.findOne({
+                openid: openid
+              }, cb);
+            };
+            ```
+            
+            调用
+            
+            ```
+            User.find_by_openid(openid, cb)
+            ```
+            
+            
+          </section>
+          
+          <section data-markdown>
+            - 扩展mongoose模型：methods对象方法
+            
+            ```
+            UserSchema.methods.is_exist = function(cb) {
+              var query;
+              query = {
+                username: this.username,
+                password: this.password
+              };
+              return this.model('UserModel').findOne(query, cb);
+            };
+            ```
+            
+            调用
+            
+            ```
+            var user = new User({});
+            user.is_exist(cb)
+            ```
+            
+          </section>
+          
+          
+          <section data-markdown>
+            - hook.js
+            - 了解pre和post的差别
+            
+            ```
+            UserSchema.pre('save', function(next) {
+                var user = this;
+                if (!user.isModified('password')) return next();
+                bcrypt.genSalt(SALT_WORK_FACTOR, function(err, salt) {
+                  if (err) return next(err);
+                  bcrypt.hash(user.password, salt, function (err, hash) {
+                    if (err) return next(err);
+                      user.password = hash;
+                      next();
+                    });
+                });
+            });
+            ```
+          </section>
+          
+          <section data-markdown>
+            - 了解virtual属性
+            
+            ```
+            UserSchema.virtual('is_valid').get(function(){
+              console.log('phone_number = ' +this.phone_number)
+              if(this.phone_number == undefined | this.invite_code == undefined){
+                return false;
+              }
+              return this.invite_code.length >= 2 && this.phone_number > 0
+            });
+            ```
+          </section>
+          
+          
+          <section data-markdown>
+            - 了解mongoose的插件机制
+            
+            ```
+            // lastMod.js
+            module.exports = exports = function lastModifiedPlugin (schema, options) {
+              schema.add({ lastMod: Date })
+  
+              schema.pre('save', function (next) {
+                this.lastMod = new Date
+                next()
+              })
+  
+              if (options && options.index) {
+                schema.path('lastMod').index(options.index)
+              }
+            }
+            ```
+            
+            调用
+            
+            ```
+            // game-schema.js
+            var lastMod = require('./lastMod');
+            var Game = new Schema({ ... });
+            Game.plugin(lastMod, { index: true });
+            ```
+          </section>
+          
+          
+          
+          <section data-markdown>
+            - 了解索引优化
+            
+            ```
+            ContactSchema = new Schema({
+                ...
+                owner: {
+                  type: Schema.ObjectId,
+                  required: true,
+                  index: true
+                }
+            });
+            ```
+            也可以这样的
+            
+            ```
+            ContactSchema.ensureIndexes(owner);
+            ```
+          </section>
+          
+          <section data-markdown>
+            - 了解explain
+            
+            ```
+            db.usermodels.find({
+              '_id' :{ 
+                "$gt" :ObjectId("55940ae59c39572851075bfd")
+              } 
+            }).explain()
+            
+            关注点
+            
+            - stage：查询策略
+            - nReturned：返回的文档行数
+            - needTime：耗时（毫秒）
+            - indexBounds：所用的索引
+            ```
+            
+            
+          </section>
+          
+          <section data-markdown>
+            - 了解profile
+            
+            
+            ```
+            profile级别有三种：
+            
+            - 0：不开启
+            - 1：记录慢命令，默认为大于100ms
+            - 2：记录所有命令
+            - 3、查询profiling记录
+            ```
+            
+            开启
+            
+                db.setProfilingLevel(2, 20)
+
+            默认记录在system.profile中
+
+                db['system.profile'].find()
+          </section>
+          
+          <section data-markdown>
+            ## 了解mongodb的部署
+            
+            - replset
+            - shard
+            
+            
+            
+            ```
+            我写的《 mongodb运维之副本集实践》
+            https://cnodejs.org/topic/5590adbbebf9c92d17e734de
+            ```
+          </section>
+          
+          
+          
+          <section data-markdown>
+            ## mongoosedao
+            
+            模型
+            
+            ```
+            var TopModel = mongoose.model('TopModel', TopSchema); 
+            var TopModelDao = new MongooseDao(TopModel);
+            module.exports = TopModelDao;
+            ```
+            
+            用法
+            
+            ```
+            require('./db');
+
+            var User = require('./User');
+
+            User.create({"username":"sss","password":"password"},function(err, user){
+              console.log(user);
+            });
+
+            User.delete({"username":"sss"},function(err, user){
+              console.log(user);
+            });
+            ```
+            
+            https://github.com/moajs/mongoosedao
+          </section>
+          
+          
+          
+				</section>        
+        
+				<section data-transition="slide" data-background="#9c56b9" data-background-transition="zoom">
+  				<section data-transition="slide" data-background="#9c56b9" data-background-transition="zoom">
+  					<h2>Part 3：Promise/A+规范</h2>
+  					<p>
+ 						A promise is defined as an object that has a function as the value for the property then: then(fulfilledHandler, errorHandler, progressHandler)
+  					</p>
+  					<pre><code style="word-wrap: break-word;">http://promisesaplus.com/</code></pre>
+          </section>     
+
+
+
+          <section data-markdown>
+            - 了解jquery里的then和$.deferred
+            
+            ```
+            function successFunc(){ console.log( “success!” ); }   
+            function failureFunc(){ console.log( “failure!” ); }   
+  
+            $.when(   
+               $.ajax( "/main.php" ),  
+               $.ajax( "/modules.php" ),  
+               $.ajax( “/lists.php” )  
+            ).then( successFunc, failureFunc );
+            ```
+          </section>     
+          <section data-markdown>
+            ## 了解的node的异步
+            
+            - 一切都是异步的
+            - 同步是奢求，要查Api
+            
+            ![](images/api.png)
+          </section>
+          
+          <section data-markdown>
+            ## 了解异步的恶心
+            
+            > 1. 用户登录 2. 增加用户日志 3. 更新用户登录次数
+            
+            ![](images/cb.png)
+          </section>
+          
+          <section data-markdown>
+            ## 如果用promise写呢？
+            
+            ![](images/cb_with_promise.png)
+          </section>
+          
+          <section data-markdown>
+            ## 如何实现一个promise库
+            
+            - 了解的then
+            
+            ```
+            var promise = {
+              okCallbacks: [],
+              koCallbacks: [],
+              then: function (okCallback, koCallback) {
+                okCallbacks.push(okCallback);
+                if (koCallback) {
+                  koCallbacks.push(koCallback);
+                }
+              }
+            }
+            ```
+          </section>
+          
+          <section data-markdown>
+            ## 如何实现一个promise库
+            
+            - 了解的resolve和reject
+            
+            ```
+            var defer = {
+              promise: promise,
+              resolve: function (data) {
+                this.promise.okCallbacks.forEach(function(callback) {
+                  window.setTimeout(function () {
+                    callback(data)
+                  }, 0);
+                });
+              },
+
+              reject: function (error) {
+                this.promise.koCallbacks.forEach(function(callback) {
+                  window.setTimeout(function () {
+                    callback(error)
+                  }, 0);
+                });
+              }
+            };
+            ```
+          </section>
+          
+          <section data-markdown>
+            ## 如何实现一个promise库
+          
+            - 测试代码
+            
+            ```
+            function test() {
+              var defer = new Defer();
+              // an example of an async call
+              serverCall(function (request) {
+                if (request.status === 200) {
+                  defer.resolve(request.responseText);
+                } else {
+                  defer.reject(new Error("Status code was " + request.status));
+                }
+              });
+              return defer.promise;
+            }
+            test().then(function (text) {
+              alert(text);
+            }, function (error) {
+              alert(error.message);
+            });
+            ```
+          </section>
+          
+          
+          <section data-markdown>
+            - 了解异步基本场景，比如waterfall这样的路程使用async如何处理
+            
+            ```
+            var async = require('async');
+            async.waterfall([
+                function(callback) {
+                    callback(null, 'one', 'two');
+                },
+                function(arg1, arg2, callback) {
+                  // arg1 now equals 'one' and arg2 now equals 'two'
+                    callback(null, 'three');
+                },
+                function(arg1, callback) {
+                    // arg1 now equals 'three'
+                    callback(null, 'done');
+                }
+            ], function (err, result) {
+                // result now equals 'done'
+            });
+            ```
+          </section>
+          
+          <section data-markdown>
+          - 了解q和bluebird用法（如果有angularjs经验，推荐q，其他只推荐bluebird）
+            
+          </section>
+          
+          <section data-markdown>
+            - 了解bluebird的promisifyAll用法
+            
+            ```
+            //Read more about promisification in the API Reference:
+            //API.md
+            var fs = Promise.promisifyAll(require("fs"));
+
+            fs.readFileAsync("myfile.json").then(JSON.parse).then(function (json) {
+                console.log("Successful json");
+            }).catch(SyntaxError, function (e) {
+                console.error("file contains invalid json");
+            }).catch(Promise.OperationalError, function (e) {
+                console.error("unable to read file, because: ", e.message);
+            });
+            ```
+          </section>
+          
+          <section data-markdown>
+            - model上应用promisifyAll
+            
+            ![](images/model-promisefy.png)
+          </section>
+          
+          <section data-markdown>
+            - 了解如何重构流程，以及代码的可读性   
+          </section>
+          
+          <section data-markdown>
+            - controller上应用promisifyAll
+            
+            ![](images/controller-promisefy.png)
+          </section>
+          
+          <section data-markdown>
+            - more
+            
+            https://github.com/kriskowal/q/tree/v1/design
+            
+          </section>
+          
+				</section>
+        
+				<section data-transition="slide" data-background="#e87e04" data-background-transition="zoom">
+          <section data-transition="slide" data-background="#e87e04" data-background-transition="zoom">
+					<h2>Part 4：tdd/bdd测试</h2>
+          <br>
+          <p>朴灵说：“不写测试的项目都不是好项目”</p>
+  
+          </section>
+          
+          
+          <section data-markdown>
+            - 理解最小问题思想，培养程序员该有的强大的内心
+          </section>
+                    
+          <section data-markdown>
+            - mocha的基本用法
+            
+            ```
+            npm install --save-dev mocha
+            ```
+            
+            ```
+            https://github.com/mochajs/mocha
+
+            var assert = require("assert")
+            
+            describe('truth', function(){
+              it('should find the truth', function(){
+                assert.equal(1, 1);
+              })
+            })
+            ```
+          </section>
+          
+          <section data-markdown>
+            - 理解断言
+            
+            系统Api内置的assert
+            
+            ```
+            https://iojs.org/api/assert.html
+            ```
+
+            ![](images/chai.png)
+            
+            rspec里推荐用expect，其实看个人习惯
+          </section>
+          
+          <section data-markdown>
+            - 理解测试生命周期
+            
+            ```
+            describe('Test', function(){
+              before(function() {
+                // runs before all tests in this block
+              })
+              after(function(){
+                // runs after all tests in this block
+              })
+              beforeEach(function(){
+                // runs before each test in this block
+              })
+              afterEach(function(){
+                // runs after each test in this block
+              })
+            })
+            ```
+          </section>
+          
+          <section data-markdown>
+            - 理解done回调
+            
+            ```
+            describe('MongooseDao', function(){
+            	before(function(done) {  
+                  Top.deleteAll(function(err){
+                    if(err){
+                      console.log(err);
+                    }
+                    var files = [];
+                    for (var i = 0; i < 100; ++i) {
+                      files.push(Top.createAsync({"username":"fixture-user-" + i,"address":"password" + i}));
+                    }
+                    Promise.all(files).then(function() {
+                      done();
+                    });
+                });
+              })
+            ```
+            
+            - 生命周期方法有done
+            - 测试方法也有done
+          </section>
+          
+    		  <section>
+            <h2>常用测试模块</h2>
+  					<p class="fragment">
+              1. mocha
+            </p>
+				 
+  				  <p class="fragment">  
+              2. chai（Chai is a BDD / TDD assertion library for node and the browser that can be delightfully paired with any javascript testing framework.
+            </p>
+  				  <p class="fragment">  
+              3. sinon（Standalone test spies, stubs and mocks for JavaScript.）
+            </p>
+  				  <p class="fragment">  
+              4. zombie (页面事件模拟Zombie.js is a lightweight framework for testing client-side JavaScript code in a simulated environment. No browser required.)
+            </p>
+  				  <p class="fragment">  
+              5. supertest(接口测试 Super-agent driven library for testing node.js HTTP servers using a fluent API)
+            </p>
+            
+  			  </section>
+          
+          <section data-markdown>
+            ## 反复测试？
+            
+            CI = Continuous integration 持续集成
+            
+            - jenkins
+            - travis-ci
+            
+            ```
+            教程 https://cnodejs.org/topic/558df089ebf9c92d17e73358
+            ```
+            
+            ![](images/ci.png)
+            
+            
+          </section>
+              
+          <section data-markdown>
+            ## 理解测试覆盖率
+            
+            ci实际上解决了反复测试的自动化问题。
+                  
+            但是如何看我的程序里的每一个函数都测试到了呢？
+            
+            
+          </section>
+              
+          <section data-markdown>
+          安装
+        
+          ```
+          $ npm install -g istanbul
+          ```
+        
+          执行
+
+          ```
+          $ istanbul cover my-test-script.js -- my test args
+          ```
+          </section>
+            
+          <section data-markdown>
+          ## 测试报告
+            
+            
+            ```
+            ./node_modules/.bin/istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly
+                #MongooseDao()
+                  ✓ should return ok when record create
+                  ✓ should return ok when record delete fixture-user
+                  ...
+                  ✓ should return ok when record query
+
+
+              8 passing (50ms)
+
+            =============================== Coverage summary ===============================
+            Statements   : 47.27% ( 26/55 )
+            Branches     : 8.33% ( 1/12 )
+            Functions    : 60% ( 9/15 )
+            Lines        : 47.27% ( 26/55 )
+            ================================================================================
+            ```
+          </section>
+          
+          <section data-markdown>
+            - 理解基于gulp自动化测试方法
+            
+            ```
+            var gulp = require('gulp');
+            var watch = require('gulp-watch');
+            var path = 'test/**/*.js';
+
+            gulp.task('watch', function() {
+              gulp.watch(['test/**/*.js', 'lib/*.js'], ['mocha']);
+            });
+
+            var mocha = require('gulp-mocha');
+            gulp.task('mocha', function () {
+                return gulp.src(path , {read: false})
+                    .pipe(mocha({reporter: 'spec'}));
+            });
+
+            gulp.task('default',['mocha', 'watch']);
+            ```
+            
+          </section>
+          
+       
+          
+          <section data-markdown>
+            ## more
+            
+ 如果有兴趣，可以去了解更多bdd/tdd内容，甚至是cucumber.js,从用户故事开始写测试
+          </section>
+       
+				</section>
+        
+        
+				<section data-transition="slide" data-background="#01bf9d" data-background-transition="zoom">
+          <section data-transition="slide" data-background="#01bf9d" data-background-transition="zoom">
+  					<h2>Part 5：调试</h2>
+ 
+  					<img src='images/debug.jpg'/>
+            
+          </section>
+         <section data-markdown>
+            ## 3种方法
+
+            - node debugger
+            - node inspector
+            - 测试驱动开发
+         </section>
+  
+          <section data-markdown>
+             ## node debugger -1
+    
+             V8 提供了一个强大的调试器，可以通过 TCP 协议从外部访问。
+             
+             Nodejs提供了一个内建调试器来帮助开发者调试应用程序。
+             
+             ```
+             var hello = 'hello';
+             var world = 'nodejs';
+
+             debugger;
+
+             var hello_world = hello + ' ' + world;
+             console.log(hello_world);
+             ```
+              
+          </section>
+          <section data-markdown>
+             ## node debugger -2
+ 
+             执行命令：
+             
+             ```
+             node debug helloword-debug.js 
+             ```
+             
+             就可以进入调试模式。
+          </section>
+          
+          <section data-markdown>
+             ## 全是命令行能习惯么？
+             
+             ```
+             node-debug-tutorial git:(master) ✗ node debug helloword-debug.js
+             < debugger listening on port 5858
+             connecting... ok
+             break in helloword-debug.js:1
+               1 var hello = 'hello';
+               2 var world = 'nodejs';
+               3 
+             debug> help
+             Commands: run (r), cont (c), next (n), step (s), out (o), backtrace (bt), setBreakpoint (sb), clearBreakpoint (cb),
+             watch, unwatch, watchers, repl, restart, kill, list, scripts, breakOnException, breakpoints, version
+             debug> 
+             debug> n
+             break in helloword-debug.js:2
+               1 var hello = 'hello';
+               2 var world = 'nodejs';
+               3 
+               4 debugger;
+             debug> repl
+             Press Ctrl + C to leave debug repl
+             > hello
+             'hello'
+             ```
+             
+             官方文档
+             
+             ```
+             http://nodejs.org/api/debugger.html
+             ```
+          </section>
+          
+          <section data-markdown>
+             - node inspector
+             
+             ```
+             https://github.com/node-inspector/node-inspector
+             ```
+          </section>
+          
+          <section data-markdown>       
+安装
+
+```
+npm install -g node-inspector
+```
+
+安装完成之后，通常可以直接这样启动在后台：
+
+```
+node-inspector &
+```
+
+我更喜欢这样用
+
+```
+node-debug app.js
+```
+          </section>
+          
+          
+          
+          <section >
+  					<h2>可视化界面</h2>
+  					<p>
+                <img src='images/inspector-ui.png'/>
+  					</p>
+             
+          </section>
+          
+          <section data-markdown>
+           ## 断点操作
+
+           - resume script execution（F8） 挂起断点，也可以理解为放弃当前断点，如果有下一个断点，会自动断住得
+           - step over（F10） 跳过这行，到下一行，如果当前函数结束，会跳到调用栈的上一级的下一行
+           - step into（F11） 进入当前行代码里的函数内部
+           - step out（Shift + F11） 从当前函数退出到之前进入的代码处
+                        
+             
+          </section>
+          
+          <section data-markdown>
+           ## 总结
+
+           - inspector 足够简单了，功能够用，需要断点的时候用
+           - tdd/bdd 平常做业务测试
+           
+           - 如果想了解更详细的，可以看我写的教程和视频：node-debug 三法三例
+           ```
+           https://cnodejs.org/topic/5463f6e872f405c829029f7e
+           ```
+          </section>
+          
+          
+				</section>
+        
+        <section data-transition="slide" data-background="#1fcf6d" data-background-transition="zoom" >
+          
+           <section data-transition="slide" data-background="#1fcf6d" data-background-transition="zoom" data-markdown>
+          ## 回顾一下
+   
+          - 了解http协议，尤其是express如何req
+          - 了解db相关操作，以mongoose为主
+          - 了解Promise/A+规范，合理规避回调陷阱
+          - 使用tdd/bdd测试，最小化问题
+          - 你无论如何都要会的：调试
+          </section>
+          <section data-transition="slide" data-background="#1fcf6d" data-background-transition="zoom" >
+          <h2>招聘Nodejs工程师, 我亲自带</h2>
+          目标全栈
+           <p class="fragment">天津，管吃住，工资和北京持平，有机会拿到天津户口，股票期权</p>
+           </section>
+        </section>
+        
+				<section data-transition="slide" data-background="#5babe6" data-background-transition="zoom">
+					<h2>Q & A</h2>
+					<p>
+						少抱怨，多思考，未来更美好。有的时候我看的不是你一时的能力，而是你面对世界的态度。
+					</p>
+          
+          <img width="178" height="238" data-src="images/q&a.jpg" alt="Down arrow">
+	
+          <p class="fragment">console.log('The End, Thanks~')</p>
+				</section>
+       
+       
+       
+   
+       
+       
+			</div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+
+			// Full list of configuration options available at:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+				// Optional reveal.js plugins
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true },
+					{ src: 'plugin/notes/notes.js', async: true }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
