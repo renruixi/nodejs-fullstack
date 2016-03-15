@@ -1,0 +1,455 @@
+
+	    <html>
+	      <head>
+				  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	        <title>README</title>
+					
+					<link href="toc/style/github-bf51422f4bb36427d391e4b75a1daa083c2d840e.css" media="all" rel="stylesheet" type="text/css"/>
+					<link href="toc/style/github2-d731afd4f624c99a4b19ad69f3083cd6d02b81d5.css" media="all" rel="stylesheet" type="text/css"/>
+					<link href="toc/css/zTreeStyle/zTreeStyle.css" media="all" rel="stylesheet" type="text/css"/>
+			
+				  <style>
+					pre {
+					    counter-reset: line-numbering;
+					    border: solid 1px #d9d9d9;
+					    border-radius: 0;
+					    background: #fff;
+					    padding: 0;
+					    line-height: 23px;
+					    margin-bottom: 30px;
+					    white-space: pre;
+					    overflow-x: auto;
+					    word-break: inherit;
+					    word-wrap: inherit;
+					}
+
+					pre a::before {
+					  content: counter(line-numbering);
+					  counter-increment: line-numbering;
+					  padding-right: 1em; /* space after numbers */
+					  width: 25px;
+					  text-align: right;
+					  opacity: 0.7;
+					  display: inline-block;
+					  color: #aaa;
+					  background: #eee;
+					  margin-right: 16px;
+					  padding: 2px 10px;
+					  font-size: 13px;
+					  -webkit-touch-callout: none;
+					  -webkit-user-select: none;
+					  -khtml-user-select: none;
+					  -moz-user-select: none;
+					  -ms-user-select: none;
+					  user-select: none;
+					}
+
+					pre a:first-of-type::before {
+					  padding-top: 10px;
+					}
+
+					pre a:last-of-type::before {
+					  padding-bottom: 10px;
+					}
+
+					pre a:only-of-type::before {
+					  padding: 10px;
+					}
+			
+					.highlight { background-color: #ffffcc } /* RIGHT */
+					</style>
+	      </head>
+	      <body>
+				  <div>
+							<div style='width:25%;'>
+									<ul id="tree" class="ztree" style='width:100%'>
+		
+									</ul>
+							</div>
+			        <div id='readme' style='width:70%;margin-left:20%;'>
+			          	<article class='markdown-body'>
+			            	<style>.highlight .hll { background-color: #ffffcc }
+.highlight  { background: #f0f0f0; }
+.highlight .c { color: #60a0b0; font-style: italic } /* Comment */
+.highlight .err { border: 1px solid #FF0000 } /* Error */
+.highlight .k { color: #007020; font-weight: bold } /* Keyword */
+.highlight .o { color: #666666 } /* Operator */
+.highlight .cm { color: #60a0b0; font-style: italic } /* Comment.Multiline */
+.highlight .cp { color: #007020 } /* Comment.Preproc */
+.highlight .c1 { color: #60a0b0; font-style: italic } /* Comment.Single */
+.highlight .cs { color: #60a0b0; background-color: #fff0f0 } /* Comment.Special */
+.highlight .gd { color: #A00000 } /* Generic.Deleted */
+.highlight .ge { font-style: italic } /* Generic.Emph */
+.highlight .gr { color: #FF0000 } /* Generic.Error */
+.highlight .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+.highlight .gi { color: #00A000 } /* Generic.Inserted */
+.highlight .go { color: #888888 } /* Generic.Output */
+.highlight .gp { color: #c65d09; font-weight: bold } /* Generic.Prompt */
+.highlight .gs { font-weight: bold } /* Generic.Strong */
+.highlight .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+.highlight .gt { color: #0044DD } /* Generic.Traceback */
+.highlight .kc { color: #007020; font-weight: bold } /* Keyword.Constant */
+.highlight .kd { color: #007020; font-weight: bold } /* Keyword.Declaration */
+.highlight .kn { color: #007020; font-weight: bold } /* Keyword.Namespace */
+.highlight .kp { color: #007020 } /* Keyword.Pseudo */
+.highlight .kr { color: #007020; font-weight: bold } /* Keyword.Reserved */
+.highlight .kt { color: #902000 } /* Keyword.Type */
+.highlight .m { color: #40a070 } /* Literal.Number */
+.highlight .s { color: #4070a0 } /* Literal.String */
+.highlight .na { color: #4070a0 } /* Name.Attribute */
+.highlight .nb { color: #007020 } /* Name.Builtin */
+.highlight .nc { color: #0e84b5; font-weight: bold } /* Name.Class */
+.highlight .no { color: #60add5 } /* Name.Constant */
+.highlight .nd { color: #555555; font-weight: bold } /* Name.Decorator */
+.highlight .ni { color: #d55537; font-weight: bold } /* Name.Entity */
+.highlight .ne { color: #007020 } /* Name.Exception */
+.highlight .nf { color: #06287e } /* Name.Function */
+.highlight .nl { color: #002070; font-weight: bold } /* Name.Label */
+.highlight .nn { color: #0e84b5; font-weight: bold } /* Name.Namespace */
+.highlight .nt { color: #062873; font-weight: bold } /* Name.Tag */
+.highlight .nv { color: #bb60d5 } /* Name.Variable */
+.highlight .ow { color: #007020; font-weight: bold } /* Operator.Word */
+.highlight .w { color: #bbbbbb } /* Text.Whitespace */
+.highlight .mb { color: #40a070 } /* Literal.Number.Bin */
+.highlight .mf { color: #40a070 } /* Literal.Number.Float */
+.highlight .mh { color: #40a070 } /* Literal.Number.Hex */
+.highlight .mi { color: #40a070 } /* Literal.Number.Integer */
+.highlight .mo { color: #40a070 } /* Literal.Number.Oct */
+.highlight .sb { color: #4070a0 } /* Literal.String.Backtick */
+.highlight .sc { color: #4070a0 } /* Literal.String.Char */
+.highlight .sd { color: #4070a0; font-style: italic } /* Literal.String.Doc */
+.highlight .s2 { color: #4070a0 } /* Literal.String.Double */
+.highlight .se { color: #4070a0; font-weight: bold } /* Literal.String.Escape */
+.highlight .sh { color: #4070a0 } /* Literal.String.Heredoc */
+.highlight .si { color: #70a0d0; font-style: italic } /* Literal.String.Interpol */
+.highlight .sx { color: #c65d09 } /* Literal.String.Other */
+.highlight .sr { color: #235388 } /* Literal.String.Regex */
+.highlight .s1 { color: #4070a0 } /* Literal.String.Single */
+.highlight .ss { color: #517918 } /* Literal.String.Symbol */
+.highlight .bp { color: #007020 } /* Name.Builtin.Pseudo */
+.highlight .vc { color: #bb60d5 } /* Name.Variable.Class */
+.highlight .vg { color: #bb60d5 } /* Name.Variable.Global */
+.highlight .vi { color: #bb60d5 } /* Name.Variable.Instance */
+.highlight .il { color: #40a070 } /* Literal.Number.Integer.Long */</style>
+<h1>Node &amp;&amp; js = 全栈</h1>
+
+<p>高可用架构专用</p>
+
+<h2>主要内容</h2>
+
+<ol>
+<li>Why Node.js ？</li>
+<li>我眼中的Node.js核心</li>
+<li>快速开发实践</li>
+<li>全栈 or 全烂 ？</li>
+<li>未来</li>
+</ol>
+
+<h1>Part 1：Why Node.js ？</h1>
+
+<p>已经7岁的Node.js，你还熟悉么？</p>
+
+<p>以前？现在？</p>
+
+<h2>以前我们总是喜欢拿异步说事儿</h2>
+
+<ul>
+<li>event-driven</li>
+<li>non-blocking I/O</li>
+</ul>
+
+<p>结果，今天。。。各种【异步模型】。。。烂大街了</p>
+
+<h2>今天，我们拿什么吹牛呢？</h2>
+<div class="highlight"><pre><span class="vg">Node</span><span class="o">.</span><span class="vg">js</span><span class="c1">&#39; package ecosystem, npm, is the largest ecosystem </span>
+<span class="vg">of</span><span class="w"> </span><span class="vg">open</span><span class="w"> </span><span class="vg">source</span><span class="w"> </span><span class="vg">libraries</span><span class="w"> </span><span class="vg">in</span><span class="w"> </span><span class="vg">the</span><span class="w"> </span><span class="vg">world</span><span class="o">.</span>
+</pre></div>
+<h2>为什么我们选择Node.js ？</h2>
+
+<p>即使不优化，性能比其他语言好</p>
+
+<p>即使优化，也比其他语言简单</p>
+
+<p>如不够，java补</p>
+
+<h2>架构平衡</h2>
+
+<ul>
+<li>使用0.10.38，开发moajs框架
+
+<ul>
+<li>express/mongodb</li>
+<li>pm2部署</li>
+<li>阿里云的slb负载</li>
+<li>alinode监控</li>
+</ul></li>
+<li>前后端分离
+
+<ul>
+<li>moa-api</li>
+<li>moa-frontend</li>
+<li>moa-h5(未能用)</li>
+</ul></li>
+<li>上redis缓存</li>
+<li>上rabbitmq</li>
+<li>上senaca作为rpc</li>
+<li>上kong作为api gateway</li>
+<li>上elk作为日志分析处理</li>
+<li>使用docker compose作为本地开发环境</li>
+<li>线上docker</li>
+</ul>
+
+<h2>我们的瓶颈在哪里 ？</h2>
+
+<ul>
+<li>人（天津招不到人）</li>
+<li>开发速度（创业公司，跑。。。）</li>
+<li>传承（以后也要）</li>
+</ul>
+
+<h2>回顾一下历史</h2>
+
+<h1>Part 2：我眼中的Node.js核心</h1>
+
+<p>MEAN</p>
+
+<ul>
+<li>异步流程控制</li>
+<li>cli（scaffold）</li>
+<li>web framework</li>
+</ul>
+
+<h2>小而美的哲学</h2>
+
+<p>&quot;Small is beautiful&quot;是Unix哲学9条里的第一条，但对Node.js来说，它实在是再合适不过了</p>
+
+<p>http://blog.izs.me/post/48281998870/unix-philosophy-and-nodejs</p>
+
+<!-- ![](images/nodejs-philosophy.png) -->
+
+<ul>
+<li>Write modules that do one thing well. Write a new module rather than complicate an old one.</li>
+<li>Write modules that encourage composition rather than extension.</li>
+<li>Write modules that handle data Streams, because that is the universal interface.</li>
+<li>Write modules that are agnostic about the source of their input or the destination of their output.</li>
+<li>Write modules that solve a problem you know, so you can learn about the ones you don’t.</li>
+<li>Write modules that are small. Iterate quickly. Refactor ruthlessly. Rewrite bravely.</li>
+<li>Write modules quickly, to meet your needs, with just a few tests for compliance. Avoid extensive specifications. Add a test for each bug you fix.</li>
+<li>Write modules for publication, even if you only use them privately. You will appreciate documentation in the future.</li>
+</ul>
+
+<h2>取巧：之从LAMP到MEAN</h2>
+
+<p>(Mongdb,express,angular,node)架构</p>
+
+<h2>异步流程控制</h2>
+
+<p><img src="images/async.png" alt=""></p>
+
+<ul>
+<li>异步流程控制
+
+<ul>
+<li>promise</li>
+<li>generator+yield</li>
+<li>co</li>
+<li>async+await）</li>
+<li>bluebird</li>
+</ul></li>
+</ul>
+
+<h2>Node.js Web开发</h2>
+
+<ul>
+<li>Node.js Web开发
+
+<ul>
+<li>express</li>
+<li>koa</li>
+<li>restify</li>
+<li>其他框架sails、meteor</li>
+</ul></li>
+</ul>
+
+<h2>Node.js 模块开发</h2>
+
+<ul>
+<li>Node.js模块开发
+
+<ul>
+<li>普通模块</li>
+<li>cli</li>
+<li>脚手架scaffold</li>
+<li>c/c++ addons</li>
+</ul></li>
+</ul>
+
+<h1>Part 3：快速开发实践</h1>
+
+<ul>
+<li>Node.js实践
+
+<ul>
+<li>前后端分离</li>
+<li>api</li>
+<li>mq/rpc/senaca</li>
+<li>微服务</li>
+</ul></li>
+</ul>
+
+<h1>Part 4：全栈 or 全烂 ？</h1>
+
+<h2>Node.js工具</h2>
+
+<ul>
+<li>grunt/gulp/fis/webpack</li>
+<li>bower/spm/npm</li>
+</ul>
+
+<h2>前端开发4阶段</h2>
+
+<ul>
+<li>html/css/js（基础）</li>
+<li>jQuery、jQuery-ui，Extjs（曾经流行）</li>
+<li>Backbone，Angularjs、Vuejs（当前流行）</li>
+<li>React（未来趋势）、Vuejs</li>
+</ul>
+
+<p>Vuejs综合Angular和React的优点，应该是下一个流行趋势</p>
+
+<h2>Hybrid开发</h2>
+
+<ul>
+<li>移动端概述</li>
+<li>cordova(老的phonegap)
+
+<ul>
+<li>插件</li>
+</ul></li>
+<li>ionicframework</li>
+<li>h5实践</li>
+</ul>
+
+<h2>跨平台</h2>
+
+<p>懒和折腾的快乐里，安放着程序员的青春</p>
+
+<h3>c/s架构到b/s架构</h3>
+
+<p>这个大部分都清楚，不多说</p>
+
+<h3>移动端：加壳</h3>
+
+<p><img src="images/cordovaapparchitecture.png" alt=""></p>
+
+<p>在浏览器上做文章，把页面生成各个移动端的app文件</p>
+
+<h3>PC端：继续加壳</h3>
+
+<p><img src="images/electron.jpg" alt=""></p>
+
+<p>一样是延续浏览器做文章，不过这次把页面生成各个PC平台的可执行文件</p>
+
+<ul>
+<li>node-webkit is renamed <a href="https://github.com/nwjs/nw.js">NW.js</a></li>
+<li><a href="https://github.com/atom/electron">Electron</a> - Build cross platform desktop apps with web technologies</li>
+</ul>
+
+<p>目前比较火的编辑器<a href="https://github.com/atom/atom">atom</a>和<a href="https://github.com/Microsoft/vscode">vscode</a>都是基于Electron打包的。</p>
+
+<h3>组件化：统一用法</h3>
+
+<p>React的出现影响最大的是jsx的出现，解决了长久以来组件化的问题，</p>
+
+<ul>
+<li>我们反复的折腾js，依然无法搞定</li>
+<li>我们尝试OO，比如extjs</li>
+<li>我们最终还是找个中间格式jsx</li>
+</ul>
+
+<p>单纯的React只是view层面的，还不足以应用，于是又有Redux</p>
+
+<p>核心概念：Actions、Reducers 和 Store，简单点说就是状态控制</p>
+
+<p>然后再结合打包加壳，变成app或可执行文件</p>
+
+<ul>
+<li>iOS、Android上用Cordova</li>
+<li>PC上使用Electron</li>
+</ul>
+
+<p>总结</p>
+
+<ul>
+<li>组件定义好（React）</li>
+<li>控制好组件之间的状态切换（Redux）</li>
+<li>打包或加壳（Cordova or Electron）</li>
+</ul>
+
+<p>这部分其实组件化了前端，那么能否用这样的思想来组件化移动端呢？</p>
+
+<p>再看<a href="https://github.com/facebook/react-native">react-native</a></p>
+
+<p>A framework for building native apps with React. http://facebook.github.io/react-native/</p>
+
+<p>简单点说，就是用React的语法来组件化iOS或Android SDK。</p>
+
+<p>它们都在告诉我们，你们以后就玩这些组件就好了，你不需要知道复杂的SDK是什么</p>
+
+<h3>当下流行玩法</h3>
+
+<p><img src="images/medis.png" alt=""></p>
+
+<p><a href="https://github.com/luin/medis">Medis</a> is a beautiful, easy-to-use Redis management application built on the modern web with Electron, React, and Redux. It&#39;s powered by many awesome Node.js modules, especially ioredis and ssh2.</p>
+
+<p>技术点</p>
+
+<ul>
+<li>使用Node.js模块</li>
+<li>使用Webpack构建</li>
+<li>使用React（视图） + Redux（控制逻辑）</li>
+<li>使用Electron加壳打包</li>
+</ul>
+
+<p>亲，你看到未来了么？</p>
+
+<h1>Part 5：未来</h1>
+
+<p>可能是一场春梦，也可能一个变革机遇，拭目以待吧</p>
+
+<h2>模块化</h2>
+
+<h2>语言</h2>
+
+<ul>
+<li>es6、es7（babel编译）</li>
+<li>typescript（微软）</li>
+<li>coffeescript（式微）</li>
+</ul>
+
+<h2>工具</h2>
+
+			          	</article>
+			        </div>
+					</div>
+	      </body>
+	    </html>
+			<script type="text/javascript" src="toc/js/jquery-1.4.4.min.js"></script>
+			<script type="text/javascript" src="toc/js/jquery.ztree.all-3.5.min.js"></script>
+			<script type="text/javascript" src="toc/js/ztree_toc.js"></script>
+      <script type="text/javascript" src="toc/toc_conf.js"></script>
+      
+			<SCRIPT type="text/javascript" >
+			<!--
+			$(document).ready(function(){
+          var css_conf = eval(markdown_panel_style);
+          $('#readme').css(css_conf)
+          
+          var conf = eval(jquery_ztree_toc_opts);
+  				$('#tree').ztree_toc(conf);
+
+				
+			});
+			//-->
+			</SCRIPT>
+	  

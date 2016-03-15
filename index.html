@@ -41,8 +41,8 @@
 			<!-- Any section element inside of this container is displayed as a slide -->
 			<div class="slides">
 				<section>
-					<h1>Nodejs最新技术栈</h1>
-					<p>Nodejs是比较简单的，只有你有前端js基础，那就按照我的办法来吧！一周足矣</p>
+					<h1>Node && js = 全栈</h1>
+					<p>高可用架构专用</p>
 					<p>
 						<small>Created by <a href="https://cnodejs.org/user/i5ting">i5ting</a> / <a href="http://github.com/i5ting">@i5ting</a></small>
 					</p>
@@ -80,11 +80,11 @@
           <section data-markdown>
             ## 主要内容
             
-            1. 了解http协议，尤其是express如何req
-            1. 了解db相关操作，以mongoose为主
-            1. 了解Promise/A+规范，合理规避回调陷阱
-            1. 使用tdd/bdd测试，最小化问题
-            1. 你无论如何都要会的：调试
+            1. Why Node.js ？
+            1. 我眼中的Node.js核心
+            1. 快速开发实践
+            1. 全栈 or 全烂 ？
+            1. 未来
             
           </section>
           
@@ -104,60 +104,46 @@
         
 				<section data-transition="slide" data-background="#4d7e65" data-background-transition="zoom">
           <section data-transition="slide" data-background="#4d7e65" data-background-transition="zoom">
-					<h2>Part 1：http基础</h2>
+					<h2>Part 1：Why Node.js ？</h2>
 					<p>
-						了解http协议，尤其是express如何req
+						以前？现在？
 					</p>
-					<pre><code>curl -d "a=1&b=2" http://127.0.0.1:3001/users/post</code></pre>
+					<pre><code>已经7岁的Node.js，你还熟悉么？</code></pre>
           </section>
           
           <section data-markdown>
-              ## http是无状态的协议
+              ## 以前我们总是喜欢拿异步说事儿
               
-              tcp呢？
+              - event-driven
+              - non-blocking I/O
+              
+              结果，今天。。。各种【异步模型】烂大街了
           </section>
           
           <section data-markdown>
-              - 绝对地址和相对地址
+              ## 今天，我们拿什么吹牛呢？
   
               ```
-              相对地址的举例：
-              &lt;a href="/visit"&gt;访谈&lt;/a&gt;
-              
-              绝对地址的举例：
-              &lt;a href="http://www.xxxxx.cn/net/"&gt;广告网络平台&lt;/a&gt;
-           
+              Node.js' package ecosystem, npm, is the largest ecosystem 
+              of open source libraries in the world.
               ```
           </section>
           
           <section data-markdown>
-              - querystring
+              ## 为什么我们选择Node.js ？
               
-              ```
-              https://www.baidu.com/s?wd=querystring
-              ```
+              即使不优化，性能比其他语言好
               
-              in expressjs
-              
-              ```
-              req.query.wd
-              ```
-              
+              即使优化，也比其他语言简单
             
           </section>
           
           <section data-markdown>
-              ## url 和 uri
+              ## 我们的瓶颈在哪里 ？
               
-              
-              URI抽象结构     
-              ```
-              [scheme:]scheme-specific-part[#fragment]
-
-              [scheme:][//authority][path][?query][#fragment]
-
-              authority为[user-info@]host[:port]
-              ```
+              - 人（天津招不到人）
+              - 开发速度（创业公司，跑。。。）
+              - 传承（以后也要）
           </section>
           
           <section data-markdown>
@@ -512,23 +498,16 @@
 				<section data-transition="slide" data-background="#b5533c" data-background-transition="zoom">
         
   				<section data-transition="slide" data-background="#b5533c" data-background-transition="zoom">
-  					<h2>Part 2：db相关</h2>
+  					<h2>Part 2：我眼中的Node.js核心</h2>
   					<p>
               MEAN
   					</p>
-            <li>M = mongodb
+            <li>异步流程控制
+            <li>cli（scaffold）
+            <li>web framework
           </section>
           
-          <section data-markdown>
-            - 了解mvc里m的作用
-            
-            ![](images/mvc.png)
-          </section>
-          <section data-markdown>
-            - 代码结构
-            
-            ![](images/models.png)
-          </section>
+         
           <section data-markdown>
 
 - mongoose用法
@@ -847,7 +826,7 @@ kitty.save(function (err) {
         
 				<section data-transition="slide" data-background="#9c56b9" data-background-transition="zoom">
   				<section data-transition="slide" data-background="#9c56b9" data-background-transition="zoom">
-  					<h2>Part 3：Promise/A+规范</h2>
+  					<h2>Part 3：快速开发实践</h2>
   					<p>
  						A promise is defined as an object that has a function as the value for the property then: then(fulfilledHandler, errorHandler, progressHandler)
   					</p>
@@ -855,7 +834,18 @@ kitty.save(function (err) {
           </section>     
 
 
-
+          <section data-markdown>
+            - mvc还是那个mvc
+            
+            ![](images/mvc.png)
+          </section>
+          <section data-markdown>
+            - 代码结构
+            
+            ![](images/models.png)
+          </section>
+          
+          
           <section data-markdown>
             - 了解jquery里的then和$.deferred
             
