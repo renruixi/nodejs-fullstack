@@ -131,7 +131,7 @@
 .highlight .vg { color: #bb60d5 } /* Name.Variable.Global */
 .highlight .vi { color: #bb60d5 } /* Name.Variable.Instance */
 .highlight .il { color: #40a070 } /* Literal.Number.Integer.Long */</style>
-<h1>Node &amp;&amp; js 全栈</h1>
+<h1>全栈工程师之路-Node.js</h1>
 
 <p>高可用架构专用</p>
 
@@ -160,7 +160,9 @@
 <li>未来</li>
 </ol>
 
-<p>还在调整</p>
+<p>最近比较火的2016年开发者调查了，Node.js和全栈、以及和js相关的技术都有不错的战绩，这次给大家分享一下《全栈工程师之路-Node.js》，准备的还不够充分，水平也有限，大家见谅啊</p>
+
+<p>http://stackoverflow.com/research/developer-survey-2016</p>
 
 <h2>讲师介绍</h2>
 
@@ -174,8 +176,6 @@
 <p>已经7岁的Node.js，你还熟悉么？</p>
 
 <p>以前？现在？</p>
-
-<p>http://stackoverflow.com/research/developer-survey-2016</p>
 
 <h2>回顾一下2015年</h2>
 
@@ -225,7 +225,19 @@
 
 <h2>版本帝？</h2>
 
-<p>目前的2个版本</p>
+<p>去年</p>
+
+<ul>
+<li>从v0.10.35 开始</li>
+<li>2015-01-14发布了v1.0.0版本（io.js）</li>
+<li>2.x（io.js）</li>
+<li>3.x（io.js）</li>
+<li>2015年09月Node.js基金会已发布Node.js V4.0版 与io.js合并后的第一个版本</li>
+<li>2015年10月Node.jsv4.2.0将是首个lts长期支持版本</li>
+<li>年底发布到4.2.4 &amp;&amp; 5.4.0</li>
+</ul>
+
+<p>目前（2016年3月20日）的2个版本</p>
 
 <ul>
 <li>v4.4.0 LTS（长期支持版本）</li>
@@ -244,25 +256,28 @@
 
 <h2>以前我们总是喜欢拿异步说事儿</h2>
 
+<p>Node.js与生俱来的2个特性</p>
+
 <ul>
 <li>event-driven</li>
 <li>non-blocking I/O</li>
 </ul>
 
-<p>结果，今天。。。各种【异步模型】。。。烂大街了</p>
+<p>结果，今天。。。各种【异步】。。。烂大街了</p>
 
-<h2>今天，我们拿什么吹牛呢？</h2>
-<div class="highlight"><pre><span class="vg">Node</span><span class="o">.</span><span class="vg">js</span><span class="c1">&#39; package ecosystem, npm, is the largest ecosystem </span>
-<span class="vg">of</span><span class="w"> </span><span class="vg">open</span><span class="w"> </span><span class="vg">source</span><span class="w"> </span><span class="vg">libraries</span><span class="w"> </span><span class="vg">in</span><span class="w"> </span><span class="vg">the</span><span class="w"> </span><span class="vg">world</span><span class="o">.</span>
-</pre></div>
-<p>除了性能，其他都是病。易維護更是YY。</p>
+<p>异步已经不是明显优势了</p>
 
-<h2>特定场景的快速</h2>
+<h2>除了性能，其他都是病？</h2>
 
 <ul>
-<li>metetor</li>
-<li>mean.io</li>
+<li>第一、callback hell问题，目前已经很好的解决了，promise/generator/async后面会讲</li>
+<li>第二、npm已经是开源世界里最大的包管理器了，模块非常丰富（25.6万+）</li>
 </ul>
+
+<p>官方说</p>
+<div class="highlight"><pre><span class="vg">Node</span><span class="o">.</span><span class="vg">js</span><span class="c1">&#39; package ecosystem, npm, is the largest ecosystem of open source libraries in the world.</span>
+</pre></div>
+<p>以前我们总是喜欢拿异步说事儿，现在我们拿Node.js的强大的生态来炫耀</p>
 
 <h2>大事儿记</h2>
 
@@ -273,6 +288,17 @@
 <li><p>2015年 IBM <a href="http://www-03.ibm.com/press/us/en/pressrelease/47577.wss">收购 StrongLoop，拓展云服务业务</a></p></li>
 </ul>
 
+<p>Node.js基金会的创始成员包括Joyent、IBM、Paypal、微软、Fidelity和Linux基金会</p>
+
+<p><img src="images/member.png" alt=""></p>
+
+<p>更多参见
+https://nodejs.org/en/foundation/members/</p>
+
+<p>对于企业级开发，Node.js是足够的，无论从性能、安全、稳定性等都是非常棒的。</p>
+
+<p>空弦科技做的是基于云仓储的SaaS服务，给中小卖家提供服务，核心系统是进销存+订单池+WMS。目前来看不存在任何问题，稍后会讲我们为啥选择Node.js</p>
+
 <h3>es &amp;&amp; babel</h3>
 
 <ul>
@@ -281,7 +307,11 @@
 
 <p>http://babeljs.io/</p>
 
-<p>babel作为es编译器，已经大量开始使用了</p>
+<p>babel作为es编译器，已经大量开始使用了，模块做的非常棒，还有人用babel写其他语言编译器</p>
+
+<p>Node.js里在0.12之后才增加es6特性，es7的目前还不支持。</p>
+
+<p>所以在Node.js里使用es里比较高级的特性，是需要babel去编译处理的。</p>
 
 <h3>微软请求 Node.js 支持 ChakraCore</h3>
 
@@ -296,18 +326,146 @@
 </pre></div>
 <h2>为什么我们选择Node.js ？</h2>
 
-<p>即使不优化，性能比其他语言好</p>
-
-<p>即使优化，也比其他语言简单</p>
-
-<p>如不够，java补</p>
-
-<h2>平衡</h2>
-
-<h3>执行效率、开发效率与进度</h3>
+<p>我们的瓶颈在哪里 ？</p>
 
 <ul>
-<li>执行效率：即使不优化，性能比其他语言好</li>
+<li>人（天津不好招人）</li>
+</ul>
+
+<p>Node.js招不到，好多都是从java转的，前端也不好找，好多也是从java转的，我们相当于从0开始组建团队</p>
+
+<ul>
+<li>开发速度</li>
+</ul>
+
+<p>创业公司，5分钟要造火箭。。。大家都懂</p>
+
+<p>所以让开发快速进入状态，提高开发速度，对我们来说至关重要</p>
+
+<ul>
+<li>稳定</li>
+</ul>
+
+<p>在没有运维人员的情况下，如何保证系统可用、稳定</p>
+
+<p>然而Node.js的好处</p>
+
+<ul>
+<li>即同样不优化，性能比大部分语言好</li>
+<li>即使优化，也比其他语言简单</li>
+<li>有足够多的选择和架构的平衡</li>
+<li>如实在不够，java补</li>
+</ul>
+
+<h2>选择</h2>
+
+<p>Node.js给了我们足够的选择工具</p>
+
+<h3>可难可易</h3>
+
+<ul>
+<li>可以采用面向过程</li>
+<li>可以面向对象</li>
+<li>可以函数式</li>
+</ul>
+
+<p>甚至可以用各种编译器coffee、typescript、babel（es）等</p>
+
+<p>对于从0开始的团队来讲，可以先面向过程、然后随着团队的成熟度，一点一点增加难度</p>
+
+<h3>提供好的基础和包管理工具</h3>
+
+<ul>
+<li>测试相关 tdd/bdd/测试覆盖率</li>
+<li>规范化 standard、各种lint、hint</li>
+<li>构建相关 gulp、grunt、webpack，大量插件</li>
+<li>生成器 yo等</li>
+<li>包管理工具npm足够简单易用</li>
+</ul>
+
+<p>以上这些都做大型软件的基础，Node.js在这方面做得非常好</p>
+
+<h3>特定场景的快速</h3>
+
+<p>很多人把mean组合（比如mean.io）起来，这样做的好处是如果熟悉，开发速度确实会非常快，但确定是难度太大，很少有人能搞的定</p>
+
+<p>metetor模糊了服务端和客户端，是同构的典型应用，对于实时场景是非常高效的。</p>
+
+<p>这种东西都算特定场景的快速，一般不敢轻易上，调优难度非常大，如果有人能cover的住，在初期是非常高效的。</p>
+
+<h3>总结</h3>
+
+<ul>
+<li>可以简单，可以难</li>
+<li>可以快、也可以慢</li>
+<li>可以开发大型软件</li>
+</ul>
+
+<p>还有一个问题就是如果以上不满足咋办？这时就需要架构平衡了</p>
+
+<h2>架构平衡</h2>
+
+<p>技术选型的3个思考点</p>
+
+<ul>
+<li>在语言层面可以做，那语言层面做</li>
+<li>如果语言层面搞不定，那就架构层面做</li>
+<li>如果架构层面也搞不定，这东西就不能用了</li>
+</ul>
+
+<p><img src="images/arch.png" alt=""></p>
+
+<p>我们很坦然的面对Node.js的优点和缺点</p>
+
+<ul>
+<li>语言层面能解决的
+
+<ul>
+<li>已有大量npm上的模块(目前在25.6万个以上) </li>
+<li>自己造轮子(站在海量包上+简单语法+npm=快速)</li>
+<li>使用Node.js里的<a href="https://github.com/nodejs/nan">nan</a>自己包装c/c++轮子</li>
+</ul></li>
+</ul>
+
+<p>绝大部分需求都可以满足了  </p>
+
+<ul>
+<li>架构层面能解决的
+
+<ul>
+<li>业务边界、模块拆分、面向服务</li>
+<li>mq、rpc、cache</li>
+<li>运维、监控、自动化</li>
+</ul></li>
+</ul>
+
+<p>稍微解释一下</p>
+
+<ul>
+<li>首先，架构和是不是Node.js写的没关系，是独立的</li>
+<li>其次，架构师常用的东东有足够的Node.js模块支持，比如mq，像rabbitmq有比较好的node模块支持，像rpc里thrift、grpc、tchannel支持的都不错，我们使用的senecajs，比如redis，我们使用的ioredis，后面做ha都是一样的。</li>
+<li>合适的场景用合适的东西</li>
+</ul>
+
+<p>有很多东西是Node.js不擅长，又不在架构范畴里的，咋办？</p>
+
+<ul>
+<li>如实在不够，java补（严格点，应该叫其他语言补）
+
+<ul>
+<li>比如复杂excel生成</li>
+<li>比如apns推送（go做其实也很好，不过除了我，没人能维护。。。）</li>
+</ul></li>
+</ul>
+
+<p>但凡是java或其他语言里比较成熟的库，可以作为独立服务使用的，都可以做Node.js的支持。避免过多的时间用在早轮子上，影响开发进度</p>
+
+<h2>效率问题？</h2>
+
+<p>执行效率：</p>
+
+<ul>
+<li>同样不优化，性能比大部分语言好</li>
 </ul>
 
 <p>开发效率：</p>
@@ -341,20 +499,13 @@
 <li>基于js的模板引擎（知名的30+）</li>
 </ul>
 
-<h3>架构平衡</h3>
-
-<h2>小步快走</h2>
+<h2>我们用Node.js做什么？</h2>
 
 <ul>
-<li>一次只上一样</li>
-<li>形成梯队，即可准备上新东西</li>
-<li>善用npm，实现3化
-
-<ul>
-<li>模块化</li>
-<li>最小化</li>
-<li>服务化</li>
-</ul></li>
+<li>api服务</li>
+<li>前端（moa-frontend）</li>
+<li>SDK（OAuth Provider）</li>
+<li>辅助开发cli工具</li>
 </ul>
 
 <h2>目前进度</h2>
@@ -379,6 +530,7 @@
 <li>上rabbitmq</li>
 <li>上senaca作为rpc</li>
 <li>上kong作为api gateway（todo）</li>
+<li>上consul做服务发现和配置（todo）</li>
 <li>上elk作为日志分析处理（todo）</li>
 <li>使用docker compose作为本地开发环境（todo）</li>
 <li>线上docker（todo）</li>
@@ -394,22 +546,28 @@
 
 <p>4.x在内存和性能上都有非常大的提升，新的语言特性上，异步流程和语法上都需要学习，故不急于升级，待人才梯队完善</p>
 
-<h2>我们的瓶颈在哪里 ？</h2>
+<h2>小步快走</h2>
 
 <ul>
-<li>人（天津招不到人）</li>
-<li>开发速度（创业公司，跑。。。）</li>
-<li>传承（以后也要）</li>
+<li>一次只上一样</li>
+<li>形成梯队，即可准备上新东西</li>
+<li>善用npm，实现3化
+
+<ul>
+<li>模块化</li>
+<li>最小化</li>
+<li>服务化</li>
+</ul></li>
 </ul>
 
 <h1>Part 2：我眼中的Node.js核心</h1>
 
-<p>MEAN</p>
-
 <ul>
+<li>小而美的哲学</li>
+<li>取巧：之从LAMP到MEAN</li>
 <li>异步流程控制</li>
-<li>cli（scaffold）</li>
-<li>web framework</li>
+<li>Node.js Web开发</li>
+<li>Node.js 模块开发</li>
 </ul>
 
 <h2>小而美的哲学</h2>
@@ -431,25 +589,58 @@
 <li>Write modules for publication, even if you only use them privately. You will appreciate documentation in the future.</li>
 </ul>
 
-<h2>取巧：之从LAMP到MEAN</h2>
+<h2>从LAMP到MEAN</h2>
 
-<p>(Mongdb,express,angular,node)架构</p>
+<p>MEAN是目前最潮的全栈javascript架构</p>
+
+<p>MEAN是一个Javascript平台的现代Web开发框架总称，它是MongoDB + Express +AngularJS + NodeJS 四个框架的第一个字母组合。它与传统LAMP一样是一种全套开发工具的简称。</p>
+
+<p>从我的角度看</p>
+
+<ul>
+<li>mysql用mongodb替换，nosql里最像rdbms的，从开发和性能都是有优势的（老毕已经讲过了）</li>
+<li>angular的出现是一个时代，ioc，双向绑定，指令等都曾让无数热血沸腾</li>
+<li>nodejs提供了完全的生态和工具链，你要的它基本都有，感谢npm，早些年nodejs的性能甩php几条街的</li>
+<li>express作为nodejs示范项目，它非常精简，是比较合适的web框架</li>
+</ul>
+
+<p>我为什么选择MEAN架构？</p>
+
+<ul>
+<li>成熟、稳定，简单，有问题我们能cover住，所以我们选了nodejs</li>
+<li>把握趋势，以后nodejs的前景非常看好，尤其先后端统一，全栈方向</li>
+<li>在架构上可以屏蔽可能风险，不孤注一掷，也不会一叶障目，合理的使用其他语言，只要每个功能都以服务出现，至于它是什么语言写的，并不重要</li>
+<li>招人成本的性价比相对较高，技术栈新，容易吸引人才</li>
+</ul>
+
+<p>最重要的一件事儿，是当有问题的时候，有人能cover住，在创业初期这是最最重要的事儿。</p>
+
+<p>我的一篇爆款文章《Node.js最新Web技术栈（2015年5月）》https://cnodejs.org/topic/55651bf07d4c64752effb4b1
+讲的就是我们用的技术栈</p>
 
 <h2>异步流程控制</h2>
+
+<p>js流程控制的演进过程，分以下5部分</p>
+
+<ul>
+<li>1) 回调函数Callbacks</li>
+<li>2) 异步JavaScript</li>
+<li>3) Promise/a+规范</li>
+<li>4) 生成器Generators/ yield(es6)</li>
+<li>5) Async/ await(es7)</li>
+</ul>
 
 <p><img src="images/async.png" alt=""></p>
 
 <ul>
-<li>异步流程控制
-
-<ul>
-<li>promise</li>
-<li>generator+yield</li>
-<li>co</li>
-<li>async+await）</li>
-<li>bluebird</li>
-</ul></li>
+<li>目前所有版本都支持Promise/a+规范</li>
+<li>目前Node.js 4.0 + 支持Generators/ yield</li>
+<li>目前不支持ES7里的Async/await，但可以通过babel实先</li>
 </ul>
+
+<p>整体来说，对异步流程控制解决的还是比较好的。</p>
+
+<p>详见<a href="https://cnodejs.org/topic/560dbc826a1ed28204a1e7de">Node.js最新技术栈之Promise篇</a></p>
 
 <h2>Node.js Web开发</h2>
 
@@ -457,12 +648,17 @@
 <li>Node.js Web开发
 
 <ul>
-<li>express</li>
-<li>koa</li>
-<li>restify</li>
+<li>express、koa</li>
+<li>restify、hapi</li>
 <li>其他框架sails、meteor</li>
 </ul></li>
 </ul>
+
+<p>各种类型web开发都支持的，一般我们采用非restful的使用express、koa更简单</p>
+
+<p>如果是纯restful，可以采用restify、hapi</p>
+
+<p>另外还有快速模拟api的<a href="https://github.com/typicode/json-server">json-server</a>，对rest支持超方便</p>
 
 <h2>Node.js 模块开发</h2>
 
@@ -477,9 +673,21 @@
 </ul></li>
 </ul>
 
+<p>普通模块和cli模块只是差package.json里的</p>
+<div class="highlight"><pre><span class="w">  </span><span class="s2">&quot;preferGlobal&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;true&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="s2">&quot;bin&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="s2">&quot;kp&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;kp.js&quot;</span>
+<span class="w">  </span><span class="p">},</span>
+</pre></div>
+<p>脚手架scaffold = cli + 模板生成，在Node.js里这2点都非常容易</p>
+
+<p>在Node.js里写c/c++扩展，有nan抽象层，其他就看大家的c/c++水平了</p>
+
 <h1>Part 3：快速开发实践</h1>
 
 <h2>业务边界优化</h2>
+
+<p>创业公司有很多可变性，要做的系统也无数，如何保证业务系统的边界是非常难的，我们其实走了很多弯路，图-稍后补</p>
 
 <h2>静态api理论</h2>
 
@@ -487,9 +695,24 @@
 
 <p><img src="images/api-after.png" alt=""></p>
 
+<p>当需求和ue定下来之后，就开始编写静态api，这样app、h5、前端就可以使用静态api完成功能，而后端也可以以静态api为标准来实现，整体效率还是比较高的。</p>
+
+<p>另外还有基于api生成http请求的思考（未完成）</p>
+
+<p><img src="images/IMG_2578.JPG" alt=""></p>
+
 <h2>api约定</h2>
 
 <p><img src="images/api-conversion.png" alt=""></p>
+
+<p>api的最佳实践</p>
+
+<ul>
+<li>http://developer.github.com/v3/ （严格的restful）</li>
+<li>微博API (可读性强，相对比较传统)</li>
+</ul>
+
+<p>我们采用的微博API类似的，约定结构也是类似的</p>
 
 <p>res.api is an express middleware for render json api , it convention over api format like this :</p>
 <div class="highlight"><pre><span class="p">{</span>
@@ -502,24 +725,134 @@
 <span class="w">  </span><span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
-<ul>
-<li>Node.js实践
+<p>详见<a href="https://cnodejs.org/topic/552b3b9382388cec50cf6d95">客户端 API 开发总结</a></p>
+
+<h2>约定结构</h2>
+
+<p><img src="images/models.png" alt=""></p>
+
+<p>和java开发里的目录结构类似，该分层的分层，适当的按照express/koa增加中间件、路由等目录，便于开发</p>
+
+<h2>使用npm模块化</h2>
 
 <ul>
-<li>前后端分离</li>
-<li>api</li>
-<li>mq/rpc/senaca</li>
-<li>微服务</li>
+<li>使用npmjs的private私有模块（目前做法）</li>
+<li>使用npm的本地模块开发方法（测试和部署都非常快）</li>
+<li>搭建npm私服（todo）</li>
+</ul>
+<div class="highlight"><pre><span class="vg">hz</span><span class="o">-</span><span class="vg">api</span><span class="o">-</span><span class="vg">cloud</span><span class="o">-</span><span class="vg">admin</span>
+<span class="vg">hz</span><span class="o">-</span><span class="vg">api</span><span class="o">-</span><span class="vg">cloud</span><span class="o">-</span><span class="vg">order</span>
+<span class="vg">hz</span><span class="o">-</span><span class="vg">api</span><span class="o">-</span><span class="vg">cloud</span><span class="o">-</span><span class="vg">stock</span>
+<span class="vg">hz</span><span class="o">-</span><span class="vg">api</span><span class="o">-</span><span class="vg">private</span>
+<span class="vg">hz</span><span class="o">-</span><span class="vg">api</span><span class="o">-</span><span class="vg">private</span><span class="o">-</span><span class="vg">admin</span>
+<span class="vg">hz</span><span class="o">-</span><span class="vg">dao</span><span class="o">-</span><span class="vg">cloud</span>
+<span class="vg">hz</span><span class="o">-</span><span class="vg">dao</span><span class="o">-</span><span class="vg">private</span>
+<span class="vg">hz</span><span class="o">-</span><span class="vg">dao</span><span class="o">-</span><span class="vg">usercenter</span>
+<span class="vg">hz</span><span class="o">-</span><span class="vg">doc</span><span class="o">-</span><span class="vg">api</span>
+<span class="vg">hz</span><span class="o">-</span><span class="vg">frontend</span>
+<span class="vg">hz</span><span class="o">-</span><span class="vg">mq</span><span class="w"> </span>
+<span class="vg">hz</span><span class="o">-</span><span class="vg">mq</span><span class="o">-</span><span class="vg">stockin</span>
+<span class="vg">hz</span><span class="o">-</span><span class="vg">sms</span>
+<span class="vg">hz</span><span class="o">-</span><span class="vg">usercenter</span>
+<span class="vg">migrate</span>
+<span class="vg">mongo</span><span class="o">-</span><span class="vg">express</span><span class="o">.</span><span class="vg">sh</span>
+<span class="vg">xbm</span><span class="o">-</span><span class="vg">h5</span>
+<span class="vg">xbm</span><span class="o">-</span><span class="vg">sdk</span>
+<span class="vg">hz</span><span class="o">-</span><span class="vg">api</span><span class="o">-</span><span class="vg">admin</span>
+<span class="vg">hz</span><span class="o">-</span><span class="vg">api</span><span class="o">-</span><span class="vg">crm</span>
+<span class="vg">hz</span><span class="o">-</span><span class="vg">api</span><span class="o">-</span><span class="vg">order</span>
+<span class="vg">hz</span><span class="o">-</span><span class="vg">api</span><span class="o">-</span><span class="vg">statistics</span>
+<span class="vg">hz</span><span class="o">-</span><span class="vg">api</span><span class="o">-</span><span class="vg">stock</span>
+<span class="vg">hz</span><span class="o">-</span><span class="vg">config</span>
+<span class="vg">hz</span><span class="o">-</span><span class="vg">dao</span>
+<span class="vg">hz</span><span class="o">-</span><span class="vg">doc</span>
+</pre></div>
+<h2>编写生成器</h2>
+
+<p>在web开发里，写了moajs生成器，类似于rails</p>
+<div class="highlight"><pre><span class="vg">moag</span><span class="w"> </span><span class="vg">order</span><span class="w"> </span><span class="nl">name:</span><span class="vg">string</span><span class="w"> </span><span class="nl">password:</span><span class="vg">string</span>
+</pre></div>
+<p>其他开发，如iOS开发里模型校验非常烦,于是写了一个json2objc命令行工具，读取json，生成oc代码，可以节省不少时间</p>
+
+<h2>Moajs框架和前后端分离</h2>
+
+<ul>
+<li>前端：<a href="https://github.com/moajs/moa-frontend">moa-frontend</a>
+
+<ul>
+<li>public下面的采用nginx做反向代理</li>
+<li>其他的采用express+jade精简代码（ajax与后端交互）</li>
 </ul></li>
+<li>后端：<a href="https://github.com/moajs/moa-api">moa-api</a></li>
+</ul>
+
+<h3>moa生成器</h3>
+
+<p>即上面讲的生成器scaffold</p>
+
+<h3>moa-frontend</h3>
+
+<p>技术栈</p>
+
+<ul>
+<li>express</li>
+<li>jade</li>
+<li>bootstrap、bootstrap-table</li>
+<li>jquery</li>
+<li>gulp</li>
+<li>nginx</li>
+</ul>
+
+<h3>moa-api</h3>
+
+<p>技术栈</p>
+
+<ul>
+<li><a href="https://github.com/base-n/base2-core">base2(mirco kernel)</a></li>
+<li><a href="https://github.com/Automattic/mongoose">mongoose</a></li>
+<li><a href="https://github.com/petkaantonov/bluebird">bluebird</a></li>
+<li><a href="https://github.com/moajs/res.api">res.api</a></li>
+</ul>
+
+<p>Features</p>
+
+<ul>
+<li>自动加载路由</li>
+<li>支持mongodb配置</li>
+<li>集成mongoosedao，快速写crud等dao接口</li>
+<li>自带用户管理</li>
+<li>使用jsonwebtoken做用户鉴权</li>
+<li>支持migrate测试</li>
+<li>支持mocha测试</li>
+<li>默认集成res.api，便于写接口</li>
+<li>集成supervisor，代码变动，自动重载</li>
+<li>gulp自动监控文件变动，跑测试</li>
+<li>gulp routes生成路由说明</li>
+<li>使用log4js记录日志</li>
+</ul>
+
+<h3>总结</h3>
+
+<p>从开发效果上看，还是非常快的，非常稳定的</p>
+
+<p>更多参见我写的<a href="https://cnodejs.org/topic/567e2388aacb6923221de469">《Moajs框架演进之路》</a></p>
+
+<h2>其他</h2>
+
+<ul>
+<li>《从0开始写Node.js框架》</li>
 </ul>
 
 <h1>Part 4：全栈 or 全烂 ？</h1>
 
-<h2>Node.js工具</h2>
+<h2>Node.js相关工具</h2>
 
 <ul>
 <li>grunt/gulp/fis/webpack</li>
 <li>bower/spm/npm</li>
+<li>tdd/bdd cucumber/mocha</li>
+<li>standard</li>
+<li>babel/typescript/coffee</li>
 </ul>
 
 <h2>前端开发4阶段</h2>
@@ -535,20 +868,16 @@
 
 <h2>Hybrid开发</h2>
 
-<ul>
-<li>移动端概述</li>
-<li>cordova(老的phonegap)
+<p>Hybrid混搭开发是指使用html5技术开发的跨浏览器应用，并最终可以将html5.js.css等打包成apk和ipa包的开发方式。它也可以上传到应用商店，提供给移动设备进行安装。它最大的好处是通过h5开发一次，就可以在多个平台上安装。</p>
+
+<p>未来的2点</p>
 
 <ul>
-<li>插件</li>
-</ul></li>
-<li>ionicframework</li>
-<li>h5实践</li>
+<li>js一统天下（nodejs做后端，传统web和h5使用javasctipt，更智能的工具如gulp，更简单的写法如coffeescript等）</li>
+<li>h5大行其道（网速变快，硬件内存增长）</li>
 </ul>
 
 <h2>跨平台</h2>
-
-<p>懒和折腾的快乐里，安放着程序员的青春</p>
 
 <h3>c/s架构到b/s架构</h3>
 
@@ -629,7 +958,7 @@
 
 <p>亲，你看到未来了么？</p>
 
-<h2>如何全栈（正向|逆向|移动端）</h2>
+<h2>如何全栈？</h2>
 
 <p>全栈核心</p>
 
@@ -726,7 +1055,7 @@
 
 <p>一般的前端都非常容易学会，基本2周就已经非常熟练了，我的计划是半年后，让他们接触【异步流程处理】和【数据库】相关内容，学习后端代码，就可以全栈了</p>
 
-<p><img src="images/moa-frontend.png" alt=""></p>
+<!-- ![](images/moa-frontend.png) -->
 
 <h3>从移动端转</h3>
 
@@ -763,19 +1092,7 @@
 
 <h1>Part 5：未来</h1>
 
-<p>可能是一场春梦，也可能一个变革机遇，拭目以待吧</p>
-
-<h2>模块化</h2>
-
-<h2>语言</h2>
-
-<ul>
-<li>es6、es7（babel编译）</li>
-<li>typescript（微软）</li>
-<li>coffeescript（式微）</li>
-</ul>
-
-<h2>工具</h2>
+<p>可能是一场春梦，也可能一个变革机遇，我们更相信它是变革机遇，拭目以待吧</p>
 
 			          	</article>
 			        </div>

@@ -1,4 +1,4 @@
-# Node && js 全栈
+# 全栈工程师之路-Node.js
 
 高可用架构专用
 
@@ -20,7 +20,11 @@
   - 全栈的可能
 5. 未来
 
-还在调整
+
+最近比较火的2016年开发者调查了，Node.js和全栈、以及和js相关的技术都有不错的战绩，这次给大家分享一下《全栈工程师之路-Node.js》，准备的还不够充分，水平也有限，大家见谅啊
+
+http://stackoverflow.com/research/developer-survey-2016
+
 
 ## 讲师介绍
 
@@ -30,15 +34,13 @@
 算全栈程序员吧，带过前端、后端、数据分析、移动端负责人、做过首席架构师、技术总监，目前主要从事技术架构 + 招人工作
 
 
-# Part 1：Why Node.js ？
+# Part 1：为什么选用Node.js ？
 
 已经7岁的Node.js，你还熟悉么？
 
 以前？现在？
 
-http://stackoverflow.com/research/developer-survey-2016
-
-## 回顾一下2015年
+## 回顾一下2015年Node.js的发展历史
 
 http://i5ting.github.io/history-of-node-js/
 
@@ -98,28 +100,32 @@ http://i5ting.github.io/history-of-node-js/
 
 ## 以前我们总是喜欢拿异步说事儿
 
+Node.js与生俱来的2个特性
+
 - event-driven
 - non-blocking I/O
 
-结果，今天。。。各种【异步模型】。。。烂大街了
+结果，今天。。。各种【异步】。。。烂大街了
+
+异步已经不是明显优势了
+
+## 除了性能，其他都是病？
+
+- 第一、callback hell问题，目前已经很好的解决了，promise/generator/async后面会讲
+- 第二、npm已经是开源世界里最大的包管理器了，模块非常丰富（25.6万+）
 
 
-## 今天，我们拿什么吹牛呢？
+官方说
 
 ```
-Node.js' package ecosystem, npm, is the largest ecosystem 
-of open source libraries in the world.
+Node.js' package ecosystem, npm, is the largest ecosystem of open source libraries in the world.
 ```
 
-除了性能，其他都是病。易維護更是YY。
-
-## 特定场景的快速
-
-- metetor
-- mean.io
-
+以前我们总是喜欢拿异步说事儿，现在我们拿Node.js的强大的生态来炫耀
 
 ## 大事儿记
+
+下面介绍点Node.js的大事儿记
 
 ### 企业级
 
@@ -127,6 +133,18 @@ of open source libraries in the world.
 
 
 - 2015年 IBM [收购 StrongLoop，拓展云服务业务](http://www-03.ibm.com/press/us/en/pressrelease/47577.wss)
+
+
+Node.js基金会的创始成员包括Joyent、IBM、Paypal、微软、Fidelity和Linux基金会
+
+![](images/member.png)
+
+更多参见
+https://nodejs.org/en/foundation/members/
+
+对于企业级开发，Node.js是足够的，无论从性能、安全、稳定性等都是非常棒的。
+
+空弦科技做的是基于云仓储的SaaS服务，给中小卖家提供服务，核心系统是进销存+订单池+WMS。目前来看不存在任何问题，稍后会讲我们为啥选择Node.js
 
 ### es && babel
 
@@ -140,6 +158,8 @@ Node.js里在0.12之后才增加es6特性，es7的目前还不支持。
 
 所以在Node.js里使用es里比较高级的特性，是需要babel去编译处理的。
 
+这是node追逐的事实标准
+
 ### 微软请求 Node.js 支持 ChakraCore
 
 -  2016年01月22日，[微软请求 Node.js 支持 ChakraCore](https://github.com/nodejs/node/pull/4765)
@@ -152,20 +172,117 @@ Node.js里在0.12之后才增加es6特性，es7的目前还不支持。
 基本结论是 V8 ES5 >> 查克拉 ES6 > 查克拉 ES5 > V8 ES6
 ```
 
-
 ## 为什么我们选择Node.js ？
 
-即使不优化，性能比其他语言好
+先看一下我们的瓶颈在哪里 ？
 
-即使优化，也比其他语言简单
+- 1）人（天津不好招人）
 
-如不够，java补
+Node.js招不到，好多都是从java转的，前端也不好找，好多也是从java转的，我们相当于从0开始组建团队
 
-## 平衡
+- 2）开发速度
 
-### 执行效率、开发效率与进度
+创业公司，5分钟要造火箭。。。大家都懂
 
-- 执行效率：即使不优化，性能比其他语言好
+所以让开发快速进入状态，提高开发速度，对我们来说至关重要
+
+- 3）稳定
+
+在没有专业运维人员的情况下，如何保证系统可用、稳定
+
+
+于是就引出了我认为的Node.js的好处
+
+- 1）即同样不优化，性能比大部分语言好(天生被黑的优越感，没办法)
+- 2）即使优化，也比其他语言简单，比如java
+- 3）有足够多的选择和架构的平衡
+- 4）如实在不够，java补
+
+## 选择
+
+Node.js给了我们足够的选择空间
+
+### 1）可难可易
+
+- 可以采用面向过程
+- 可以面向对象
+- 可以函数式
+
+甚至可以用各种编译器coffee、typescript、babel（es）等
+
+对于从0开始的团队来讲，可以先面向过程、然后随着团队的成熟度，一点一点增加难度
+
+### 2）提供好的基础和包管理工具
+
+- 测试相关 tdd/bdd/测试覆盖率
+- 规范化 standard、各种lint、hint
+- 构建相关 gulp、grunt、webpack，大量插件
+- 生成器 yo等
+- 包管理工具npm足够简单易用
+
+以上这些都做大型软件的基础，Node.js在这方面做得非常好
+
+### 3）特定场景的快速
+
+很多人把mean组合（比如mean.io）起来，这样做的好处是如果熟悉，开发速度确实会非常快，但确定是难度太大，很少有人能搞的定
+
+metetor模糊了服务端和客户端，是同构的典型应用，对于实时场景是非常高效的。
+
+这种东西都算特定场景的快速，一般不敢轻易上，调优难度非常大，如果有人能cover的住，在初期是非常高效的。
+
+### 4）总结
+
+- 可以简单，可以难
+- 可以快、也可以慢
+- 可以开发大型软件
+
+还有一个问题就是如果以上不满足咋办？这时就需要架构平衡了
+
+## 架构平衡
+
+先说技术选型的3个思考点
+
+- 在语言层面可以做，那语言层面做
+- 如果语言层面搞不定，那就架构层面做
+- 如果架构层面也搞不定，这东西就不能用了
+
+![](images/arch.png)
+
+各自做各自合适的事儿就好，下面分别举例看看
+
+我们很坦然的面对Node.js的优点和缺点
+
+- 1）语言层面能解决的
+  - 已有大量npm上的模块(目前在25.6万个以上) 
+  - 自己造轮子(站在海量包上+简单语法+npm=快速)
+  - 使用Node.js里的[nan](https://github.com/nodejs/nan)自己包装c/c++轮子
+
+绝大部分需求都可以满足了  
+
+- 2）架构层面能解决的
+  - 业务边界、模块拆分、面向服务
+  - mq、rpc、cache
+  - 运维、监控、自动化
+
+稍微解释一下
+
+- 首先，架构和是不是Node.js写的没关系，是独立的
+- 其次，架构师常用的东东有足够的Node.js模块支持，比如mq，像rabbitmq有比较好的node模块支持，像rpc里thrift、grpc、tchannel支持的都不错，我们使用的senecajs，比如redis，我们使用的ioredis，后面做ha都是一样的。
+- 合适的场景用合适的东西
+
+有很多东西是Node.js不擅长，又不在架构范畴里的，咋办？
+
+3）如实在不够，java补（严格点，应该叫其他语言补）
+  - 比如复杂excel生成
+  - 比如apns推送（go做其实也很好，不过除了我，没人能维护。。。）
+
+但凡是java或其他语言里比较成熟的库，可以作为独立服务使用的，都可以做Node.js的支持。避免过多的时间用在早轮子上，影响开发进度
+
+## 效率问题？
+
+执行效率：
+
+- 同样不优化，性能比大部分语言好
 
 开发效率：
 
@@ -190,17 +307,13 @@ Node.js的web开发框架express、koa等，简单，小巧，精致，缺点是
 - cli命令模块，编写非常容易
 - 基于js的模板引擎（知名的30+）
 
-### 架构平衡
 
+## 我们用Node.js做什么？
 
-## 小步快走
-
-- 一次只上一样
-- 形成梯队，即可准备上新东西
-- 善用npm，实现3化
-  - 模块化
-  - 最小化
-  - 服务化
+- api服务
+- 前端（moa-frontend）
+- SDK（OAuth Provider）
+- 辅助开发cli工具
 
 ## 目前进度
 
@@ -217,6 +330,7 @@ Node.js的web开发框架express、koa等，简单，小巧，精致，缺点是
 - 上rabbitmq
 - 上senaca作为rpc
 - 上kong作为api gateway（todo）
+- 上consul做服务发现和配置（todo）
 - 上elk作为日志分析处理（todo）
 - 使用docker compose作为本地开发环境（todo）
 - 线上docker（todo）
@@ -229,22 +343,26 @@ Node.js的web开发框架express、koa等，简单，小巧，精致，缺点是
 
 4.x在内存和性能上都有非常大的提升，新的语言特性上，异步流程和语法上都需要学习，故不急于升级，待人才梯队完善
 
+目前的做法是小步快走
 
-## 我们的瓶颈在哪里 ？
-
-- 人（天津招不到人）
-- 开发速度（创业公司，跑。。。）
-- 传承（以后也要）
+- 一次只上一样新技术
+- 形成梯队，即可准备上新东西
+- 善用npm，实现3化
+  - 模块化
+  - 最小化
+  - 服务化
+  
               
-
-
 # Part 2：我眼中的Node.js核心
 
-MEAN
 
-- 异步流程控制
-- cli（scaffold）
-- web framework
+- 1）小而美的哲学
+- 2）从LAMP到MEAN
+- 3）异步流程控制
+- 4）Node.js Web开发
+- 5）Node.js 模块开发
+
+时间原因，接下来稍微介绍一下MEAN
 
 ## 小而美的哲学
 
@@ -263,28 +381,68 @@ http://blog.izs.me/post/48281998870/unix-philosophy-and-nodejs
 - Write modules quickly, to meet your needs, with just a few tests for compliance. Avoid extensive specifications. Add a test for each bug you fix.
 - Write modules for publication, even if you only use them privately. You will appreciate documentation in the future.
 
-## 取巧：之从LAMP到MEAN
+## 从LAMP到MEAN
 
-(Mongdb,express,angular,node)架构
+MEAN是目前最潮的全栈javascript架构
+
+MEAN是一个Javascript平台的现代Web开发框架总称，它是MongoDB + Express +AngularJS + NodeJS 四个框架的第一个字母组合。它与传统LAMP一样是一种全套开发工具的简称。
+
+
+从我的角度看
+
+- mysql用mongodb替换，nosql里最像rdbms的，从开发和性能都是有优势的（老毕已经讲过了）
+- angular的出现是一个时代，ioc，双向绑定，指令等都曾让无数热血沸腾
+- nodejs提供了完全的生态和工具链，你要的它基本都有，感谢npm，早些年nodejs的性能甩php几条街的
+- express作为nodejs示范项目，它非常精简，是比较合适的web框架
+
+
+我为什么选择MEAN架构？
+
+- 成熟、稳定，简单，有问题我们能cover住，所以我们选了nodejs
+- 把握趋势，以后nodejs的前景非常看好，尤其先后端统一，全栈方向
+- 在架构上可以屏蔽可能风险，不孤注一掷，也不会一叶障目，合理的使用其他语言，只要每个功能都以服务出现，至于它是什么语言写的，并不重要
+- 招人成本的性价比相对较高，技术栈新，容易吸引人才
+
+最重要的一件事儿，是当有问题的时候，有人能cover住，在创业初期这是最最重要的事儿。
+
+我的一篇爆款文章《Node.js最新Web技术栈（2015年5月）》https://cnodejs.org/topic/55651bf07d4c64752effb4b1
+讲的就是我们用的技术栈
 
 
 ## 异步流程控制
 
+js流程控制的演进过程，分以下5部分
+
+- 1) 回调函数Callbacks
+- 2) 异步JavaScript
+- 3) Promise/a+规范
+- 4) 生成器Generators/ yield(es6)
+- 5) Async/ await(es7)
+
+
 ![](images/async.png)
 
-- 异步流程控制
-  - promise
-  - generator+yield
-  - co
-  - async+await）
-  - bluebird
+
+- 目前所有版本都支持Promise/a+规范
+- 目前Node.js 4.0 + 支持Generators/ yield
+- 目前不支持ES7里的Async/await，但可以通过babel实现
+
+整体来说，对异步流程控制解决的还是比较好的。
+
+详见[Node.js最新技术栈之Promise篇](https://cnodejs.org/topic/560dbc826a1ed28204a1e7de)
 
 ## Node.js Web开发
+
 - Node.js Web开发
-  - express
-  - koa
-  - restify
+  - express、koa
+  - restify、hapi
   - 其他框架sails、meteor
+
+各种类型web开发都支持的，一般我们采用非restful的使用express、koa更简单
+
+如果是纯restful，可以采用restify、hapi
+
+另外还有快速模拟api的[json-server](https://github.com/typicode/json-server)，对rest支持超方便
 
 ## Node.js 模块开发
 
@@ -294,12 +452,27 @@ http://blog.izs.me/post/48281998870/unix-philosophy-and-nodejs
   - 脚手架scaffold
   - c/c++ addons
 
+普通模块和cli模块只是差package.json里的
+
+```
+  "preferGlobal": "true",
+  "bin": {
+    "kp": "kp.js"
+  },
+```
+
+脚手架scaffold = cli + 模板生成，在Node.js里这2点都非常容易
+
+在Node.js里写c/c++扩展，有nan抽象层，其他就看大家的c/c++水平了
 
 # Part 3：快速开发实践
 
-## 业务边界优化
+## 1、业务边界优化
 
-## 静态api理论
+创业公司有很多可变性，要做的系统也无数，如何保证业务系统的边界是非常难的，我们其实走了很多弯路，图-稍后补
+
+
+## 2、静态api理论
 
 ![](images/api-before.png)
 
@@ -307,9 +480,25 @@ http://blog.izs.me/post/48281998870/unix-philosophy-and-nodejs
 ![](images/api-after.png)
 
 
-## api约定
+当需求和ue定下来之后，就开始编写静态api，这样app、h5、前端就可以使用静态api完成功能，而后端也可以以静态api为标准来实现，整体效率还是比较高的。
+
+
+另外还有基于api生成http请求的思考（未完成）
+
+![](images/IMG_2578.JPG)
+
+## 3、api约定
 
 ![](images/api-conversion.png)
+
+
+api的最佳实践
+
+
+- http://developer.github.com/v3/ （严格的restful）
+- 微博API (可读性强，相对比较传统)
+
+我们采用的微博API类似的，约定结构也是类似的
 
 res.api is an express middleware for render json api , it convention over api format like this :
 
@@ -325,13 +514,112 @@ res.api is an express middleware for render json api , it convention over api fo
 }
 ```
 
+详见[客户端 API 开发总结](https://cnodejs.org/topic/552b3b9382388cec50cf6d95)
+
+## 4、约定结构
+
+![](images/models.png)
+
+和java开发里的目录结构类似，该分层的分层，适当的按照express/koa增加中间件、路由等目录，便于开发
+
+## 5、使用npm模块化
+
+- 使用npmjs的private私有模块（目前做法）
+- 使用npm的本地模块开发方法（测试和部署都非常快）
+- 搭建npm私服（todo）
+
+```
+hz-api-cloud-admin
+hz-api-cloud-order
+hz-api-cloud-stock
+hz-api-private
+hz-api-private-admin
+hz-dao-cloud
+hz-dao-private
+hz-dao-usercenter
+hz-doc-api
+hz-frontend
+hz-mq 
+hz-sms
+hz-usercenter
+xbm-sdk
+hz-api-admin
+hz-api-crm
+hz-api-order
+hz-api-statistics
+hz-api-stock
+hz-config
+hz-dao
+hz-doc
+```
 
 
-- Node.js实践
-  - 前后端分离
-  - api
-  - mq/rpc/senaca
-  - 微服务
+## 6、编写生成器
+
+在web开发里，写了moajs生成器，类似于rails
+
+```
+moag order name:string password:string
+```
+
+其他开发，如iOS开发里模型校验非常烦,于是写了一个json2objc命令行工具，读取json，生成oc代码，可以节省不少时间
+
+## 7、Moajs框架和前后端分离
+
+- 前端：[moa-frontend](https://github.com/moajs/moa-frontend)
+  - public下面的采用nginx做反向代理
+  - 其他的采用express+jade精简代码（ajax与后端交互）
+- 后端：[moa-api](https://github.com/moajs/moa-api)
+
+### 1）、moa生成器
+
+即上面讲的生成器scaffold
+
+### 2）、moa-frontend
+
+技术栈
+
+- express
+- jade
+- bootstrap、bootstrap-table
+- jquery
+- gulp
+- nginx
+
+### 3）、moa-api
+
+技术栈
+
+- [base2(mirco kernel)](https://github.com/base-n/base2-core)
+- [mongoose](https://github.com/Automattic/mongoose)
+- [bluebird](https://github.com/petkaantonov/bluebird)
+- [res.api](https://github.com/moajs/res.api)
+
+Features
+
+- 自动加载路由
+- 支持mongodb配置
+- 集成mongoosedao，快速写crud等dao接口
+- 自带用户管理
+- 使用jsonwebtoken做用户鉴权
+- 支持migrate测试
+- 支持mocha测试
+- 默认集成res.api，便于写接口
+- 集成supervisor，代码变动，自动重载
+- gulp自动监控文件变动，跑测试
+- gulp routes生成路由说明
+- 使用log4js记录日志
+
+### 4）、总结
+
+从开发效果上看，还是非常快的，非常稳定的
+
+更多参见我写的[《Moajs框架演进之路》](https://cnodejs.org/topic/567e2388aacb6923221de469)
+
+
+## 其他
+
+- 《从0开始写Node.js框架》
 
 # Part 4：全栈 or 全烂 ？
 
@@ -347,34 +635,33 @@ res.api is an express middleware for render json api , it convention over api fo
 
 - html/css/js（基础）
 - jQuery、jQuery-ui，Extjs（曾经流行）
-- Backbone，Angularjs、Vuejs（当前流行）
-- React（未来趋势）、Vuejs
+- Backbone（mvc），Angularjs、Vuejs（当前流行）
+- React组件化（未来趋势）、Vuejs
 
 Vuejs综合Angular和React的优点，应该是下一个流行趋势
 
 ## Hybrid开发
 
-- 移动端概述
-- cordova(老的phonegap)
-  - 插件
-- ionicframework
-- h5实践
+Hybrid混搭开发是指使用html5技术开发的跨浏览器应用，并最终可以将html5.js.css等打包成apk和ipa包的开发方式。它也可以上传到应用商店，提供给移动设备进行安装。它最大的好处是通过h5开发一次，就可以在多个平台上安装。
+
+未来的2点
+
+- js一统天下（nodejs做后端，传统web和h5使用javasctipt，更智能的工具如gulp，更简单的写法如coffeescript等）
+- h5大行其道（网速变快，硬件内存增长）
 
 ## 跨平台
 
-懒和折腾的快乐里，安放着程序员的青春
-
-### c/s架构到b/s架构
+ 1）c/s架构到b/s架构
 
 这个大部分都清楚，不多说
 
-### 移动端：加壳
+ 2）移动端：加壳
 
 ![](images/cordovaapparchitecture.png)
 
 在浏览器上做文章，把页面生成各个移动端的app文件
 
-### PC端：继续加壳
+ 3）PC端：继续加壳
 
 ![](images/electron.jpg)
 
@@ -385,7 +672,7 @@ Vuejs综合Angular和React的优点，应该是下一个流行趋势
 
 目前比较火的编辑器[atom](https://github.com/atom/atom)和[vscode](https://github.com/Microsoft/vscode)都是基于Electron打包的。
 
-### 组件化：统一用法
+ 4） 组件化：统一用法
 
 
 React的出现影响最大的是jsx的出现，解决了长久以来组件化的问题，
@@ -419,11 +706,13 @@ A framework for building native apps with React. http://facebook.github.io/react
 
 它们都在告诉我们，你们以后就玩这些组件就好了，你不需要知道复杂的SDK是什么
 
-### 当下流行玩法
+ 5）当下流行玩法
 
-![](images/medis.png)
 
 [Medis](https://github.com/luin/medis) is a beautiful, easy-to-use Redis management application built on the modern web with Electron, React, and Redux. It's powered by many awesome Node.js modules, especially ioredis and ssh2.
+
+
+![](images/medis.png)
 
 技术点
 
@@ -434,16 +723,21 @@ A framework for building native apps with React. http://facebook.github.io/react
 
 亲，你看到未来了么？
 
-## 如何全栈（正向|逆向|移动端）
+
+6）总结
+
+讲了node工具，前端4阶段，hybrid，各种跨平台，目前就是为了介绍Node全栈的各种可能，下面讲一下如何能做到Node全栈？
+
+## 如何全栈？
 
 全栈核心
 
-- ui（界面相关）
-- db（业务相关）
+- 后端不会的ui（界面相关）
+- 前端不会的db（业务相关）
 
 只要打通这2个要点，其他就比较容易了
 
-### 从后端转
+1）从后端转
 
 做后端的人
 
@@ -461,12 +755,7 @@ A framework for building native apps with React. http://facebook.github.io/react
 - Backbone，Angularjs（当前流行）、Vuejs
 - React（未来趋势）、Vuejs
 
-Vuejs综合Angular和React的优点，应该是下一个流行趋势
-
-![](images/p1.png)
-
-
-### 从前端转
+2）从前端转
 
 
 从前端往后端转，api接口非常容易学会，像express、koa这类框架大部分人一周就能学会，最难的是对db、er模型的理解，说直白点，还是业务需求落地的理解
@@ -520,9 +809,7 @@ https://github.com/moajs/moa-frontend
 
 一般的前端都非常容易学会，基本2周就已经非常熟练了，我的计划是半年后，让他们接触【异步流程处理】和【数据库】相关内容，学习后端代码，就可以全栈了
 
-![](images/moa-frontend.png)
-
-
+<!-- ![](images/moa-frontend.png) -->
 
 ### 从移动端转
 
@@ -553,18 +840,14 @@ https://github.com/moajs/moa-frontend
 
 # Part 5：未来
 
-可能是一场春梦，也可能一个变革机遇，拭目以待吧
+可能是一场春梦，也可能一个变革机遇，我们更相信它是变革机遇，拭目以待吧
+
+谢谢大家
 
 
-## 模块化
+- [前端资源教程](https://cnodejs.org/topic/56ef3edd532839c33a99d00e#56f146920a5a2cfb3ad14928)
+- [JavaScript 资源大全中文版](https://cnodejs.org/topic/56e8c95dcf7763a6045c4ae4)
 
 
-## 语言
-
-- es6、es7（babel编译）
-- typescript（微软）
-- coffeescript（式微）
-
-
-## 工具
+# Q & A
 
