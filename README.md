@@ -571,11 +571,11 @@ moag order name:string password:string
   - 其他的采用express+jade精简代码（ajax与后端交互）
 - 后端：[moa-api](https://github.com/moajs/moa-api)
 
-### 1）、moa生成器
+### 1）moa生成器
 
 即上面讲的生成器scaffold
 
-### 2）、moa-frontend
+### 2）moa-frontend
 
 技术栈
 
@@ -586,7 +586,7 @@ moag order name:string password:string
 - gulp
 - nginx
 
-### 3）、moa-api
+### 3）moa-api
 
 技术栈
 
@@ -610,7 +610,7 @@ Features
 - gulp routes生成路由说明
 - 使用log4js记录日志
 
-### 4）、总结
+### 4）总结
 
 从开发效果上看，还是非常快的，非常稳定的
 
@@ -651,17 +651,17 @@ Hybrid混搭开发是指使用html5技术开发的跨浏览器应用，并最终
 
 ## 跨平台
 
- 1）c/s架构到b/s架构
+### 1）c/s架构到b/s架构
 
 这个大部分都清楚，不多说
 
- 2）移动端：加壳
+### 2）移动端：加壳
 
 ![](images/cordovaapparchitecture.png)
 
 在浏览器上做文章，把页面生成各个移动端的app文件
 
- 3）PC端：继续加壳
+### 3）PC端：继续加壳
 
 ![](images/electron.jpg)
 
@@ -672,7 +672,7 @@ Hybrid混搭开发是指使用html5技术开发的跨浏览器应用，并最终
 
 目前比较火的编辑器[atom](https://github.com/atom/atom)和[vscode](https://github.com/Microsoft/vscode)都是基于Electron打包的。
 
- 4） 组件化：统一用法
+### 4） 组件化：统一用法
 
 
 React的出现影响最大的是jsx的出现，解决了长久以来组件化的问题，
@@ -706,7 +706,7 @@ A framework for building native apps with React. http://facebook.github.io/react
 
 它们都在告诉我们，你们以后就玩这些组件就好了，你不需要知道复杂的SDK是什么
 
- 5）当下流行玩法
+### 5）当下流行玩法
 
 
 [Medis](https://github.com/luin/medis) is a beautiful, easy-to-use Redis management application built on the modern web with Electron, React, and Redux. It's powered by many awesome Node.js modules, especially ioredis and ssh2.
@@ -724,7 +724,7 @@ A framework for building native apps with React. http://facebook.github.io/react
 亲，你看到未来了么？
 
 
-6）总结
+### 6）总结
 
 讲了node工具，前端4阶段，hybrid，各种跨平台，目前就是为了介绍Node全栈的各种可能，下面讲一下如何能做到Node全栈？
 
@@ -737,7 +737,7 @@ A framework for building native apps with React. http://facebook.github.io/react
 
 只要打通这2个要点，其他就比较容易了
 
-1）从后端转
+### 1）从后端转
 
 做后端的人
 
@@ -755,7 +755,7 @@ A framework for building native apps with React. http://facebook.github.io/react
 - Backbone，Angularjs（当前流行）、Vuejs
 - React（未来趋势）、Vuejs
 
-2）从前端转
+### 2）从前端转
 
 
 从前端往后端转，api接口非常容易学会，像express、koa这类框架大部分人一周就能学会，最难的是对db、er模型的理解，说直白点，还是业务需求落地的理解
@@ -811,7 +811,7 @@ https://github.com/moajs/moa-frontend
 
 <!-- ![](images/moa-frontend.png) -->
 
-### 从移动端转
+### 3）从移动端转
 
 移动端分
 
@@ -850,4 +850,69 @@ https://github.com/moajs/moa-frontend
 
 
 # Q & A
+
+## 问题一：在全栈的语言选择上，除了node.js，是否还考虑过其他语言？
+
+有的，未来swift和lua是有可能的。swift的语法和性能上有很大优势，lua在openresty的推动下也有机会，不过没有swift大
+
+像WebAssembly之类的就不太看好了
+
+
+## 问题二：请教桑老师：刚才你说的并发开发流程中静态api指的是api文档？
+如果是的话谁负责编写？你们目前已经是一个人分模块从前端写到后端了吗？
+
+目前没做到文档即静态api，所以目前是直接提供json和部分[json-server](https://github.com/typicode/json-server)
+
+负责是后端开发的leader在写，他的进度会比正常开发要早一周左右
+
+目前不是一个人写所有的前后端，团队成立不久，天津Node.js会的不多，所以还是前后端分离。但是通过moa-frontend可以让前端了解express等后端知识，适当的时候会给予机会，前端转后端
+
+
+## 问题三：第一贵司在开发协作中提到了静态api，请问是不是有什么比较好的工具可以推荐？
+
+nodejs里[json-server](https://github.com/typicode/json-server) 比较好
+
+我其实很想围绕静态api，写各种请求的生成器，只要api出来，文档和各平台的http请求代码就生成出来，同时可以对正式api进行压测，可惜目前还没精力写
+
+## 问题四：做hybrid app在移动端会遇到性能问题吧。。有没有什么优化经验可以分享？
+
+- 足够轻量级，少选大框架，做好前端该有的优化
+- 注意touch和click的区别，比如fastclick或zeptojs的tap手势
+- Chrome profile（css3动画）
+- 使用weinre真机测试
+
+
+[我的h5实践](http://mp.weixin.qq.com/s?__biz=MzAxMTU0NTc4Nw==&mid=222892082&idx=1&sn=ba1cdb42b43fbec08e4328c5080774e5#rd)
+
+
+## 问题五：如果都全栈了，当前你们团队是如何分工的？
+
+我们团队还是倾向于分工专业化，各个服务粒度非常小，便于轮岗、还有就是可以为以后像google那样代码开放做准备
+
+但是有很多情况下，是需要有机动的突击队的（尤其是创业时期），这样可以随便组合，另外就是全栈为remote提供了更多便利性。
+
+## 问题六：h5在手机上用iscroll坑比较多啊 尤其三星打开硬件加速的时候render页面，桑老师怎么看？
+
+可以尝试一下淘宝系的h5虚拟化，鬼道曾经在as大会上讲过的，我们目前还没能力做这么深层次的优化
+
+
+## 问题七：Node.js做业务金额计算的金额性能和精度够吗
+
+1）你问的不是Node.js，而是Node.js要操作的数据库。
+2）耗性能的计算可以在架构上平衡的
+- 如果可以延时，mq就可以了
+- 如果是非延时情况，可以采用其他语言编写对应服务，没必要非要一定要Node.js
+3）我们目前的场景，还没有在计算遇到瓶颈
+
+
+
+## 问题八：关于API返回格式那里，对于status为什么不打平了把code和message放出来？这么设定有什么好处么？
+
+
+语义上更加清晰
+
+整个返回的json就只有data和status，如果status.code!=0,我取msg就好了，如果等于0，处理data数据
+
+这种设计不见得多好，不过结构清晰，对于开发者来说，是比较容易接受的
+
 
