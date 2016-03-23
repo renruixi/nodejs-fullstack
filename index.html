@@ -1,1453 +1,1187 @@
-<!doctype html>
-<html lang="en">
 
-	<head>
-		<meta charset="utf-8">
-
-		<title>Node.js - 最新Web技术栈</title>
-
-		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
-		<meta name="author" content="Hakim El Hattab">
-
-		<meta name="apple-mobile-web-app-capable" content="yes" />
-		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
-
-		<link rel="stylesheet" href="css/reveal.css">
-		<link rel="stylesheet" href="css/theme/black.css" id="theme">
-
-		<!-- Code syntax highlighting -->
-		<link rel="stylesheet" href="lib/css/zenburn.css">
-
-		<!-- Printing and PDF exports -->
-		<script>
-			var link = document.createElement( 'link' );
-			link.rel = 'stylesheet';
-			link.type = 'text/css';
-			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
-			document.getElementsByTagName( 'head' )[0].appendChild( link );
-		</script>
-
-		<!--[if lt IE 9]>
-		<script src="lib/js/html5shiv.js"></script>
-		<![endif]-->
-	</head>
-
-	<body>
-
-		<div class="reveal">
-
-			<!-- Any section element inside of this container is displayed as a slide -->
-			<div class="slides">
-				<section>
-					<h1>Node && js = 全栈</h1>
-					<p>高可用架构专用</p>
-					<p>
-						<small>Created by <a href="https://cnodejs.org/user/i5ting">i5ting</a> / <a href="http://github.com/i5ting">@i5ting</a></small>
-					</p>
-				</section>
-
-				<section>
+	    <html>
+	      <head>
+				  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	        <title>README</title>
 					
-					<section data-background="#dddddd">
-						<h2>Abount Me</h2>
-						<p>
-							i5ting 一个开源爱好者
-						</p>
-						<a href="#" class="navigate-down">
-							<img width="600" height="338" data-src="images/me.png" alt="Down arrow">
-						</a>
-					</section>
-          
-					<section data-background="#dddddd">
-  					<h2>Node全栈公众号</h2>
-  					<p>
-  						<p>什么是全栈？一直站在前面讲么？</p>
-  						<br>
-              <img src='images/nodeonly-wechat.png'/>
-  					</p>
-            
-  					<aside class="notes">
-  						Oh hey, these are some notes. They'll be hidden in your presentation, but you can see them if you open the speaker notes window (hit 's' on your keyboard).
-  					</aside>
-					</section>
-          
-				</section>
-        
-        
-        <section>
-          <section data-markdown>
-            ## 主要内容
-            
-            1. Why Node.js ？
-            1. 我眼中的Node.js核心
-            1. 快速开发实践
-            1. 全栈 or 全烂 ？
-            1. 未来
-            
-          </section>
-          
-          <section data-markdown>
-              ## 推荐技术栈
-            
-              - express 4.x （express最新版本，初学者先别去碰koa）
-              - mongoose（mongodb）
-              - bluebird（Promise/A+实现）
-              - jade（视图层模板）
-              - mocha（测试）
-              - node-inspector(调试)
-
-              https://github.com/i5ting/express-starter
-          </section>
-				</section>
-        
-				<section data-transition="slide" data-background="#4d7e65" data-background-transition="zoom">
-          <section data-transition="slide" data-background="#4d7e65" data-background-transition="zoom">
-					<h2>Part 1：Why Node.js ？</h2>
-					<p>
-						以前？现在？
-					</p>
-					<pre><code>已经7岁的Node.js，你还熟悉么？</code></pre>
-          </section>
-          
-          <section data-markdown>
-              ## 以前我们总是喜欢拿异步说事儿
-              
-              - event-driven
-              - non-blocking I/O
-              
-              结果，今天。。。各种【异步模型】烂大街了
-          </section>
-          
-          <section data-markdown>
-              ## 今天，我们拿什么吹牛呢？
-  
-              ```
-              Node.js' package ecosystem, npm, is the largest ecosystem 
-              of open source libraries in the world.
-              ```
-          </section>
-          
-          <section data-markdown>
-              ## 为什么我们选择Node.js ？
-              
-              即使不优化，性能比其他语言好
-              
-              即使优化，也比其他语言简单
-            
-          </section>
-          
-          <section data-markdown>
-              ## 我们的瓶颈在哪里 ？
-              
-              - 人（天津招不到人）
-              - 开发速度（创业公司，跑。。。）
-              - 传承（以后也要）
-          </section>
-          
-          <section data-markdown>
-              ## http verbs -1
-              
-              verbs = 动词
-
-              http://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html
-              
-              ```
-              app.get('/user:id', function (req, res) {
-                res.send('Hello World!');
-              });
-
-              app.post('/user/create', function (req, res) {
-                res.send('Got a POST request');
-              });
-
-              app.put('/user/:id', function (req, res) {
-                res.send('Got a PUT request at /user');
-              });
-
-              app.delete('/user/:id', function (req, res) {
-                res.send('Got a DELETE request at /user');
-              });
-              ```
-              
-          </section>
-          
-          <section data-markdown>
-              ## http verbs -2
-              
-              链式写法？
-              
-              ```
-              router.route('/')
-                .get($.list)
-                .post($.create);
-              ```
-              
-              all代表什么？
-              
-              ```
-              router.all('/new', $.new);  
-              ```
-              
-              更多node里的verbs（26个），见 https://github.com/jshttp/methods/blob/master/index.js
-          </section>
-          
-          
-          
-          <section data-markdown>
-              ## http status code
-              
-              - http://www.restapitutorial.com/httpstatuscodes.html
-              - https://github.com/nodejs/io.js/blob/master/lib/_http_server.js
-
-              ```
-              500 : 'Internal Server Error',
-              403 : 'Forbidden',
-              404 : 'Not Found',
-              304 : 'Not Modified',
-              200 : 'OK',
-              
-              app.get('/user/:id', function(req, res){
-                res.status(200).json({
-                  a : 1,
-                  b : 2
-                });
-              });
-              ```
-          </section>
-          
-          <section data-markdown>
-              ## req取参数的3种方法
-              
-              expressjs里的请求参数，4.x里只有3种
-              
-              - req.params
-              - req.body
-              - req.query
-              - 已经废弃的api：req.param
-          </section>
-          
-          <section data-markdown>
-              - req.params
-
-              ```
-              app.get('/user/:id', function(req, res){
-                res.send('user ' + req.params.id);
-              });
-              ```
-              
-              俗点：取带冒号的参数
-          </section>
-          
-          <section data-markdown>
-              - req.body
-
-              ```
-              var app = require('express')();
-              var bodyParser = require('body-parser');
-
-              app.use(bodyParser.json()); // for parsing application/json
-              app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
-
-              app.post('/', function (req, res) {
-                console.log(req.body);
-                res.json(req.body);
-              })
-              ```
-              
-              可以肯定的一点是req.body一定是post请求，express里依赖的中间件必须有bodyParser，不然req.body是没有的。
-          </section>
-          
-          <section data-markdown>
-              - req.query
-
-              ```
-              // GET /search?q=tobi+ferret
-              req.query.q
-              // => "tobi ferret"
-
-              // GET /shoes?order=desc&shoe[color]=blue&shoe[type]=converse
-              req.query.order
-              // => "desc"
-
-              req.query.shoe.color
-              // => "blue"
-
-              req.query.shoe.type
-              // => "converse"
-              ```
-              
-              query是querystring
-
-          </section>
-          
-          <section data-markdown>
-              - req.query不一定是get
-
-              ```
-              // POST /search?q=tobi+ferret
-              {a:1,b:2}
-              req.query.q
-              // => "tobi ferret"
-              ```
-             
-              post里的数据看不到得，需要用req.body取
-          </section>
-          
-          
-          <section data-markdown>
-              - 3种不同类型的post
-          </section>
-          
-          <section data-markdown>
-              - Post with x-www-form-urlencoded
-              
-              see post.html
-              
-              ```
-              $.ajaxSetup({
-                contentType: "application/x-www-form-urlencoded; charset=utf-8"
-              });
-
-              $.post("/users/post", { name: "i5a6", time: "2pm" },
-                 function(data){
-                   console.log(data);
-                 }, "json");
-              ```
-              
-              in routes/users.js
-
-              ```
-              router.post('/post', function(req, res) {
-                // res.send('respond with a resource');
-                  res.json(req.body);
-              });
-              ```
-          </section>
-          
-          <section data-markdown>
-              #### Post with form-data 主要目的是为了上传
-              
-              
-              ```
-              var express = require('express')
-              var multer  = require('multer')
-
-              var app = express()
-              app.use(multer({ dest: './uploads/'}))
-              ```
-              
-              You can access the fields and files in the request object
-
-              ```
-              router.post('/post-form-data', function(req, res) {
-                console.log(req.body)
-                console.log(req.files)
-              });
-              
-              ```
-              
-              Multer will not process any form which is not multipart/form-data
-              
-          </section>
-          
-          <section data-markdown>
-              - Post with raw
-              
-              To get the raw body content of a request with Content-Type: "text/plain" into req.rawBody you can do:
-              
-              ```
-              var express = require('./')
-              var app = express();
-              app.use(function(req, res, next){
-                if (req.is('text/*')) {
-                  req.text = '';
-                  req.setEncoding('utf8');
-                  req.on('data', function(chunk){ req.text += chunk });
-                  req.on('end', next);
-                } else {
-                  next();
-                }
-              });
-              app.post('/', function(req, res){
-                res.send('got "' + req.text + '"');
-              });
-              app.listen(3000)
-              ```
-          </section>
-          
-          
-          
-          <section data-markdown>
-              ## 命令行玩法
-              
-              ```
-              #! /bin/bash
-
-              echo -n "post common"
-              curl -d "a=1&b=2" http://127.0.0.1:3001/users/post
-
-              echo -n 'post formdata'
-              curl -F 'pic=@"img/post-common.png"' -F 'a=1' -F 'b=2'  http://127.0.0.1:3001/users/post/formdata
-
-              echo -n 'post raw json'
-
-              curl -d "{"a":"1","b":"2","c":{"a":"1","b":"2"}}" http://127.0.0.1:3001/users/post
-              ```
-              
-              如不清楚，请 `man curl`.
-          </section>
-          
-          <section data-markdown>
-              ## supertest用法
-              
-              https://github.com/expressjs/restful-router/blob/master/test/restful-router.test.js
-              
-              ```
-              var request = require('supertest');
-              var app = require('../example/app');
-              
-              describe('restful-router.test.js', function () {
-                it('should get /users/new => user.new', function (done) {
-                   request(app)
-                   .get('/users/new')
-                   .expect('GET /users/new => new, query: {}')
-                   .expect(200, done);
-                 });
-               });
-              ```
-          </section>
-          
-          <section data-markdown>
-              ## what is rest?
-              
-              参考阮一峰的文章http://www.ruanyifeng.com/blog/2011/09/restful.html
-              
-              ```
-              /**
-               * Auto generate RESTful url routes.
-               *
-               * URL routes:
-               *
-               *  GET    /topics[/]        => topic.list()
-               *  GET    /topics/new       => topic.new()
-               *  GET    /topics/:id       => topic.show()
-               *  GET    /topics/:id/edit  => topic.edit()
-               *  POST   /topics[/]        => topic.create()
-               *  PATCH  /topics/:id       => topic.update()
-               *  DELETE /topics/:id       => topic.destroy()
-               *
-               */
-               ```
-          </section>
-          
-          <section data-markdown>
-              ## restful api or res.api？
-              
-              res.api is an express middleware for render json api , it convention over api format like this :
-
-              ```
-              {
-                data: {
-
-                },
-                status: {
-                  code : x,
-                  msg  : 'some message'
-                }
-              }
-              ```
-              
-              - 客户端 API 开发总结 https://cnodejs.org/topic/552b3b9382388cec50cf6d95
-              - res.api用法说明 https://cnodejs.org/topic/55818a0c395a0c1812f18273
-              
-          </section>
-          
-     
-  				<section>
-
-						<h2>如果还不懂http协议?</h2>
-            花点时间会用个软件就能学会，有兴趣吗？
-            
-						<p class="fragment">
-              推荐Postman
-              <img width="1000" height="538" data-src="images/postman.png" alt="Down arrow">
-            </p>
-
-				</section>
-        
-        
-  		  <section>
-          <h2>如果还还不懂http协议?</h2>
-          看书吧
-					<p class="fragment">推荐1
-            <a href='http://ccbikai.gitbooks.io/http-book/content/index.html'>《HTTP下午茶》
-            </a> 
-          </p>
-				 
-				  <p class="fragment">推荐2
-           <a href='http://product.china-pub.com/3769819'>《图解HTTP》
-           </a> 
-         </p>
-			  </section>
-      </section>
-        
-        
-        
-				<section data-transition="slide" data-background="#b5533c" data-background-transition="zoom">
-        
-  				<section data-transition="slide" data-background="#b5533c" data-background-transition="zoom">
-  					<h2>Part 2：我眼中的Node.js核心</h2>
-  					<p>
-              MEAN
-  					</p>
-            <li>异步流程控制
-            <li>cli（scaffold）
-            <li>web framework
-          </section>
-          
-         
-          <section data-markdown>
-
-- mongoose用法
-    
-```
-var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/test');
-
-var Cat = mongoose.model('Cat', { name: String });
-
-var kitty = new Cat({ name: 'Zildjian' });
-kitty.save(function (err) {
-  if (err) // ...
-  console.log('meow');
-});
-```
-          </section>
-          <section data-markdown>
-            ## crud（增删改查）
-            
-            - save
-            - find | findOne
-            - update
-            - remove
-            
-            ```
-            Kitten.find({ name: /^Fluff/ }, callback)
-            Comment.remove({ title: 'baby born from alien father' }, callback);
-            MyModel.update({ age: { $gt: 18 } }, { oldEnough: true }, fn);
-            ```
-          </section>
-          
-          <section data-markdown>
-            - 了解分页
-            
-            常见写法
-            ```
-            db.users.find().skip(pagesize*(n-1)).limit(pagesize)
-            ```
-            
-            更好的写法
-            ```
-            db.usermodels.find({'_id' :{
-               "$gt" :ObjectId("55940ae59c39572851075bfd")} 
-             }).limit(20).sort({_id:-1})
-            ```
-          </section>
-          
-          <section data-markdown>
-            - 了解关系（1对1，1对多）在mongoose里如何实现
-            
-            ```
-            UserSchema = new Schema({
-                ...
-                contacts:[]
-            });
-            ```
-          </section>
-          
-          <section data-markdown>
-            - 了解关系（1对1，1对多，多对多）在mongoose里如何实现
-            
-            ```
-            ContactSchema = new Schema({
-                ...
-                owner: {
-                  type: Schema.ObjectId,
-                  required: true,
-                  index: true
-                }
-            });
-            ```
-          </section>
-          
-          
-          <section data-markdown>
-            - 了解populate
-            
-            ```
-            ContactSchema = new Schema({
-                ...
-                owner: {
-                  type: Schema.ObjectId,
-                  ref: ‘user’ 
-                }
-            });
-            
-            ContactSchema.find({}).populate(‘owner’).exec(callback);
-            
-            ```
-          </section>
-          
-          
-          <section data-markdown>
-            - 扩展mongoose模型：statics类方法
-            
-            ```
-            UserSchema.statics.find_by_openid = function(openid, cb) {
-              return this.findOne({
-                openid: openid
-              }, cb);
-            };
-            ```
-            
-            调用
-            
-            ```
-            User.find_by_openid(openid, cb)
-            ```
-            
-            
-          </section>
-          
-          <section data-markdown>
-            - 扩展mongoose模型：methods对象方法
-            
-            ```
-            UserSchema.methods.is_exist = function(cb) {
-              var query;
-              query = {
-                username: this.username,
-                password: this.password
-              };
-              return this.model('UserModel').findOne(query, cb);
-            };
-            ```
-            
-            调用
-            
-            ```
-            var user = new User({});
-            user.is_exist(cb)
-            ```
-            
-          </section>
-          
-          
-          <section data-markdown>
-            - hook.js
-            - 了解pre和post的差别
-            
-            ```
-            UserSchema.pre('save', function(next) {
-                var user = this;
-                if (!user.isModified('password')) return next();
-                bcrypt.genSalt(SALT_WORK_FACTOR, function(err, salt) {
-                  if (err) return next(err);
-                  bcrypt.hash(user.password, salt, function (err, hash) {
-                    if (err) return next(err);
-                      user.password = hash;
-                      next();
-                    });
-                });
-            });
-            ```
-          </section>
-          
-          <section data-markdown>
-            - 了解virtual属性
-            
-            ```
-            UserSchema.virtual('is_valid').get(function(){
-              console.log('phone_number = ' +this.phone_number)
-              if(this.phone_number == undefined | this.invite_code == undefined){
-                return false;
-              }
-              return this.invite_code.length >= 2 && this.phone_number > 0
-            });
-            ```
-          </section>
-          
-          
-          <section data-markdown>
-            - 了解mongoose的插件机制
-            
-            ```
-            // lastMod.js
-            module.exports = exports = function lastModifiedPlugin (schema, options) {
-              schema.add({ lastMod: Date })
-  
-              schema.pre('save', function (next) {
-                this.lastMod = new Date
-                next()
-              })
-  
-              if (options && options.index) {
-                schema.path('lastMod').index(options.index)
-              }
-            }
-            ```
-            
-            调用
-            
-            ```
-            // game-schema.js
-            var lastMod = require('./lastMod');
-            var Game = new Schema({ ... });
-            Game.plugin(lastMod, { index: true });
-            ```
-          </section>
-          
-          
-          
-          <section data-markdown>
-            - 了解索引优化
-            
-            ```
-            ContactSchema = new Schema({
-                ...
-                owner: {
-                  type: Schema.ObjectId,
-                  required: true,
-                  index: true
-                }
-            });
-            ```
-            也可以这样的
-            
-            ```
-            ContactSchema.ensureIndexes(owner);
-            ```
-          </section>
-          
-          <section data-markdown>
-            - 了解explain
-            
-            ```
-            db.usermodels.find({
-              '_id' :{ 
-                "$gt" :ObjectId("55940ae59c39572851075bfd")
-              } 
-            }).explain()
-            
-            关注点
-            
-            - stage：查询策略
-            - nReturned：返回的文档行数
-            - needTime：耗时（毫秒）
-            - indexBounds：所用的索引
-            ```
-            
-            
-          </section>
-          
-          <section data-markdown>
-            - 了解profile
-            
-            
-            ```
-            profile级别有三种：
-            
-            - 0：不开启
-            - 1：记录慢命令，默认为大于100ms
-            - 2：记录所有命令
-            - 3、查询profiling记录
-            ```
-            
-            开启
-            
-                db.setProfilingLevel(2, 20)
-
-            默认记录在system.profile中
-
-                db['system.profile'].find()
-          </section>
-          
-          <section data-markdown>
-            ## 了解mongodb的部署
-            
-            - replset
-            - shard
-            
-            
-            
-            ```
-            我写的《 mongodb运维之副本集实践》
-            https://cnodejs.org/topic/5590adbbebf9c92d17e734de
-            ```
-          </section>
-          
-          
-          
-          <section data-markdown>
-            ## mongoosedao
-            
-            模型
-            
-            ```
-            var TopModel = mongoose.model('TopModel', TopSchema); 
-            var TopModelDao = new MongooseDao(TopModel);
-            module.exports = TopModelDao;
-            ```
-            
-            用法
-            
-            ```
-            require('./db');
-
-            var User = require('./User');
-
-            User.create({"username":"sss","password":"password"},function(err, user){
-              console.log(user);
-            });
-
-            User.delete({"username":"sss"},function(err, user){
-              console.log(user);
-            });
-            ```
-            
-            https://github.com/moajs/mongoosedao
-          </section>
-          
-          
-          
-				</section>        
-        
-				<section data-transition="slide" data-background="#9c56b9" data-background-transition="zoom">
-  				<section data-transition="slide" data-background="#9c56b9" data-background-transition="zoom">
-  					<h2>Part 3：快速开发实践</h2>
-  					<p>
- 						A promise is defined as an object that has a function as the value for the property then: then(fulfilledHandler, errorHandler, progressHandler)
-  					</p>
-  					<pre><code style="word-wrap: break-word;">http://promisesaplus.com/</code></pre>
-          </section>     
-
-
-          <section data-markdown>
-            - mvc还是那个mvc
-            
-            ![](images/mvc.png)
-          </section>
-          <section data-markdown>
-            - 代码结构
-            
-            ![](images/models.png)
-          </section>
-          
-          
-          <section data-markdown>
-            - 了解jquery里的then和$.deferred
-            
-            ```
-            function successFunc(){ console.log( “success!” ); }   
-            function failureFunc(){ console.log( “failure!” ); }   
-  
-            $.when(   
-               $.ajax( "/main.php" ),  
-               $.ajax( "/modules.php" ),  
-               $.ajax( “/lists.php” )  
-            ).then( successFunc, failureFunc );
-            ```
-          </section>     
-          <section data-markdown>
-            ## 了解的node的异步
-            
-            - 一切都是异步的
-            - 同步是奢求，要查Api
-            
-            ![](images/api.png)
-          </section>
-          
-          <section data-markdown>
-            ## 了解异步的恶心
-            
-            > 1. 用户登录 2. 增加用户日志 3. 更新用户登录次数
-            
-            ![](images/cb.png)
-          </section>
-          
-          <section data-markdown>
-            ## 如果用promise写呢？
-            
-            ![](images/cb_with_promise.png)
-          </section>
-          
-          <section data-markdown>
-            ## 如何实现一个promise库
-            
-            - 了解的then
-            
-            ```
-            var promise = {
-              okCallbacks: [],
-              koCallbacks: [],
-              then: function (okCallback, koCallback) {
-                okCallbacks.push(okCallback);
-                if (koCallback) {
-                  koCallbacks.push(koCallback);
-                }
-              }
-            }
-            ```
-          </section>
-          
-          <section data-markdown>
-            ## 如何实现一个promise库
-            
-            - 了解的resolve和reject
-            
-            ```
-            var defer = {
-              promise: promise,
-              resolve: function (data) {
-                this.promise.okCallbacks.forEach(function(callback) {
-                  window.setTimeout(function () {
-                    callback(data)
-                  }, 0);
-                });
-              },
-
-              reject: function (error) {
-                this.promise.koCallbacks.forEach(function(callback) {
-                  window.setTimeout(function () {
-                    callback(error)
-                  }, 0);
-                });
-              }
-            };
-            ```
-          </section>
-          
-          <section data-markdown>
-            ## 如何实现一个promise库
-          
-            - 测试代码
-            
-            ```
-            function test() {
-              var defer = new Defer();
-              // an example of an async call
-              serverCall(function (request) {
-                if (request.status === 200) {
-                  defer.resolve(request.responseText);
-                } else {
-                  defer.reject(new Error("Status code was " + request.status));
-                }
-              });
-              return defer.promise;
-            }
-            test().then(function (text) {
-              alert(text);
-            }, function (error) {
-              alert(error.message);
-            });
-            ```
-          </section>
-          
-          
-          <section data-markdown>
-            - 了解异步基本场景，比如waterfall这样的路程使用async如何处理
-            
-            ```
-            var async = require('async');
-            async.waterfall([
-                function(callback) {
-                    callback(null, 'one', 'two');
-                },
-                function(arg1, arg2, callback) {
-                  // arg1 now equals 'one' and arg2 now equals 'two'
-                    callback(null, 'three');
-                },
-                function(arg1, callback) {
-                    // arg1 now equals 'three'
-                    callback(null, 'done');
-                }
-            ], function (err, result) {
-                // result now equals 'done'
-            });
-            ```
-          </section>
-          
-          <section data-markdown>
-          - 了解q和bluebird用法（如果有angularjs经验，推荐q，其他只推荐bluebird）
-            
-          </section>
-          
-          <section data-markdown>
-            - 了解bluebird的promisifyAll用法
-            
-            ```
-            //Read more about promisification in the API Reference:
-            //API.md
-            var fs = Promise.promisifyAll(require("fs"));
-
-            fs.readFileAsync("myfile.json").then(JSON.parse).then(function (json) {
-                console.log("Successful json");
-            }).catch(SyntaxError, function (e) {
-                console.error("file contains invalid json");
-            }).catch(Promise.OperationalError, function (e) {
-                console.error("unable to read file, because: ", e.message);
-            });
-            ```
-          </section>
-          
-          <section data-markdown>
-            - model上应用promisifyAll
-            
-            ![](images/model-promisefy.png)
-          </section>
-          
-          <section data-markdown>
-            - 了解如何重构流程，以及代码的可读性   
-          </section>
-          
-          <section data-markdown>
-            - controller上应用promisifyAll
-            
-            ![](images/controller-promisefy.png)
-          </section>
-          
-          <section data-markdown>
-            - more
-            
-            https://github.com/kriskowal/q/tree/v1/design
-            
-          </section>
-          
-				</section>
-        
-				<section data-transition="slide" data-background="#e87e04" data-background-transition="zoom">
-          <section data-transition="slide" data-background="#e87e04" data-background-transition="zoom">
-					<h2>Part 4：tdd/bdd测试</h2>
-          <br>
-          <p>朴灵说：“不写测试的项目都不是好项目”</p>
-  
-          </section>
-          
-          
-          <section data-markdown>
-            - 理解最小问题思想，培养程序员该有的强大的内心
-          </section>
-                    
-          <section data-markdown>
-            - mocha的基本用法
-            
-            ```
-            npm install --save-dev mocha
-            ```
-            
-            ```
-            https://github.com/mochajs/mocha
-
-            var assert = require("assert")
-            
-            describe('truth', function(){
-              it('should find the truth', function(){
-                assert.equal(1, 1);
-              })
-            })
-            ```
-          </section>
-          
-          <section data-markdown>
-            - 理解断言
-            
-            系统Api内置的assert
-            
-            ```
-            https://iojs.org/api/assert.html
-            ```
-
-            ![](images/chai.png)
-            
-            rspec里推荐用expect，其实看个人习惯
-          </section>
-          
-          <section data-markdown>
-            - 理解测试生命周期
-            
-            ```
-            describe('Test', function(){
-              before(function() {
-                // runs before all tests in this block
-              })
-              after(function(){
-                // runs after all tests in this block
-              })
-              beforeEach(function(){
-                // runs before each test in this block
-              })
-              afterEach(function(){
-                // runs after each test in this block
-              })
-            })
-            ```
-          </section>
-          
-          <section data-markdown>
-            - 理解done回调
-            
-            ```
-            describe('MongooseDao', function(){
-            	before(function(done) {  
-                  Top.deleteAll(function(err){
-                    if(err){
-                      console.log(err);
-                    }
-                    var files = [];
-                    for (var i = 0; i < 100; ++i) {
-                      files.push(Top.createAsync({"username":"fixture-user-" + i,"address":"password" + i}));
-                    }
-                    Promise.all(files).then(function() {
-                      done();
-                    });
-                });
-              })
-            ```
-            
-            - 生命周期方法有done
-            - 测试方法也有done
-          </section>
-          
-    		  <section>
-            <h2>常用测试模块</h2>
-  					<p class="fragment">
-              1. mocha
-            </p>
-				 
-  				  <p class="fragment">  
-              2. chai（Chai is a BDD / TDD assertion library for node and the browser that can be delightfully paired with any javascript testing framework.
-            </p>
-  				  <p class="fragment">  
-              3. sinon（Standalone test spies, stubs and mocks for JavaScript.）
-            </p>
-  				  <p class="fragment">  
-              4. zombie (页面事件模拟Zombie.js is a lightweight framework for testing client-side JavaScript code in a simulated environment. No browser required.)
-            </p>
-  				  <p class="fragment">  
-              5. supertest(接口测试 Super-agent driven library for testing node.js HTTP servers using a fluent API)
-            </p>
-            
-  			  </section>
-          
-          <section data-markdown>
-            ## 反复测试？
-            
-            CI = Continuous integration 持续集成
-            
-            - jenkins
-            - travis-ci
-            
-            ```
-            教程 https://cnodejs.org/topic/558df089ebf9c92d17e73358
-            ```
-            
-            ![](images/ci.png)
-            
-            
-          </section>
-              
-          <section data-markdown>
-            ## 理解测试覆盖率
-            
-            ci实际上解决了反复测试的自动化问题。
-                  
-            但是如何看我的程序里的每一个函数都测试到了呢？
-            
-            
-          </section>
-              
-          <section data-markdown>
-          安装
-        
-          ```
-          $ npm install -g istanbul
-          ```
-        
-          执行
-
-          ```
-          $ istanbul cover my-test-script.js -- my test args
-          ```
-          </section>
-            
-          <section data-markdown>
-          ## 测试报告
-            
-            
-            ```
-            ./node_modules/.bin/istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly
-                #MongooseDao()
-                  ✓ should return ok when record create
-                  ✓ should return ok when record delete fixture-user
-                  ...
-                  ✓ should return ok when record query
-
-
-              8 passing (50ms)
-
-            =============================== Coverage summary ===============================
-            Statements   : 47.27% ( 26/55 )
-            Branches     : 8.33% ( 1/12 )
-            Functions    : 60% ( 9/15 )
-            Lines        : 47.27% ( 26/55 )
-            ================================================================================
-            ```
-          </section>
-          
-          <section data-markdown>
-            - 理解基于gulp自动化测试方法
-            
-            ```
-            var gulp = require('gulp');
-            var watch = require('gulp-watch');
-            var path = 'test/**/*.js';
-
-            gulp.task('watch', function() {
-              gulp.watch(['test/**/*.js', 'lib/*.js'], ['mocha']);
-            });
-
-            var mocha = require('gulp-mocha');
-            gulp.task('mocha', function () {
-                return gulp.src(path , {read: false})
-                    .pipe(mocha({reporter: 'spec'}));
-            });
-
-            gulp.task('default',['mocha', 'watch']);
-            ```
-            
-          </section>
-          
-       
-          
-          <section data-markdown>
-            ## more
-            
- 如果有兴趣，可以去了解更多bdd/tdd内容，甚至是cucumber.js,从用户故事开始写测试
-          </section>
-       
-				</section>
-        
-        
-				<section data-transition="slide" data-background="#01bf9d" data-background-transition="zoom">
-          <section data-transition="slide" data-background="#01bf9d" data-background-transition="zoom">
-  					<h2>Part 5：调试</h2>
- 
-  					<img src='images/debug.jpg'/>
-            
-          </section>
-         <section data-markdown>
-            ## 3种方法
-
-            - node debugger
-            - node inspector
-            - 测试驱动开发
-         </section>
-  
-          <section data-markdown>
-             ## node debugger -1
-    
-             V8 提供了一个强大的调试器，可以通过 TCP 协议从外部访问。
-             
-             Nodejs提供了一个内建调试器来帮助开发者调试应用程序。
-             
-             ```
-             var hello = 'hello';
-             var world = 'nodejs';
-
-             debugger;
-
-             var hello_world = hello + ' ' + world;
-             console.log(hello_world);
-             ```
-              
-          </section>
-          <section data-markdown>
-             ## node debugger -2
- 
-             执行命令：
-             
-             ```
-             node debug helloword-debug.js 
-             ```
-             
-             就可以进入调试模式。
-          </section>
-          
-          <section data-markdown>
-             ## 全是命令行能习惯么？
-             
-             ```
-             node-debug-tutorial git:(master) ✗ node debug helloword-debug.js
-             < debugger listening on port 5858
-             connecting... ok
-             break in helloword-debug.js:1
-               1 var hello = 'hello';
-               2 var world = 'nodejs';
-               3 
-             debug> help
-             Commands: run (r), cont (c), next (n), step (s), out (o), backtrace (bt), setBreakpoint (sb), clearBreakpoint (cb),
-             watch, unwatch, watchers, repl, restart, kill, list, scripts, breakOnException, breakpoints, version
-             debug> 
-             debug> n
-             break in helloword-debug.js:2
-               1 var hello = 'hello';
-               2 var world = 'nodejs';
-               3 
-               4 debugger;
-             debug> repl
-             Press Ctrl + C to leave debug repl
-             > hello
-             'hello'
-             ```
-             
-             官方文档
-             
-             ```
-             http://nodejs.org/api/debugger.html
-             ```
-          </section>
-          
-          <section data-markdown>
-             - node inspector
-             
-             ```
-             https://github.com/node-inspector/node-inspector
-             ```
-          </section>
-          
-          <section data-markdown>       
-安装
+					<link href="toc/style/github-bf51422f4bb36427d391e4b75a1daa083c2d840e.css" media="all" rel="stylesheet" type="text/css"/>
+					<link href="toc/style/github2-d731afd4f624c99a4b19ad69f3083cd6d02b81d5.css" media="all" rel="stylesheet" type="text/css"/>
+					<link href="toc/css/zTreeStyle/zTreeStyle.css" media="all" rel="stylesheet" type="text/css"/>
+			
+				  <style>
+					pre {
+					    counter-reset: line-numbering;
+					    border: solid 1px #d9d9d9;
+					    border-radius: 0;
+					    background: #fff;
+					    padding: 0;
+					    line-height: 23px;
+					    margin-bottom: 30px;
+					    white-space: pre;
+					    overflow-x: auto;
+					    word-break: inherit;
+					    word-wrap: inherit;
+					}
+
+					pre a::before {
+					  content: counter(line-numbering);
+					  counter-increment: line-numbering;
+					  padding-right: 1em; /* space after numbers */
+					  width: 25px;
+					  text-align: right;
+					  opacity: 0.7;
+					  display: inline-block;
+					  color: #aaa;
+					  background: #eee;
+					  margin-right: 16px;
+					  padding: 2px 10px;
+					  font-size: 13px;
+					  -webkit-touch-callout: none;
+					  -webkit-user-select: none;
+					  -khtml-user-select: none;
+					  -moz-user-select: none;
+					  -ms-user-select: none;
+					  user-select: none;
+					}
+
+					pre a:first-of-type::before {
+					  padding-top: 10px;
+					}
+
+					pre a:last-of-type::before {
+					  padding-bottom: 10px;
+					}
+
+					pre a:only-of-type::before {
+					  padding: 10px;
+					}
+			
+					.highlight { background-color: #ffffcc } /* RIGHT */
+					</style>
+	      </head>
+	      <body>
+				  <div>
+							<div style='width:25%;'>
+									<ul id="tree" class="ztree" style='width:100%'>
+		
+									</ul>
+							</div>
+			        <div id='readme' style='width:70%;margin-left:20%;'>
+			          	<article class='markdown-body'>
+			            	<style>.highlight .hll { background-color: #ffffcc }
+.highlight  { background: #f0f0f0; }
+.highlight .c { color: #60a0b0; font-style: italic } /* Comment */
+.highlight .err { border: 1px solid #FF0000 } /* Error */
+.highlight .k { color: #007020; font-weight: bold } /* Keyword */
+.highlight .o { color: #666666 } /* Operator */
+.highlight .cm { color: #60a0b0; font-style: italic } /* Comment.Multiline */
+.highlight .cp { color: #007020 } /* Comment.Preproc */
+.highlight .c1 { color: #60a0b0; font-style: italic } /* Comment.Single */
+.highlight .cs { color: #60a0b0; background-color: #fff0f0 } /* Comment.Special */
+.highlight .gd { color: #A00000 } /* Generic.Deleted */
+.highlight .ge { font-style: italic } /* Generic.Emph */
+.highlight .gr { color: #FF0000 } /* Generic.Error */
+.highlight .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+.highlight .gi { color: #00A000 } /* Generic.Inserted */
+.highlight .go { color: #888888 } /* Generic.Output */
+.highlight .gp { color: #c65d09; font-weight: bold } /* Generic.Prompt */
+.highlight .gs { font-weight: bold } /* Generic.Strong */
+.highlight .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+.highlight .gt { color: #0044DD } /* Generic.Traceback */
+.highlight .kc { color: #007020; font-weight: bold } /* Keyword.Constant */
+.highlight .kd { color: #007020; font-weight: bold } /* Keyword.Declaration */
+.highlight .kn { color: #007020; font-weight: bold } /* Keyword.Namespace */
+.highlight .kp { color: #007020 } /* Keyword.Pseudo */
+.highlight .kr { color: #007020; font-weight: bold } /* Keyword.Reserved */
+.highlight .kt { color: #902000 } /* Keyword.Type */
+.highlight .m { color: #40a070 } /* Literal.Number */
+.highlight .s { color: #4070a0 } /* Literal.String */
+.highlight .na { color: #4070a0 } /* Name.Attribute */
+.highlight .nb { color: #007020 } /* Name.Builtin */
+.highlight .nc { color: #0e84b5; font-weight: bold } /* Name.Class */
+.highlight .no { color: #60add5 } /* Name.Constant */
+.highlight .nd { color: #555555; font-weight: bold } /* Name.Decorator */
+.highlight .ni { color: #d55537; font-weight: bold } /* Name.Entity */
+.highlight .ne { color: #007020 } /* Name.Exception */
+.highlight .nf { color: #06287e } /* Name.Function */
+.highlight .nl { color: #002070; font-weight: bold } /* Name.Label */
+.highlight .nn { color: #0e84b5; font-weight: bold } /* Name.Namespace */
+.highlight .nt { color: #062873; font-weight: bold } /* Name.Tag */
+.highlight .nv { color: #bb60d5 } /* Name.Variable */
+.highlight .ow { color: #007020; font-weight: bold } /* Operator.Word */
+.highlight .w { color: #bbbbbb } /* Text.Whitespace */
+.highlight .mb { color: #40a070 } /* Literal.Number.Bin */
+.highlight .mf { color: #40a070 } /* Literal.Number.Float */
+.highlight .mh { color: #40a070 } /* Literal.Number.Hex */
+.highlight .mi { color: #40a070 } /* Literal.Number.Integer */
+.highlight .mo { color: #40a070 } /* Literal.Number.Oct */
+.highlight .sb { color: #4070a0 } /* Literal.String.Backtick */
+.highlight .sc { color: #4070a0 } /* Literal.String.Char */
+.highlight .sd { color: #4070a0; font-style: italic } /* Literal.String.Doc */
+.highlight .s2 { color: #4070a0 } /* Literal.String.Double */
+.highlight .se { color: #4070a0; font-weight: bold } /* Literal.String.Escape */
+.highlight .sh { color: #4070a0 } /* Literal.String.Heredoc */
+.highlight .si { color: #70a0d0; font-style: italic } /* Literal.String.Interpol */
+.highlight .sx { color: #c65d09 } /* Literal.String.Other */
+.highlight .sr { color: #235388 } /* Literal.String.Regex */
+.highlight .s1 { color: #4070a0 } /* Literal.String.Single */
+.highlight .ss { color: #517918 } /* Literal.String.Symbol */
+.highlight .bp { color: #007020 } /* Name.Builtin.Pseudo */
+.highlight .vc { color: #bb60d5 } /* Name.Variable.Class */
+.highlight .vg { color: #bb60d5 } /* Name.Variable.Global */
+.highlight .vi { color: #bb60d5 } /* Name.Variable.Instance */
+.highlight .il { color: #40a070 } /* Literal.Number.Integer.Long */</style>
+<h1>全栈工程师之路-Node.js</h1>
+
+<p>高可用架构专用</p>
+
+<h2>主要内容</h2>
+
+<ol>
+<li>Why Node.js ？
+
+<ul>
+<li>历史</li>
+<li>槽点</li>
+<li>架构平衡和选择</li>
+<li>企业级</li>
+</ul></li>
+<li>我眼中的Node.js核心</li>
+<li>快速开发实践</li>
+<li>全栈 or 全烂 ？
+
+<ul>
+<li>工具链</li>
+<li>前端开发4阶段</li>
+<li>Hybrid开发</li>
+<li>跨平台</li>
+<li>全栈的可能</li>
+</ul></li>
+<li>未来</li>
+</ol>
+
+<p>最近比较火的2016年开发者调查了，Node.js和全栈、以及和js相关的技术都有不错的战绩，这次给大家分享一下《全栈工程师之路-Node.js》，准备的还不够充分，水平也有限，大家见谅啊</p>
+
+<p>http://stackoverflow.com/research/developer-survey-2016</p>
+
+<h2>讲师介绍</h2>
+
+<p>桑世龙，目前在天津创业，空弦科技 CTO，开源项目Moajs作者，公司目前使用技术主要是Node.js，
+技术栈算所谓的MEAN（mongodb  + express + angular + node）；
+曾在新浪，网秦等工作过；
+算全栈程序员吧，带过前端、后端、数据分析、移动端负责人、做过首席架构师、技术总监，目前主要从事技术架构 + 招人工作</p>
+
+<h1>Part 1：为什么选用Node.js ？</h1>
+
+<p>已经7岁的Node.js，你还熟悉么？</p>
+
+<p>以前？现在？</p>
+
+<h2>回顾一下2015年Node.js的发展历史</h2>
+
+<p>http://i5ting.github.io/history-of-node-js/</p>
+
+<h3>Q1(1季度)</h3>
+
+<ul>
+<li>IO.js 1.0.0 发布</li>
+<li>Joyent 推进建立 Node.js 基金会
+
+<ul>
+<li>Joyent, IBM, Microsoft, PayPal, Fidelity, SAP and The Linux Foundation Join Forces to Support Node.js Community With Neutral and Open Governance</li>
+</ul></li>
+<li>IO.js 和 Node.js 和解提案</li>
+</ul>
 
-```
-npm install -g node-inspector
-```
+<h3>Q2(2季度)</h3>
 
-安装完成之后，通常可以直接这样启动在后台：
+<ul>
+<li>npm 支持私有模块</li>
+<li>Node 项目领导人 TJ Fontaine 逐步解除核心身份并离开 Joyent 公司
 
-```
-node-inspector &
-```
+<ul>
+<li>A changing of the guard in Nodeland.</li>
+</ul></li>
+<li>Node.js 和 io.js 在 Node 基金会下合并情况</li>
+</ul>
 
-我更喜欢这样用
+<h3>Q3(3季度)</h3>
 
-```
-node-debug app.js
-```
-          </section>
-          
-          
-          
-          <section >
-  					<h2>可视化界面</h2>
-  					<p>
-                <img src='images/inspector-ui.png'/>
-  					</p>
-             
-          </section>
-          
-          <section data-markdown>
-           ## 断点操作
-
-           - resume script execution（F8） 挂起断点，也可以理解为放弃当前断点，如果有下一个断点，会自动断住得
-           - step over（F10） 跳过这行，到下一行，如果当前函数结束，会跳到调用栈的上一级的下一行
-           - step into（F11） 进入当前行代码里的函数内部
-           - step out（Shift + F11） 从当前函数退出到之前进入的代码处
-                        
-             
-          </section>
-          
-          <section data-markdown>
-           ## 总结
-
-           - inspector 足够简单了，功能够用，需要断点的时候用
-           - tdd/bdd 平常做业务测试
-           
-           - 如果想了解更详细的，可以看我写的教程和视频：node-debug 三法三例
-           ```
-           https://cnodejs.org/topic/5463f6e872f405c829029f7e
-           ```
-          </section>
-          
-          
-				</section>
-        
-        <section data-transition="slide" data-background="#1fcf6d" data-background-transition="zoom" >
-          
-           <section data-transition="slide" data-background="#1fcf6d" data-background-transition="zoom" data-markdown>
-          ## 回顾一下
-   
-          - 了解http协议，尤其是express如何req
-          - 了解db相关操作，以mongoose为主
-          - 了解Promise/A+规范，合理规避回调陷阱
-          - 使用tdd/bdd测试，最小化问题
-          - 你无论如何都要会的：调试
-          </section>
-          <section data-transition="slide" data-background="#1fcf6d" data-background-transition="zoom" >
-          <h2>招聘Nodejs工程师, 我亲自带</h2>
-          目标全栈
-           <p class="fragment">天津，管吃住，工资和北京持平，有机会拿到天津户口，股票期权</p>
-           </section>
-        </section>
-        
-				<section data-transition="slide" data-background="#5babe6" data-background-transition="zoom">
-					<h2>Q & A</h2>
-					<p>
-						少抱怨，多思考，未来更美好。有的时候我看的不是你一时的能力，而是你面对世界的态度。
-					</p>
+<ul>
+<li>4.0 版本发布，即新的 1.0 版本</li>
+</ul>
+
+<h3>Q4(4季度)</h3>
+
+<ul>
+<li>Node v4.2.0，首个长期支持版本（LTS）</li>
+<li>Apigee，RisingStack 和 Yahoo 加入 Node.js 基金会</li>
+<li>Node Interactive
+
+<ul>
+<li>The first annual Node.js conference by the Node.js Foundation</li>
+</ul></li>
+</ul>
+
+<h2>版本帝？</h2>
+
+<p>去年</p>
+
+<ul>
+<li>从v0.10.35 开始</li>
+<li>2015-01-14发布了v1.0.0版本（io.js）</li>
+<li>2.x（io.js）</li>
+<li>3.x（io.js）</li>
+<li>2015年09月Node.js基金会已发布Node.js V4.0版 与io.js合并后的第一个版本</li>
+<li>2015年10月Node.jsv4.2.0将是首个lts长期支持版本</li>
+<li>年底发布到4.2.4 &amp;&amp; 5.4.0</li>
+</ul>
+
+<p>目前（2016年3月20日）的2个版本</p>
+
+<ul>
+<li>v4.4.0 LTS（长期支持版本）</li>
+<li>v5.9.0 Stable（稳定版本）</li>
+</ul>
+
+<p><img src="images/schedule.png" alt="schedule.png"></p>
+
+<p>整体来说趋于稳定</p>
+
+<ul>
+<li>成立了nodejs基金会，能够让nodejs在未来有更好的开源社区支持</li>
+<li>发布了LTS版本，意味着api稳定</li>
+<li>快速发版本，很多人吐槽这个，其实换个角度看，这也是社区活跃的一个体现，但如果大家真的看CHANGELOG，其实都是小改进，而且是边边角角的改进，也就是说nodejs的core（核心）已经非常稳定了，可以大规模使用</li>
+</ul>
+
+<h2>以前我们总是喜欢拿异步说事儿</h2>
+
+<p>Node.js与生俱来的2个特性</p>
+
+<ul>
+<li>event-driven</li>
+<li>non-blocking I/O</li>
+</ul>
+
+<p>结果，今天。。。各种【异步】。。。烂大街了</p>
+
+<p>异步已经不是明显优势了</p>
+
+<h2>除了性能，其他都是病？</h2>
+
+<ul>
+<li>第一、callback hell问题，目前已经很好的解决了，promise/generator/async后面会讲</li>
+<li>第二、npm已经是开源世界里最大的包管理器了，模块非常丰富（25.6万+）</li>
+</ul>
+
+<p>官方说</p>
+<div class="highlight"><pre><span class="vg">Node</span><span class="o">.</span><span class="vg">js</span><span class="c1">&#39; package ecosystem, npm, is the largest ecosystem of open source libraries in the world.</span>
+</pre></div>
+<p>以前我们总是喜欢拿异步说事儿，现在我们拿Node.js的强大的生态来炫耀</p>
+
+<h2>大事儿记</h2>
+
+<p>下面介绍点Node.js的大事儿记</p>
+
+<h3>企业级</h3>
+
+<ul>
+<li><p>2014年 nearform <a href="http://www.nearform.com/nodecrunch/node-js-becoming-go-technology-enterprise/">NODE.JS为什么会成为企业中的首选技术</a></p></li>
+<li><p>2015年 IBM <a href="http://www-03.ibm.com/press/us/en/pressrelease/47577.wss">收购 StrongLoop，拓展云服务业务</a></p></li>
+</ul>
+
+<p>Node.js基金会的创始成员包括Joyent、IBM、Paypal、微软、Fidelity和Linux基金会</p>
+
+<p><img src="images/member.png" alt=""></p>
+
+<p>更多参见
+https://nodejs.org/en/foundation/members/</p>
+
+<p>对于企业级开发，Node.js是足够的，无论从性能、安全、稳定性等都是非常棒的。</p>
+
+<p>空弦科技做的是基于云仓储的SaaS服务，给中小卖家提供服务，核心系统是进销存+订单池+WMS。目前来看不存在任何问题，稍后会讲我们为啥选择Node.js</p>
+
+<h3>es &amp;&amp; babel</h3>
+
+<ul>
+<li>2015年 Ecma国际大会宣布正式批准ECMA-262第6版，亦即ECMAScript 2015（曾用名：ECMAScript 6、ES6）的语言规范</li>
+</ul>
+
+<p>http://babeljs.io/</p>
+
+<p>babel作为es编译器，已经大量开始使用了，模块做的非常棒，还有人用babel写其他语言编译器</p>
+
+<p>Node.js里在0.12之后才增加es6特性，es7的目前还不支持。</p>
+
+<p>所以在Node.js里使用es里比较高级的特性，是需要babel去编译处理的。</p>
+
+<p>这是node追逐的事实标准</p>
+
+<h3>微软请求 Node.js 支持 ChakraCore</h3>
+
+<ul>
+<li> 2016年01月22日，<a href="https://github.com/nodejs/node/pull/4765">微软请求 Node.js 支持 ChakraCore</a></li>
+</ul>
+
+<p>未来Node.js不只是基于chrome v8内核，它还可以支持更多其他浏览器内核，对生态、效率提升等非常有好处</p>
+
+<p>蔡伟小兄弟的<a href="https://github.com/DavidCai1993/ES6-benchmark">查克拉benchmark的对比</a></p>
+<div class="highlight"><pre><span class="err">基本结论是</span><span class="w"> </span><span class="vg">V8</span><span class="w"> </span><span class="vg">ES5</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="err">查克拉</span><span class="w"> </span><span class="vg">ES6</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="err">查克拉</span><span class="w"> </span><span class="vg">ES5</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="vg">V8</span><span class="w"> </span><span class="vg">ES6</span>
+</pre></div>
+<h2>为什么我们选择Node.js ？</h2>
+
+<p>先看一下我们的瓶颈在哪里 ？</p>
+
+<ul>
+<li>1）人（天津不好招人）</li>
+</ul>
+
+<p>Node.js招不到，好多都是从java转的，前端也不好找，好多也是从java转的，我们相当于从0开始组建团队</p>
+
+<ul>
+<li>2）开发速度</li>
+</ul>
+
+<p>创业公司，5分钟要造火箭。。。大家都懂</p>
+
+<p>所以让开发快速进入状态，提高开发速度，对我们来说至关重要</p>
+
+<ul>
+<li>3）稳定</li>
+</ul>
+
+<p>在没有专业运维人员的情况下，如何保证系统可用、稳定</p>
+
+<p>于是就引出了我认为的Node.js的好处</p>
+
+<ul>
+<li>1）即同样不优化，性能比大部分语言好(天生被黑的优越感，没办法)</li>
+<li>2）即使优化，也比其他语言简单，比如java</li>
+<li>3）有足够多的选择和架构的平衡</li>
+<li>4）如实在不够，java补</li>
+</ul>
+
+<h2>选择</h2>
+
+<p>Node.js给了我们足够的选择空间</p>
+
+<h3>1）可难可易</h3>
+
+<ul>
+<li>可以采用面向过程</li>
+<li>可以面向对象</li>
+<li>可以函数式</li>
+</ul>
+
+<p>甚至可以用各种编译器coffee、typescript、babel（es）等</p>
+
+<p>对于从0开始的团队来讲，可以先面向过程、然后随着团队的成熟度，一点一点增加难度</p>
+
+<h3>2）提供好的基础和包管理工具</h3>
+
+<ul>
+<li>测试相关 tdd/bdd/测试覆盖率</li>
+<li>规范化 standard、各种lint、hint</li>
+<li>构建相关 gulp、grunt、webpack，大量插件</li>
+<li>生成器 yo等</li>
+<li>包管理工具npm足够简单易用</li>
+</ul>
+
+<p>以上这些都做大型软件的基础，Node.js在这方面做得非常好</p>
+
+<h3>3）特定场景的快速</h3>
+
+<p>很多人把mean组合（比如mean.io）起来，这样做的好处是如果熟悉，开发速度确实会非常快，但确定是难度太大，很少有人能搞的定</p>
+
+<p>metetor模糊了服务端和客户端，是同构的典型应用，对于实时场景是非常高效的。</p>
+
+<p>这种东西都算特定场景的快速，一般不敢轻易上，调优难度非常大，如果有人能cover的住，在初期是非常高效的。</p>
+
+<h3>4）总结</h3>
+
+<ul>
+<li>可以简单，可以难</li>
+<li>可以快、也可以慢</li>
+<li>可以开发大型软件</li>
+</ul>
+
+<p>还有一个问题就是如果以上不满足咋办？这时就需要架构平衡了</p>
+
+<h2>架构平衡</h2>
+
+<p>先说技术选型的3个思考点</p>
+
+<ul>
+<li>在语言层面可以做，那语言层面做</li>
+<li>如果语言层面搞不定，那就架构层面做</li>
+<li>如果架构层面也搞不定，这东西就不能用了</li>
+</ul>
+
+<p><img src="images/arch.png" alt=""></p>
+
+<p>各自做各自合适的事儿就好，下面分别举例看看</p>
+
+<p>我们很坦然的面对Node.js的优点和缺点</p>
+
+<ul>
+<li>1）语言层面能解决的
+
+<ul>
+<li>已有大量npm上的模块(目前在25.6万个以上) </li>
+<li>自己造轮子(站在海量包上+简单语法+npm=快速)</li>
+<li>使用Node.js里的<a href="https://github.com/nodejs/nan">nan</a>自己包装c/c++轮子</li>
+</ul></li>
+</ul>
+
+<p>绝大部分需求都可以满足了  </p>
+
+<ul>
+<li>2）架构层面能解决的
+
+<ul>
+<li>业务边界、模块拆分、面向服务</li>
+<li>mq、rpc、cache</li>
+<li>运维、监控、自动化</li>
+</ul></li>
+</ul>
+
+<p>稍微解释一下</p>
+
+<ul>
+<li>首先，架构和是不是Node.js写的没关系，是独立的</li>
+<li>其次，架构师常用的东东有足够的Node.js模块支持，比如mq，像rabbitmq有比较好的node模块支持，像rpc里thrift、grpc、tchannel支持的都不错，我们使用的senecajs，比如redis，我们使用的ioredis，后面做ha都是一样的。</li>
+<li>合适的场景用合适的东西</li>
+</ul>
+
+<p>有很多东西是Node.js不擅长，又不在架构范畴里的，咋办？</p>
+
+<p>3）如实在不够，java补（严格点，应该叫其他语言补）
+  - 比如复杂excel生成
+  - 比如apns推送（go做其实也很好，不过除了我，没人能维护。。。）</p>
+
+<p>但凡是java或其他语言里比较成熟的库，可以作为独立服务使用的，都可以做Node.js的支持。避免过多的时间用在早轮子上，影响开发进度</p>
+
+<h2>效率问题？</h2>
+
+<p>执行效率：</p>
+
+<ul>
+<li>同样不优化，性能比大部分语言好</li>
+</ul>
+
+<p>开发效率：</p>
+
+<ul>
+<li>Node.js本身比较简单，开发效率还是比较高的</li>
+<li>完善的生态，比如测试、工具、npm大量模块</li>
+</ul>
+
+<p>缺少rails一样的大杀器</p>
+
+<ul>
+<li>scaffold脚手架</li>
+<li>orm太弱</li>
+</ul>
+
+<p>Node.js的web开发框架express、koa等，简单，小巧，精致，缺点是集成度不够，目前已有的mean或yo或sails等总有某种方面的不满意</p>
+
+<p>所以我们需要做的</p>
+
+<ul>
+<li>固化项目结构</li>
+<li>限定orm</li>
+<li>自定义脚手架</li>
+</ul>
+
+<p>偏偏Node.js提供了2点，可以让你30分钟写一个脚手架</p>
+
+<ul>
+<li>cli命令模块，编写非常容易</li>
+<li>基于js的模板引擎（知名的30+）</li>
+</ul>
+
+<h2>我们用Node.js做什么？</h2>
+
+<ul>
+<li>api服务</li>
+<li>前端（moa-frontend）</li>
+<li>SDK（OAuth Provider）</li>
+<li>辅助开发cli工具</li>
+</ul>
+
+<h2>目前进度</h2>
+
+<ul>
+<li>使用0.10.38，开发moajs框架
+
+<ul>
+<li>express/mongodb</li>
+<li>pm2部署</li>
+<li>阿里云的slb负载</li>
+<li>alinode监控</li>
+</ul></li>
+<li>前后端分离
+
+<ul>
+<li>moa-api</li>
+<li>moa-frontend</li>
+<li>moa-h5(未能用)</li>
+</ul></li>
+<li>上redis缓存</li>
+<li>上rabbitmq</li>
+<li>上senaca作为rpc</li>
+<li>上kong作为api gateway（todo）</li>
+<li>上consul做服务发现和配置（todo）</li>
+<li>上elk作为日志分析处理（todo）</li>
+<li>使用docker compose作为本地开发环境（todo）</li>
+<li>线上docker（todo）</li>
+</ul>
+
+<p>技术栈更新</p>
+
+<ul>
+<li>nodejs 4.x（预计今年6月份）</li>
+<li>koa（generator/co）</li>
+<li>es6/es7(babel)</li>
+</ul>
+
+<p>4.x在内存和性能上都有非常大的提升，新的语言特性上，异步流程和语法上都需要学习，故不急于升级，待人才梯队完善</p>
+
+<p>目前的做法是小步快走</p>
+
+<ul>
+<li>一次只上一样新技术</li>
+<li>形成梯队，即可准备上新东西</li>
+<li>善用npm，实现3化
+
+<ul>
+<li>模块化</li>
+<li>最小化</li>
+<li>服务化</li>
+</ul></li>
+</ul>
+
+<h1>Part 2：我眼中的Node.js核心</h1>
+
+<ul>
+<li>1）小而美的哲学</li>
+<li>2）从LAMP到MEAN</li>
+<li>3）异步流程控制</li>
+<li>4）Node.js Web开发</li>
+<li>5）Node.js 模块开发</li>
+</ul>
+
+<p>时间原因，接下来稍微介绍一下MEAN</p>
+
+<h2>小而美的哲学</h2>
+
+<p>&quot;Small is beautiful&quot;是Unix哲学9条里的第一条，但对Node.js来说，它实在是再合适不过了</p>
+
+<p>http://blog.izs.me/post/48281998870/unix-philosophy-and-nodejs</p>
+
+<!-- ![](images/nodejs-philosophy.png) -->
+
+<ul>
+<li>Write modules that do one thing well. Write a new module rather than complicate an old one.</li>
+<li>Write modules that encourage composition rather than extension.</li>
+<li>Write modules that handle data Streams, because that is the universal interface.</li>
+<li>Write modules that are agnostic about the source of their input or the destination of their output.</li>
+<li>Write modules that solve a problem you know, so you can learn about the ones you don’t.</li>
+<li>Write modules that are small. Iterate quickly. Refactor ruthlessly. Rewrite bravely.</li>
+<li>Write modules quickly, to meet your needs, with just a few tests for compliance. Avoid extensive specifications. Add a test for each bug you fix.</li>
+<li>Write modules for publication, even if you only use them privately. You will appreciate documentation in the future.</li>
+</ul>
+
+<h2>从LAMP到MEAN</h2>
+
+<p>MEAN是目前最潮的全栈javascript架构</p>
+
+<p>MEAN是一个Javascript平台的现代Web开发框架总称，它是MongoDB + Express +AngularJS + NodeJS 四个框架的第一个字母组合。它与传统LAMP一样是一种全套开发工具的简称。</p>
+
+<p>从我的角度看</p>
+
+<ul>
+<li>mysql用mongodb替换，nosql里最像rdbms的，从开发和性能都是有优势的（老毕已经讲过了）</li>
+<li>angular的出现是一个时代，ioc，双向绑定，指令等都曾让无数热血沸腾</li>
+<li>nodejs提供了完全的生态和工具链，你要的它基本都有，感谢npm，早些年nodejs的性能甩php几条街的</li>
+<li>express作为nodejs示范项目，它非常精简，是比较合适的web框架</li>
+</ul>
+
+<p>我为什么选择MEAN架构？</p>
+
+<ul>
+<li>成熟、稳定，简单，有问题我们能cover住，所以我们选了nodejs</li>
+<li>把握趋势，以后nodejs的前景非常看好，尤其先后端统一，全栈方向</li>
+<li>在架构上可以屏蔽可能风险，不孤注一掷，也不会一叶障目，合理的使用其他语言，只要每个功能都以服务出现，至于它是什么语言写的，并不重要</li>
+<li>招人成本的性价比相对较高，技术栈新，容易吸引人才</li>
+</ul>
+
+<p>最重要的一件事儿，是当有问题的时候，有人能cover住，在创业初期这是最最重要的事儿。</p>
+
+<p>我的一篇爆款文章《Node.js最新Web技术栈（2015年5月）》https://cnodejs.org/topic/55651bf07d4c64752effb4b1
+讲的就是我们用的技术栈</p>
+
+<h2>异步流程控制</h2>
+
+<p>js流程控制的演进过程，分以下5部分</p>
+
+<ul>
+<li>1) 回调函数Callbacks</li>
+<li>2) 异步JavaScript</li>
+<li>3) Promise/a+规范</li>
+<li>4) 生成器Generators/ yield(es6)</li>
+<li>5) Async/ await(es7)</li>
+</ul>
+
+<p><img src="images/async.png" alt=""></p>
+
+<ul>
+<li>目前所有版本都支持Promise/a+规范</li>
+<li>目前Node.js 4.0 + 支持Generators/ yield</li>
+<li>目前不支持ES7里的Async/await，但可以通过babel实现</li>
+</ul>
+
+<p>整体来说，对异步流程控制解决的还是比较好的。</p>
+
+<p>详见<a href="https://cnodejs.org/topic/560dbc826a1ed28204a1e7de">Node.js最新技术栈之Promise篇</a></p>
+
+<h2>Node.js Web开发</h2>
+
+<ul>
+<li>Node.js Web开发
+
+<ul>
+<li>express、koa</li>
+<li>restify、hapi</li>
+<li>其他框架sails、meteor</li>
+</ul></li>
+</ul>
+
+<p>各种类型web开发都支持的，一般我们采用非restful的使用express、koa更简单</p>
+
+<p>如果是纯restful，可以采用restify、hapi</p>
+
+<p>另外还有快速模拟api的<a href="https://github.com/typicode/json-server">json-server</a>，对rest支持超方便</p>
+
+<h2>Node.js 模块开发</h2>
+
+<ul>
+<li>Node.js模块开发
+
+<ul>
+<li>普通模块</li>
+<li>cli</li>
+<li>脚手架scaffold</li>
+<li>c/c++ addons</li>
+</ul></li>
+</ul>
+
+<p>普通模块和cli模块只是差package.json里的</p>
+<div class="highlight"><pre><span class="w">  </span><span class="s2">&quot;preferGlobal&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;true&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="s2">&quot;bin&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="s2">&quot;kp&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;kp.js&quot;</span>
+<span class="w">  </span><span class="p">},</span>
+</pre></div>
+<p>脚手架scaffold = cli + 模板生成，在Node.js里这2点都非常容易</p>
+
+<p>在Node.js里写c/c++扩展，有nan抽象层，其他就看大家的c/c++水平了</p>
+
+<h1>Part 3：快速开发实践</h1>
+
+<h2>1、业务边界优化</h2>
+
+<p>创业公司有很多可变性，要做的系统也无数，如何保证业务系统的边界是非常难的，我们其实走了很多弯路，图-稍后补</p>
+
+<h2>2、静态api理论</h2>
+
+<p><img src="images/api-before.png" alt=""></p>
+
+<p><img src="images/api-after.png" alt=""></p>
+
+<p>当需求和ue定下来之后，就开始编写静态api，这样app、h5、前端就可以使用静态api完成功能，而后端也可以以静态api为标准来实现，整体效率还是比较高的。</p>
+
+<p>另外还有基于api生成http请求的思考（未完成）</p>
+
+<p><img src="images/IMG_2578.JPG" alt=""></p>
+
+<h2>3、api约定</h2>
+
+<p><img src="images/api-conversion.png" alt=""></p>
+
+<p>api的最佳实践</p>
+
+<ul>
+<li>http://developer.github.com/v3/ （严格的restful）</li>
+<li>微博API (可读性强，相对比较传统)</li>
+</ul>
+
+<p>我们采用的微博API类似的，约定结构也是类似的</p>
+
+<p>res.api is an express middleware for render json api , it convention over api format like this :</p>
+<div class="highlight"><pre><span class="p">{</span>
+<span class="w">  </span><span class="nl">data:</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nl">status:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="vg">code</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="vg">x</span><span class="p">,</span>
+<span class="w">    </span><span class="vg">msg</span><span class="w">  </span><span class="o">:</span><span class="w"> </span><span class="c1">&#39;some message&#39;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+<p>详见<a href="https://cnodejs.org/topic/552b3b9382388cec50cf6d95">客户端 API 开发总结</a></p>
+
+<h2>4、约定结构</h2>
+
+<p><img src="images/models.png" alt=""></p>
+
+<p>和java开发里的目录结构类似，该分层的分层，适当的按照express/koa增加中间件、路由等目录，便于开发</p>
+
+<h2>5、使用npm模块化</h2>
+
+<ul>
+<li>使用npmjs的private私有模块（目前做法）</li>
+<li>使用npm的本地模块开发方法（测试和部署都非常快）</li>
+<li>搭建npm私服（todo）</li>
+</ul>
+<div class="highlight"><pre><span class="vg">hz</span><span class="o">-</span><span class="vg">api</span><span class="o">-</span><span class="vg">cloud</span><span class="o">-</span><span class="vg">admin</span>
+<span class="vg">hz</span><span class="o">-</span><span class="vg">api</span><span class="o">-</span><span class="vg">cloud</span><span class="o">-</span><span class="vg">order</span>
+<span class="vg">hz</span><span class="o">-</span><span class="vg">api</span><span class="o">-</span><span class="vg">cloud</span><span class="o">-</span><span class="vg">stock</span>
+<span class="vg">hz</span><span class="o">-</span><span class="vg">api</span><span class="o">-</span><span class="vg">private</span>
+<span class="vg">hz</span><span class="o">-</span><span class="vg">api</span><span class="o">-</span><span class="vg">private</span><span class="o">-</span><span class="vg">admin</span>
+<span class="vg">hz</span><span class="o">-</span><span class="vg">dao</span><span class="o">-</span><span class="vg">cloud</span>
+<span class="vg">hz</span><span class="o">-</span><span class="vg">dao</span><span class="o">-</span><span class="vg">private</span>
+<span class="vg">hz</span><span class="o">-</span><span class="vg">dao</span><span class="o">-</span><span class="vg">usercenter</span>
+<span class="vg">hz</span><span class="o">-</span><span class="vg">doc</span><span class="o">-</span><span class="vg">api</span>
+<span class="vg">hz</span><span class="o">-</span><span class="vg">frontend</span>
+<span class="vg">hz</span><span class="o">-</span><span class="vg">mq</span><span class="w"> </span>
+<span class="vg">hz</span><span class="o">-</span><span class="vg">sms</span>
+<span class="vg">hz</span><span class="o">-</span><span class="vg">usercenter</span>
+<span class="vg">xbm</span><span class="o">-</span><span class="vg">sdk</span>
+<span class="vg">hz</span><span class="o">-</span><span class="vg">api</span><span class="o">-</span><span class="vg">admin</span>
+<span class="vg">hz</span><span class="o">-</span><span class="vg">api</span><span class="o">-</span><span class="vg">crm</span>
+<span class="vg">hz</span><span class="o">-</span><span class="vg">api</span><span class="o">-</span><span class="vg">order</span>
+<span class="vg">hz</span><span class="o">-</span><span class="vg">api</span><span class="o">-</span><span class="vg">statistics</span>
+<span class="vg">hz</span><span class="o">-</span><span class="vg">api</span><span class="o">-</span><span class="vg">stock</span>
+<span class="vg">hz</span><span class="o">-</span><span class="vg">config</span>
+<span class="vg">hz</span><span class="o">-</span><span class="vg">dao</span>
+<span class="vg">hz</span><span class="o">-</span><span class="vg">doc</span>
+</pre></div>
+<h2>6、编写生成器</h2>
+
+<p>在web开发里，写了moajs生成器，类似于rails</p>
+<div class="highlight"><pre><span class="vg">moag</span><span class="w"> </span><span class="vg">order</span><span class="w"> </span><span class="nl">name:</span><span class="vg">string</span><span class="w"> </span><span class="nl">password:</span><span class="vg">string</span>
+</pre></div>
+<p>其他开发，如iOS开发里模型校验非常烦,于是写了一个json2objc命令行工具，读取json，生成oc代码，可以节省不少时间</p>
+
+<h2>7、Moajs框架和前后端分离</h2>
+
+<ul>
+<li>前端：<a href="https://github.com/moajs/moa-frontend">moa-frontend</a>
+
+<ul>
+<li>public下面的采用nginx做反向代理</li>
+<li>其他的采用express+jade精简代码（ajax与后端交互）</li>
+</ul></li>
+<li>后端：<a href="https://github.com/moajs/moa-api">moa-api</a></li>
+</ul>
+
+<h3>1）moa生成器</h3>
+
+<p>即上面讲的生成器scaffold</p>
+
+<h3>2）moa-frontend</h3>
+
+<p>技术栈</p>
+
+<ul>
+<li>express</li>
+<li>jade</li>
+<li>bootstrap、bootstrap-table</li>
+<li>jquery</li>
+<li>gulp</li>
+<li>nginx</li>
+</ul>
+
+<h3>3）moa-api</h3>
+
+<p>技术栈</p>
+
+<ul>
+<li><a href="https://github.com/base-n/base2-core">base2(mirco kernel)</a></li>
+<li><a href="https://github.com/Automattic/mongoose">mongoose</a></li>
+<li><a href="https://github.com/petkaantonov/bluebird">bluebird</a></li>
+<li><a href="https://github.com/moajs/res.api">res.api</a></li>
+</ul>
+
+<p>Features</p>
+
+<ul>
+<li>自动加载路由</li>
+<li>支持mongodb配置</li>
+<li>集成mongoosedao，快速写crud等dao接口</li>
+<li>自带用户管理</li>
+<li>使用jsonwebtoken做用户鉴权</li>
+<li>支持migrate测试</li>
+<li>支持mocha测试</li>
+<li>默认集成res.api，便于写接口</li>
+<li>集成supervisor，代码变动，自动重载</li>
+<li>gulp自动监控文件变动，跑测试</li>
+<li>gulp routes生成路由说明</li>
+<li>使用log4js记录日志</li>
+</ul>
+
+<h3>4）总结</h3>
+
+<p>从开发效果上看，还是非常快的，非常稳定的</p>
+
+<p>更多参见我写的<a href="https://cnodejs.org/topic/567e2388aacb6923221de469">《Moajs框架演进之路》</a></p>
+
+<h2>其他</h2>
+
+<ul>
+<li>《从0开始写Node.js框架》</li>
+</ul>
+
+<h1>Part 4：全栈 or 全烂 ？</h1>
+
+<h2>Node.js相关工具</h2>
+
+<ul>
+<li>grunt/gulp/fis/webpack</li>
+<li>bower/spm/npm</li>
+<li>tdd/bdd cucumber/mocha</li>
+<li>standard</li>
+<li>babel/typescript/coffee</li>
+</ul>
+
+<h2>前端开发4阶段</h2>
+
+<ul>
+<li>html/css/js（基础）</li>
+<li>jQuery、jQuery-ui，Extjs（曾经流行）</li>
+<li>Backbone（mvc），Angularjs、Vuejs（当前流行）</li>
+<li>React组件化（未来趋势）、Vuejs</li>
+</ul>
+
+<p>Vuejs综合Angular和React的优点，应该是下一个流行趋势</p>
+
+<h2>Hybrid开发</h2>
+
+<p>Hybrid混搭开发是指使用html5技术开发的跨浏览器应用，并最终可以将html5.js.css等打包成apk和ipa包的开发方式。它也可以上传到应用商店，提供给移动设备进行安装。它最大的好处是通过h5开发一次，就可以在多个平台上安装。</p>
+
+<p>未来的2点</p>
+
+<ul>
+<li>js一统天下（nodejs做后端，传统web和h5使用javasctipt，更智能的工具如gulp，更简单的写法如coffeescript等）</li>
+<li>h5大行其道（网速变快，硬件内存增长）</li>
+</ul>
+
+<h2>跨平台</h2>
+
+<h3>1）c/s架构到b/s架构</h3>
+
+<p>这个大部分都清楚，不多说</p>
+
+<h3>2）移动端：加壳</h3>
+
+<p><img src="images/cordovaapparchitecture.png" alt=""></p>
+
+<p>在浏览器上做文章，把页面生成各个移动端的app文件</p>
+
+<h3>3）PC端：继续加壳</h3>
+
+<p><img src="images/electron.jpg" alt=""></p>
+
+<p>一样是延续浏览器做文章，不过这次把页面生成各个PC平台的可执行文件</p>
+
+<ul>
+<li>node-webkit is renamed <a href="https://github.com/nwjs/nw.js">NW.js</a></li>
+<li><a href="https://github.com/atom/electron">Electron</a> - Build cross platform desktop apps with web technologies</li>
+</ul>
+
+<p>目前比较火的编辑器<a href="https://github.com/atom/atom">atom</a>和<a href="https://github.com/Microsoft/vscode">vscode</a>都是基于Electron打包的。</p>
+
+<h3>4） 组件化：统一用法</h3>
+
+<p>React的出现影响最大的是jsx的出现，解决了长久以来组件化的问题，</p>
+
+<ul>
+<li>我们反复的折腾js，依然无法搞定</li>
+<li>我们尝试OO，比如extjs</li>
+<li>我们最终还是找个中间格式jsx</li>
+</ul>
+
+<p>单纯的React只是view层面的，还不足以应用，于是又有Redux</p>
+
+<p>核心概念：Actions、Reducers 和 Store，简单点说就是状态控制</p>
+
+<p>然后再结合打包加壳，变成app或可执行文件</p>
+
+<ul>
+<li>iOS、Android上用Cordova</li>
+<li>PC上使用Electron</li>
+</ul>
+
+<p>总结</p>
+
+<ul>
+<li>组件定义好（React）</li>
+<li>控制好组件之间的状态切换（Redux）</li>
+<li>打包或加壳（Cordova or Electron）</li>
+</ul>
+
+<p>这部分其实组件化了前端，那么能否用这样的思想来组件化移动端呢？</p>
+
+<p>再看<a href="https://github.com/facebook/react-native">react-native</a></p>
+
+<p>A framework for building native apps with React. http://facebook.github.io/react-native/</p>
+
+<p>简单点说，就是用React的语法来组件化iOS或Android SDK。</p>
+
+<p>它们都在告诉我们，你们以后就玩这些组件就好了，你不需要知道复杂的SDK是什么</p>
+
+<h3>5）当下流行玩法</h3>
+
+<p><a href="https://github.com/luin/medis">Medis</a> is a beautiful, easy-to-use Redis management application built on the modern web with Electron, React, and Redux. It&#39;s powered by many awesome Node.js modules, especially ioredis and ssh2.</p>
+
+<p><img src="images/medis.png" alt=""></p>
+
+<p>技术点</p>
+
+<ul>
+<li>使用Node.js模块</li>
+<li>使用Webpack构建</li>
+<li>使用React（视图） + Redux（控制逻辑）</li>
+<li>使用Electron加壳打包</li>
+</ul>
+
+<p>亲，你看到未来了么？</p>
+
+<h3>6）总结</h3>
+
+<p>讲了node工具，前端4阶段，hybrid，各种跨平台，目前就是为了介绍Node全栈的各种可能，下面讲一下如何能做到Node全栈？</p>
+
+<h2>如何全栈？</h2>
+
+<p>全栈核心</p>
+
+<ul>
+<li>后端不会的ui（界面相关）</li>
+<li>前端不会的db（业务相关）</li>
+</ul>
+
+<p>只要打通这2个要点，其他就比较容易了</p>
+
+<h3>1）从后端转</h3>
+
+<p>做后端的人</p>
+
+<ul>
+<li>对数据库是比较熟悉，无论mongodb，还是mysql、postgres</li>
+<li>对前端理解比较弱，会基本的html，css，模板引擎等比较熟悉</li>
+</ul>
+<div class="highlight"><pre><span class="nl">4</span><span class="err">阶段循序渐进，</span><span class="vg">build</span><span class="err">与工具齐飞</span>
+</pre></div>
+<p>前端开发4阶段，我的感觉是按照顺序，循序渐进</p>
+
+<ul>
+<li>html/css/js（基础）</li>
+<li>jQuery、jQuery-ui，Extjs（曾经流行）</li>
+<li>Backbone，Angularjs（当前流行）、Vuejs</li>
+<li>React（未来趋势）、Vuejs</li>
+</ul>
+
+<h3>2）从前端转</h3>
+
+<p>从前端往后端转，api接口非常容易学会，像express、koa这类框架大部分人一周就能学会，最难的是对db、er模型的理解，说直白点，还是业务需求落地的理解</p>
+
+<p>我们来想想一般的前端有什么技能？</p>
+
+<ul>
+<li>html</li>
+<li>css（兼容浏览器）</li>
+<li>js会点（可能更多的是会点jquery）</li>
+<li>ps切图</li>
+<li>firebug和chrome debuger会的人都不太多</li>
+<li>用过几个框架，大部分人是仅仅会用</li>
+<li>英语一般</li>
+<li>svn/git会一点</li>
+</ul>
+
+<p>那么他们如果想在前端领域做的更深有哪些难点呢？</p>
+
+<ul>
+<li>基础：oo，dp，命令，shell，构建等</li>
+<li>编程思想上的理解（mvc、ioc，规约等）</li>
+<li>区分概念</li>
+<li>外围验收，如h5和hybird等</li>
+<li>追赶趋势，如何学习新东西</li>
+</ul>
+
+<p>以上皆是痛点。</p>
+
+<p>所以比较好的办法</p>
+
+<ul>
+<li>玩转npm、gulp这样的前端工具类（此时还是前端）</li>
+<li>使用node做前后端分离（此时还是前端）
+
+<ul>
+<li>express、koa这类框架</li>
+<li>jade、ejs等模板引擎</li>
+<li>nginx</li>
+</ul></li>
+<li>玩转【后端】异步流程处理（promise/es6的(generator|yield)/es7(async|await)）</li>
+<li>玩转【后端】mongodb、mysql对应的node模块</li>
+</ul>
+
+<p>从我们的经验看，这样是比较靠谱的。</p>
+
+<p>https://github.com/moajs/moa-frontend</p>
+
+<p>就是最简单前后端分离，里面没有任何和db相关，</p>
+
+<p>技术栈</p>
+
+<ul>
+<li>express</li>
+<li>jade</li>
+<li>bootstrap，bootstrap-table</li>
+<li>jquery</li>
+<li>gulp</li>
+<li>nginx</li>
+</ul>
+
+<p>一般的前端都非常容易学会，基本2周就已经非常熟练了，我的计划是半年后，让他们接触【异步流程处理】和【数据库】相关内容，学习后端代码，就可以全栈了</p>
+
+<!-- ![](images/moa-frontend.png) -->
+
+<h3>3）从移动端转</h3>
+
+<p>移动端分</p>
+
+<ul>
+<li>native原生开发</li>
+<li>hybrid混搭式开发</li>
+</ul>
+
+<p>原生开发就是iOS用oc/swift,Android用java或scala等，就算偶尔嵌入webview，能玩js的机会也非常好少</p>
+
+<p>所以移动端转全栈的方法，最好是从cordova（以前叫phonegap）开始做hybrid开发。</p>
+
+<ul>
+<li>只要关注www目录里的h5即可，比较简单</li>
+<li>如果h5不足以完成的情况下，可以编写cordova插件，即通过插件让js调用原生sdk里功能</li>
+<li>cordova的cli可以通过npm安装，学习npm的好方法</li>
+<li>学习gulp构建工具</li>
+</ul>
+
+<p>只要入了h5的坑，其实就非常好办了。</p>
+
+<ul>
+<li>然后h5、zeptojs、iscroll、fastclick等</li>
+<li>然后微信常用的，如weui、vux（vue+weui）、jmui（react+weui）</li>
+<li>然后可以玩点框架，比如jquery mobile，sencha touch</li>
+<li>然后可以玩点高级货，ionicframework（基于angularjs、cordova）</li>
+<li>然后前端4阶段，依次打怪升级</li>
+<li>然后node</li>
+</ul>
+
+<p>这个基本上是我走的路，从2010年写iOS、做phonegap（当时是0.9.3）、一路走到现在的总结吧</p>
+
+<h1>Part 5：未来</h1>
+
+<p>可能是一场春梦，也可能一个变革机遇，我们更相信它是变革机遇，拭目以待吧</p>
+
+<p>谢谢大家</p>
+
+<ul>
+<li><a href="https://cnodejs.org/topic/56ef3edd532839c33a99d00e#56f146920a5a2cfb3ad14928">前端资源教程</a></li>
+<li><a href="https://cnodejs.org/topic/56e8c95dcf7763a6045c4ae4">JavaScript 资源大全中文版</a></li>
+</ul>
+
+<h1>Q &amp; A</h1>
+
+<h2>问题一：在全栈的语言选择上，除了node.js，是否还考虑过其他语言？</h2>
+
+<p>有的，未来swift和lua是有可能的。swift的语法和性能上有很大优势，lua在openresty的推动下也有机会，不过没有swift大</p>
+
+<p>像WebAssembly之类的就不太看好了</p>
+
+<h2>问题二：请教桑老师：刚才你说的并发开发流程中静态api指的是api文档？</h2>
+
+<p>如果是的话谁负责编写？你们目前已经是一个人分模块从前端写到后端了吗？</p>
+
+<p>目前没做到文档即静态api，所以目前是直接提供json和部分<a href="https://github.com/typicode/json-server">json-server</a></p>
+
+<p>负责是后端开发的leader在写，他的进度会比正常开发要早一周左右</p>
+
+<p>目前不是一个人写所有的前后端，团队成立不久，天津Node.js会的不多，所以还是前后端分离。但是通过moa-frontend可以让前端了解express等后端知识，适当的时候会给予机会，前端转后端</p>
+
+<h2>问题三：第一贵司在开发协作中提到了静态api，请问是不是有什么比较好的工具可以推荐？</h2>
+
+<p>nodejs里<a href="https://github.com/typicode/json-server">json-server</a> 比较好</p>
+
+<p>我其实很想围绕静态api，写各种请求的生成器，只要api出来，文档和各平台的http请求代码就生成出来，同时可以对正式api进行压测，可惜目前还没精力写</p>
+
+<h2>问题四：做hybrid app在移动端会遇到性能问题吧。。有没有什么优化经验可以分享？</h2>
+
+<ul>
+<li>足够轻量级，少选大框架，做好前端该有的优化</li>
+<li>注意touch和click的区别，比如fastclick或zeptojs的tap手势</li>
+<li>Chrome profile（css3动画）</li>
+<li>使用weinre真机测试</li>
+</ul>
+
+<p><a href="http://mp.weixin.qq.com/s?__biz=MzAxMTU0NTc4Nw==&amp;mid=222892082&amp;idx=1&amp;sn=ba1cdb42b43fbec08e4328c5080774e5#rd">我的h5实践</a></p>
+
+<h2>问题五：如果都全栈了，当前你们团队是如何分工的？</h2>
+
+<p>我们团队还是倾向于分工专业化，各个服务粒度非常小，便于轮岗、还有就是可以为以后像google那样代码开放做准备</p>
+
+<p>但是有很多情况下，是需要有机动的突击队的（尤其是创业时期），这样可以随便组合，另外就是全栈为remote提供了更多便利性。</p>
+
+<h2>问题六：h5在手机上用iscroll坑比较多啊 尤其三星打开硬件加速的时候render页面，桑老师怎么看？</h2>
+
+<p>可以尝试一下淘宝系的h5虚拟化，鬼道曾经在as大会上讲过的，我们目前还没能力做这么深层次的优化</p>
+
+<h2>问题七：Node.js做业务金额计算的金额性能和精度够吗</h2>
+
+<p>1）你问的不是Node.js，而是Node.js要操作的数据库。
+2）耗性能的计算可以在架构上平衡的
+- 如果可以延时，mq就可以了
+- 如果是非延时情况，可以采用其他语言编写对应服务，没必要非要一定要Node.js
+3）我们目前的场景，还没有在计算遇到瓶颈</p>
+
+<h2>问题八：关于API返回格式那里，对于status为什么不打平了把code和message放出来？这么设定有什么好处么？</h2>
+
+<p>语义上更加清晰</p>
+
+<p>整个返回的json就只有data和status，如果status.code!=0,我取msg就好了，如果等于0，处理data数据</p>
+
+<p>这种设计不见得多好，不过结构清晰，对于开发者来说，是比较容易接受的</p>
+
+			          	</article>
+			        </div>
+					</div>
+	      </body>
+	    </html>
+			<script type="text/javascript" src="toc/js/jquery-1.4.4.min.js"></script>
+			<script type="text/javascript" src="toc/js/jquery.ztree.all-3.5.min.js"></script>
+			<script type="text/javascript" src="toc/js/ztree_toc.js"></script>
+      <script type="text/javascript" src="toc/toc_conf.js"></script>
+      
+			<SCRIPT type="text/javascript" >
+			<!--
+			$(document).ready(function(){
+          var css_conf = eval(markdown_panel_style);
+          $('#readme').css(css_conf)
           
-          <img width="178" height="238" data-src="images/q&a.jpg" alt="Down arrow">
-	
-          <p class="fragment">console.log('The End, Thanks~')</p>
-				</section>
-       
-       
-       
-   
-       
-       
-			</div>
-
-		</div>
-
-		<script src="lib/js/head.min.js"></script>
-		<script src="js/reveal.js"></script>
-
-		<script>
-
-			// Full list of configuration options available at:
-			// https://github.com/hakimel/reveal.js#configuration
-			Reveal.initialize({
-				controls: true,
-				progress: true,
-				history: true,
-				center: true,
-
-				transition: 'slide', // none/fade/slide/convex/concave/zoom
-
-				// Optional reveal.js plugins
-				dependencies: [
-					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
-					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-					{ src: 'plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
-					{ src: 'plugin/zoom-js/zoom.js', async: true },
-					{ src: 'plugin/notes/notes.js', async: true }
-				]
+          var conf = eval(jquery_ztree_toc_opts);
+  				$('#tree').ztree_toc(conf);
+
+				
 			});
-
-		</script>
-
-	</body>
-</html>
+			//-->
+			</SCRIPT>
+	  
