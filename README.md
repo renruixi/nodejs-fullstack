@@ -2,6 +2,12 @@
 
 高可用架构专用
 
+原文[高可用架构]
+
+https://mp.weixin.qq.com/s?__biz=MzAwMDU1MTE1OQ==&mid=405001493&idx=1&sn=f0ecab9b31bad83fb065ac37bb728245&scene=1&srcid=0324iTRH12WbXL5VDxXnEhH8&key=710a5d99946419d938a0ffc16a3c72118eefbe33f3f8312ed218bccbde126b60e818c8eb1068a9b07bdc8116a077b911&ascene=0&uin=NDIzMjM3MDk1&devicetype=iMac+MacBookPro11%2C1+OSX+OSX+10.10.5+build(14F27)&version=11000006&pass_ticket=xdp3crkTJPuOH6ggUMKnwvfDGKEnMUvwC5V%2FdxlW%2FKdNO9R8zI1xsDFSR4ZJECUU
+
+仔细的对比了一遍，感谢tim yang和庆丰校长的整理，非常严谨，比我讲的要好，另外感谢霍老板封我是StuQ明星讲师[呲牙][呲牙]
+
 
 ## 主要内容
 
@@ -28,7 +34,8 @@ http://stackoverflow.com/research/developer-survey-2016
 
 ## 讲师介绍
 
-桑世龙，目前在天津创业，空弦科技 CTO，开源项目Moajs作者，公司目前使用技术主要是Node.js，
+桑世龙，目前在天津创业，空弦科技 CTO，开源项目Moajs作者，StuQ明星讲师
+公司目前使用技术主要是Node.js，
 技术栈算所谓的MEAN（mongodb  + express + angular + node）；
 曾在新浪，网秦等工作过；
 算全栈程序员吧，带过前端、后端、数据分析、移动端负责人、做过首席架构师、技术总监，目前主要从事技术架构 + 招人工作
@@ -164,7 +171,7 @@ Node.js里在0.12之后才增加es6特性，es7的目前还不支持。
 
 -  2016年01月22日，[微软请求 Node.js 支持 ChakraCore](https://github.com/nodejs/node/pull/4765)
 
-未来Node.js不只是基于chrome v8内核，它还可以支持更多其他浏览器内核，对生态、效率提升等非常有好处
+未来Node.js不只是基于chrome v8引擎，它还可以支持更多其他js引擎，对生态、效率提升等非常有好处
 
 蔡伟小兄弟的[查克拉benchmark的对比](https://github.com/DavidCai1993/ES6-benchmark)
 
@@ -916,3 +923,9 @@ nodejs里[json-server](https://github.com/typicode/json-server) 比较好
 这种设计不见得多好，不过结构清晰，对于开发者来说，是比较容易接受的
 
 
+
+全文完
+
+欢迎关注我的公众号【node全栈】
+
+![node全栈.png](//dn-cnode.qbox.me/FtALxsauUkYDGdzcuA5y6BaIdUMC)
