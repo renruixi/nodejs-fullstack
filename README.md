@@ -12,8 +12,16 @@ https://mp.weixin.qq.com/s?__biz=MzAwMDU1MTE1OQ==&mid=405001493&idx=1&sn=f0ecab9
 
 - 仓库地址 https://github.com/i5ting/nodejs-fullstack
 - 在线阅读 http://i5ting.github.io/nodejs-fullstack/ 
-- keynote版本 
-- pdf版本
+- [keynote版本](https://github.com/i5ting/nodejs-fullstack/raw/master/dist/%E5%85%A8%E6%A0%88%E5%B7%A5%E7%A8%8B%E5%B8%88%E4%B9%8B%E8%B7%AFNode.js.key)
+- [pdf版本](https://github.com/i5ting/nodejs-fullstack/raw/master/dist/%E5%85%A8%E6%A0%88%E5%B7%A5%E7%A8%8B%E5%B8%88%E4%B9%8B%E8%B7%AFNode.js.pdf)
+
+
+已参加分享
+
+- 高可用架构群
+- [3月26日北京NodeParty](https://cnodejs.org/topic/56f8ce05e2d0ba0b32388717)
+
+如果想邀请分享，请邮寄给我shiren1118@126.com,如果时间ok，我会尽量分享
 
 ## 主要内容
 
