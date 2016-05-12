@@ -66,7 +66,7 @@ He will talk about the pros and cons of Node.js, why it is a good choice for sta
 
 他将讲述 Node.js 的优劣势、为什么它适合创业公司以及如何在不同的情况下选择正确的架构。与此同时，一个全面深入的关于全栈开发者秘密的总览也会涵盖其中。
 
-![](images/tech.jpg)
+![](images/tech.png)
 
 
 我这里面先问一下，大家有多少人了解Node.js？有多少做前端的？做前端又有多少了解Node.js的？看来还不是很多，其实Node.js就是如果做前端不了解Node.js，我觉得在未来就不是一个好的前端了，所以我们这块讲的时候会把相关的内容加进来，第一个讲一下为什么选择Node.js，这个是从我们公司一个初创企业的角度讲的，之后讲一下Node.js核心的东西，然后讲一下实战经验，最后把全栈的展望，一直从前端，后端，移动端，包括我个人的全栈之路，把这整个全栈路径跟大家分享一下。
@@ -520,21 +520,25 @@ js流程控制的演进过程，分以下5部分
 
 ### 如何看到koa && koa2
 
+![](images/cover.png)
+
 http://17koa.com/node4koa/#/
 
 ### 数据库
 
-http://nodeonly.com/nodesang/#/4
+见mongoose.md
 
 ### 如何做benchmark
 
-https://github.com/17koa/
+https://github.com/17koa/koa-benchmark
 
 ### 开源项目里怎么样写测试、CI和代码测试覆盖率
 
 https://cnodejs.org/topic/558df089ebf9c92d17e73358
 
 ### 真实环境部署nodejs程序
+
+见deploy.md
 
 # Part 3：快速开发实践
 
@@ -1021,7 +1025,6 @@ nodejs里[json-server](https://github.com/typicode/json-server) 比较好
 这种设计不见得多好，不过结构清晰，对于开发者来说，是比较容易接受的
 
 
-
 # 写给大家：吹牛到寄语
 
 - 时间管理：闲时要有吃紧的心思，忙里要有偷闲的乐趣
@@ -1031,8 +1034,9 @@ nodejs里[json-server](https://github.com/typicode/json-server) 比较好
 - 人老心不老，每日精进，有一双发现知识的小眼睛
 - 人生不只有代码，但它能让我快乐
 - 应变是我的毕生追求，心里要能装着无数状态
+- 少抱怨，多思考，未来更美好：tomorrow is another day
 
-
+最后祝福大家有一个好身体，做自己喜欢做的事儿，最好都能全栈，加油
 
 全文完
 
