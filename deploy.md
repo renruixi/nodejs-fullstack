@@ -1,6 +1,6 @@
 # node deploy
 
-ubuntu 14.10 LTS
+ubuntu 14.10 64位 LTS
 
 ## 登录远端服务器
 
