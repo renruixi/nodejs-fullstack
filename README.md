@@ -48,11 +48,28 @@ http://stackoverflow.com/research/developer-survey-2016
 
 ## 讲师介绍
 
-桑世龙，目前在天津创业，空弦科技 CTO，开源项目Moajs作者，StuQ明星讲师
-公司目前使用技术主要是Node.js，
-技术栈算所谓的MEAN（mongodb  + express + angular + node）；
-曾在新浪，网秦等工作过；
-算全栈程序员吧，带过前端、后端、数据分析、移动端负责人、做过首席架构师、技术总监，目前主要从事技术架构 + 招人工作
+英文版本
+
+
+Afred Sang（aka i5ting）
+
+Alfred Sang (aka i5ting), CTO of Aircos, top trainer of StuQ, author of the open source project Moa.js, and also an evangelist of Node.js. The uniqueness of his experience makes him a full stack practitioner. He served at Sina, NQ Mobile by playing several major roles, such as Chief Architect, R&D Director. Currently, he is focusing on technical architecture and organization/talent development. A book from him, named as "Smashing Node.js 6: Koa Everywhere", is also on the way.
+
+He will talk about the pros and cons of Node.js, why it is a good choice for startups, and how to make the right architecture for different scenarios. While on the subject, a thorough and in-depth overview of the myth of the full-stack developer will also be covered.
+
+
+中文版
+
+
+桑世龙（网名i5ting），空弦科技 CTO，StuQ 明星讲师，开源项目 Moajs 作者，Node.js 技术布道者
+曾就职在新浪、网秦，曾做过前端、后端、数据分析、移动端负责人、做过首席架构师、技术总监，全栈技术实践者，目前主要关注技术架构和团队梯队建设方向，正在写一个本新书《更了不起的 Node 4：将下一代 Web 框架 Koa 进行到底》
+
+他将讲述 Node.js 的优劣势、为什么它适合创业公司以及如何在不同的情况下选择正确的架构。与此同时，一个全面深入的关于全栈开发者秘密的总览也会涵盖其中。
+
+![](images/tech.png)
+
+
+我这里面先问一下，大家有多少人了解Node.js？有多少做前端的？做前端又有多少了解Node.js的？看来还不是很多，其实Node.js就是如果做前端不了解Node.js，我觉得在未来就不是一个好的前端了，所以我们这块讲的时候会把相关的内容加进来，第一个讲一下为什么选择Node.js，这个是从我们公司一个初创企业的角度讲的，之后讲一下Node.js核心的东西，然后讲一下实战经验，最后把全栈的展望，一直从前端，后端，移动端，包括我个人的全栈之路，把这整个全栈路径跟大家分享一下。
 
 
 # Part 1：为什么选用Node.js ？
@@ -222,13 +239,15 @@ Node.js招不到，好多都是从java转的，前端也不好找，好多也是
 
 ## 黑一下go语言吧
 
-go不着
+go的缺点是很难够(go)着
 
-- 没有好的包管理
-- 没有好的调试工具
-- 语法较难
+- 没有好的包管理，目前生态还不是特别好，选择的可能不多
+- 没有好的调试工具，tdd/bdd新手难掌握(vscode-go还凑合)
+- 语法不习惯，强c背景的人不多
 
-适合高端人群，但对团队开发是有门槛的，不适用大部分团队
+总结：适合高端人群，但对团队开发是有门槛的，不适用国内大部分大团队，当然如果你的团队足够牛逼，选go是非常好的选择。
+
+羊和骆驼的故事告诉我们：够得着你牛逼，够不着，累死你也够不着
 
 ## 选择
 
@@ -496,6 +515,30 @@ js流程控制的演进过程，分以下5部分
 脚手架scaffold = cli + 模板生成，在Node.js里这2点都非常容易
 
 在Node.js里写c/c++扩展，有nan抽象层，其他就看大家的c/c++水平了
+
+## 其他
+
+### 如何看到koa && koa2
+
+![](images/cover.png)
+
+http://17koa.com/node4koa/#/
+
+### 数据库
+
+见mongoose.md
+
+### 如何做benchmark
+
+https://github.com/17koa/koa-benchmark
+
+### 开源项目里怎么样写测试、CI和代码测试覆盖率
+
+https://cnodejs.org/topic/558df089ebf9c92d17e73358
+
+### 真实环境部署nodejs程序
+
+见deploy.md
 
 # Part 3：快速开发实践
 
@@ -769,6 +812,40 @@ A framework for building native apps with React. http://facebook.github.io/react
 
 只要打通这2个要点，其他就比较容易了
 
+### 我的全栈之路
+
+```
+没有目标就向钱看，自然会找到目标
+```
+
+- 从java开始，蹭课，背着机箱到深圳，3个月胖20斤
+- 坚持翻译英文文档，看thinkinjava
+- 毕业后开始bi，整理bi文档
+- 学长明林清，传授jQuery，愿意学，别人就更愿意分析
+- 接手《内蒙广电数据分析与科学决策系统》，打通前、后端
+- 广东联通，自己造轮子，写jQuery插件，DRY
+- 做云计算，学习AIX，写有《凌云志》
+- 分手、离职，去做iOS，从cordova开始搞h5，研究各种移动端框架，自己写框架，转原生
+- 面试也是学习的利器，轻松进新浪
+
+```
+既然无法逃避，就热爱它，最后变成兴趣
+```
+
+- 总结了大量iOS经验，想写书，结果写了一堆写书的工具
+- 去网秦做技术总监，做首席，管架构，带人，写开源项目
+- 创业，当cto，结婚，做公众号运营，写书，只在StuQ讲点课
+
+```
+人生不只有代码，但它能让我快乐，终生受益
+```
+
+也曾懵懂，也曾迷茫，但我这人比较傻，一直信奉：“一次只做1件事儿，尽力做到极致”，短时间看这是比较傻的，但一旦你坚持下去，你就会发现技术其实是门手艺，厚积薄发。
+
+我没办法说自己最擅长什么，但在什么场景下用什么技术是我擅长的。或者说，应变是我最大的本事。很多框架，新技术我都没见过，用过，但花一点点过一下，就能拿已有的知识快速的理解它，这其实是长期学习的好处。
+
+现在越来越忙，写代码的时间越来越少，技术又越发展越快，我能做好的就是每日精进，仗着这点已有的知识储备跟年轻人比赛。我不觉得累，相反我很享受这种感觉，没有被时代淘汰，是一件多么幸福的事儿。
+
 ### 1）从后端转
 
 做后端的人
@@ -948,6 +1025,18 @@ nodejs里[json-server](https://github.com/typicode/json-server) 比较好
 这种设计不见得多好，不过结构清晰，对于开发者来说，是比较容易接受的
 
 
+# 写给大家：吹牛到寄语
+
+- 时间管理：闲时要有吃紧的心思，忙里要有偷闲的乐趣
+- 10年我没有近视，或者说颈椎病
+- 吃了11年素食，坚持是自信的源动力
+- 一次只做1件事儿，简单一点
+- 人老心不老，每日精进，有一双发现知识的小眼睛
+- 人生不只有代码，但它能让我快乐
+- 应变是我的毕生追求，心里要能装着无数状态
+- 少抱怨，多思考，未来更美好：tomorrow is another day
+
+最后祝福大家有一个好身体，做自己喜欢做的事儿，最好都能全栈，加油
 
 全文完
 
